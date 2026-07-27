@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>CS106L Assignments &amp; Solutions - @Ezra_Yang</title>
+  
+    <link rel="shortcut icon" href="/img/favicon.png">
+  
+  
+  <link rel='manifest' href='/manifest.json'>
+  
+
+  <meta name="description" content="Assignment 1题目概述补写 main.cpp 代码使得代码能在 course.csv 文件中找出今年开设的课程和不开设的课程，并分别写入 student_output&#x2F;courses_offered.csv 和 student_output&#x2F;courses_not_offered.csv 两个文件中。 作业包中包含两个文件：  main.cpp ：你的代码应该补写在此。 utils.cp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS106L Assignments &amp; Solutions">
+<meta property="og:url" content="http://ezrablake2006.github.io/2026/07/01/CS106L-Assignments-Solutions/index.html">
+<meta property="og:site_name" content="@Ezra_Yang">
+<meta property="og:description" content="Assignment 1题目概述补写 main.cpp 代码使得代码能在 course.csv 文件中找出今年开设的课程和不开设的课程，并分别写入 student_output&#x2F;courses_offered.csv 和 student_output&#x2F;courses_not_offered.csv 两个文件中。 作业包中包含两个文件：  main.cpp ：你的代码应该补写在此。 utils.cp">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-07-01T13:16:01.000Z">
+<meta property="article:modified_time" content="2026-07-02T15:29:08.853Z">
+<meta property="article:author" content="Ezra Yang">
+<meta property="article:tag" content="solutions">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+  <script>window.ThemeCupertino = {}</script>
+
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/simple-icons-font@16/font/simple-icons.min.css">
+
+  
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1/font/bootstrap-icons.min.css">
+
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+
+  
+  
+<link rel="stylesheet" href="/css/components/card.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/button.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/badge.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/utilities.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/carousel.css">
+
+  
+  
+  <script>ThemeCupertino['_calloutStyles'] = `
+<link rel="stylesheet" href="/css/components/callout.css">
+`</script>
+  
+<script src="/js/components/callout.js"></script>
+
+  
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/scroll-reveal.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/view-transition.css">
+
+  
+  
+  <script src="https://unpkg.com/lenis@1/dist/lenis.min.js"></script>
+  
+<link rel="stylesheet" href="https://unpkg.com/lenis@1/dist/lenis.css">
+
+  
+<script src="/js/smooth-scroll.js"></script>
+
+  
+
+  
+<script src="/js/head.js"></script>
+
+  <link rel="stylesheet" href="/css/custom.css?v=5">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body
+    data-color-scheme="auto"
+    data-uppercase-categories="true"
+    
+    data-rainbow-banner="true"
+    data-rainbow-banner-shown="always"
+    data-rainbow-banner-month="6"
+    data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+    
+    data-config-root="/"
+    
+    data-toc="true"
+    data-toc-max-depth="3"
+    
+    
+    
+    data-scroll-reveal-disappear="false"
+    data-scroll-reveal-query=".scroll-reveal, .post-list-item, .card, .content p img, .content .block-large img"
+    
+    data-nav-blur-gradient="false"
+    style="--config-corner-squircle: true"
+  >
+    
+<script src="/js/body-top.js"></script>
+
+    <a href="#main-content" id="skip-to-content">Skip to content</a>
+    
+
+<nav id="theme-nav">
+  <div class="inner">
+    <a class="title" href="/">Ezra Yang</a>
+    <div class="nav-arrow"></div>
+    <div class="nav-items">
+      <a class="nav-item nav-item-home" href="/" style="--index: 0">Home</a>
+
+      
+      <a class="nav-item" href="/categories/CStudy/" style="--index: 1">CStudy</a>
+      
+      <a class="nav-item" href="/categories/Music/" style="--index: 2">Music</a>
+      
+      <a class="nav-item" href="/categories/Language/" style="--index: 3">Language</a>
+      
+      <a class="nav-item" href="/categories/Diary/" style="--index: 4">Diary</a>
+      
+      <a class="nav-item" href="/tags" style="--index: 5">Tags</a>
+      
+      <a class="nav-item" href="/about" style="--index: 6">About</a>
+      
+    </div>
+  </div>
+</nav>
+
+    <main id="main-content" data-pagefind-body>
+      
+<article class="post">
+  
+  <div class="meta">
+    
+    <div class="categories text-uppercase">
+    
+      <a href="/categories/CStudy/">CStudy</a>
+    
+    </div>
+    
+
+    
+    <time class="date" datetime="2026-07-01T21:16:01+08:00">
+      July 1, 2026
+    </time>
+    
+
+    <h1 class="title" data-pagefind-meta="title">CS106L Assignments &amp; Solutions</h1>
+  </div>
+
+  <div class="content">
+    <h2 id="Assignment-1"><a href="#Assignment-1" class="headerlink" title="Assignment 1"></a>Assignment 1</h2><h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>补写 <code>main.cpp</code> 代码使得代码能在 <code>course.csv</code> 文件中找出今年开设的课程和不开设的课程，并分别写入 <code>student_output/courses_offered.csv</code> 和 <code>student_output/courses_not_offered.csv</code> 两个文件中。</p>
+<p>作业包中包含两个文件：</p>
+<ul>
+<li><code>main.cpp</code> ：你的代码应该补写在此。</li>
+<li><code>utils.cpp</code> ：包含作业过程中需要使用的函数，不需要修改。</li>
+</ul>
+<p>Part 0：补写结构体元素类型 &amp; 修改函数声明</p>
+<ul>
+<li>阅读代码，补写结构体 <code>Courses</code> 中三个元素的数据类型；</li>
+<li>阅读代码，修改主文件中三个函数的声明，使得能够正常运行。</li>
+</ul>
+<p>Part 1：完成 <code>parse.csv</code> 函数</p>
+<p>该函数的功能是：从 <code>courses.csv</code> 文件中读取课程信息，读取至由结构体 <code>Courses</code> 构成的 <code>vector</code> 容器里。</p>
+<p>Part 2：完成 <code>write_courses_offered</code> 函数</p>
+<p>该函数的功能是：将储存在 <code>vector</code> 容器里的课程中在本学期开设的课程（即该课程的 <code>quarter</code> 不为 <code>null</code> ）输出至文件 <code>student_output/courses_offered.csv</code> 中，并删除这些已输出的课程。</p>
+<p>Part 3：完成 <code>write_courses_not_offered</code> 函数</p>
+<p>该函数的功能是：将已删除已输出的课程的 <code>vector</code> 容器里的课程（即不会在本学期开设的课程）输出至文件 <code>student_output/courses_not_offered.csv</code> 中。</p>
+<h3 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h3><p>Part 0.</p>
+<p>所有元素的数据类型都应该是 <code>std::string</code> 。</p>
+<p>三个函数都会对主函数的 <code>courses</code> 参数进行修改，因此三个函数的变量都应该加引用负号。</p>
+<p>Part 1.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">parse_csv</span><span class="params">(std::string filename, std::vector&lt;Course&gt;&amp; courses)</span> </span>&#123;</span><br><span class="line">  <span class="comment">/* (STUDENT TODO) Your code goes here... */</span></span><br><span class="line">  <span class="function">std::ifstream <span class="title">ifs</span><span class="params">(filename)</span></span>;</span><br><span class="line">  <span class="keyword">if</span> (!ifs.<span class="built_in">is_open</span>()) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;File couldn&#x27;t be opened.&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  std::string s;</span><br><span class="line">  std::<span class="built_in">getline</span>(ifs, s);</span><br><span class="line">  <span class="keyword">while</span> (std::<span class="built_in">getline</span>(ifs, s)) &#123;</span><br><span class="line">    std::vector&lt;std::string&gt; cnt_course = <span class="built_in">split</span>(s, <span class="string">&#x27;,&#x27;</span>);</span><br><span class="line">    Course cnt;</span><br><span class="line">    cnt.title = cnt_course[<span class="number">0</span>];</span><br><span class="line">    cnt.number_of_units = cnt_course[<span class="number">1</span>];</span><br><span class="line">    cnt.quarter = cnt_course[<span class="number">2</span>];</span><br><span class="line">    courses.<span class="built_in">push_back</span>(cnt);</span><br><span class="line">  &#125;</span><br><span class="line">  ifs.<span class="built_in">close</span>();</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Part 2.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">write_courses_offered</span><span class="params">(std::vector&lt;Course&gt;&amp; all_courses)</span> </span>&#123;</span><br><span class="line">  <span class="comment">/* (STUDENT TODO) Your code goes here... */</span></span><br><span class="line">  <span class="function">std::ofstream <span class="title">ofs</span><span class="params">(<span class="string">&quot;student_output/courses_offered.csv&quot;</span>, std::ios::trunc)</span></span>;</span><br><span class="line">  <span class="keyword">if</span> (!ofs.<span class="built_in">is_open</span>()) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Cannot open the file.&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  ofs &lt;&lt; <span class="string">&quot;Title,Number of Units,Quarter\n&quot;</span>;</span><br><span class="line">  std::vector&lt;Course&gt; output_courses;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> course : all_courses) &#123;</span><br><span class="line">    <span class="keyword">if</span> (course.quarter != <span class="string">&quot;null&quot;</span>) &#123;</span><br><span class="line">      ofs &lt;&lt; course.title &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; course.number_of_units &lt;&lt; <span class="string">&quot;,&quot;</span> </span><br><span class="line">          &lt;&lt; course.quarter &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">      output_courses.<span class="built_in">push_back</span>(course);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> course : output_courses) &#123;</span><br><span class="line">    <span class="built_in">delete_elem_from_vector</span>(all_courses, course);</span><br><span class="line">  &#125;</span><br><span class="line">  ofs.<span class="built_in">close</span>();</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Part 3.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">write_courses_not_offered</span><span class="params">(std::vector&lt;Course&gt;&amp; unlisted_courses)</span> </span>&#123;</span><br><span class="line">  <span class="comment">/* (STUDENT TODO) Your code goes here... */</span></span><br><span class="line">  <span class="function">std::ofstream <span class="title">ofs</span><span class="params">(<span class="string">&quot;student_output/courses_not_offered.csv&quot;</span>, std::ios::trunc)</span></span>;</span><br><span class="line">  <span class="keyword">if</span> (!ofs.<span class="built_in">is_open</span>()) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Cannot open the file.&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  ofs &lt;&lt; <span class="string">&quot;Title,Number of Units,Quarter\n&quot;</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> course : unlisted_courses) &#123;</span><br><span class="line">    ofs &lt;&lt; course.title &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; course.number_of_units &lt;&lt; <span class="string">&quot;,&quot;</span> </span><br><span class="line">        &lt;&lt; course.quarter &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  ofs.<span class="built_in">close</span>();</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Assignment-2"><a href="#Assignment-2" class="headerlink" title="Assignment 2"></a>Assignment 2</h2><h3 id="题目概述-1"><a href="#题目概述-1" class="headerlink" title="题目概述"></a>题目概述</h3><p>补写 <code>main.cpp</code> 代码，模拟 Stanford Marriage Pact 匹配流程：从 <code>students.txt</code> 中读取所有报名学生姓名，找出与自己姓名首字母相同的候选匹配对象，并从中选出最终匹配结果。</p>
+<p>作业包中主要包含两个需要关注的文件：</p>
+<ul>
+<li><code>main.cpp</code>：你的代码应该补写在此。</li>
+<li><code>short_answer.txt</code>：用于回答作业中的简答题。</li>
+</ul>
+<p>Part 0：修改个人姓名</p>
+<ul>
+<li>将 <code>main.cpp</code> 顶部的常量 <code>kYourName</code> 从默认值修改为自己的英文全名；</li>
+<li>姓名应包含 first name 和 last name，并用空格分隔。</li>
+</ul>
+<p>Part 1：完成 <code>get_applicants</code> 函数</p>
+<p>该函数的功能是：从 <code>students.txt</code> 文件中读取所有报名学生的姓名，并将这些姓名储存在 <code>std::set</code> 或 <code>std::unordered_set</code> 容器中。</p>
+<p>同时需要在 <code>short_answer.txt</code> 中回答：<code>std::set</code> 和 <code>std::unordered_set</code> 的区别、取舍，以及如何为学生姓名设计一个合法的哈希函数。</p>
+<p>Part 2：完成 <code>find_matches</code> 函数</p>
+<p>该函数的功能是：遍历学生姓名集合，找出所有与给定姓名拥有相同首字母缩写的学生，并将这些学生姓名的指针存入一个 <code>std::queue</code> 队列中。</p>
+<p>Part 3：完成 <code>get_match</code> 函数</p>
+<p>该函数的功能是：从 <code>find_matches</code> 得到的候选匹配队列中选出一个最终匹配对象。如果队列为空，则返回或输出 <code>&quot;NO MATCHES FOUND.&quot;</code>。</p>
+<p>同时需要在 <code>short_answer.txt</code> 中回答：为什么这里保存的是姓名的指针而不是姓名本身，以及如果原来的姓名集合失效后继续使用这些指针会发生什么。</p>
+<h3 id="Solutions-1"><a href="#Solutions-1" class="headerlink" title="Solutions"></a>Solutions</h3><p>Part 1.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::set&lt;std::string&gt; <span class="title">get_applicants</span><span class="params">(std::string filename)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// STUDENT <span class="doctag">TODO:</span> Implement this function.</span></span><br><span class="line">  <span class="function">std::ifstream <span class="title">ifs</span><span class="params">(filename)</span></span>;</span><br><span class="line">  std::set&lt;std::string&gt; applicants;</span><br><span class="line">  std::string s;</span><br><span class="line">  <span class="keyword">while</span> (std::<span class="built_in">getline</span>(ifs, s)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!s.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">      applicants.<span class="built_in">insert</span>(s);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> applicants;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Q1：可以选择使用有序集合或无序集合。请用几句话说明二者之间的取舍。另外，请举一个课上没有讲过的、可以用于学生姓名的合法哈希函数例子。</p>
+<p><code>std::set</code> 会按照顺序储存元素，通常底层使用平衡二叉搜索树实现。因此，它的插入、删除和查找操作的时间复杂度是 <code>O(log n)</code>，但遍历时可以按照字母顺序得到元素。<code>std::unordered_set</code> 使用哈希表储存元素，因此插入、删除和查找操作在平均情况下是 <code>O(1)</code>，但元素没有固定的顺序。因此，如果需要有序遍历，<code>std::set</code> 更合适；如果更重视平均情况下更快的查找速度，<code>std::unordered_set</code> 更合适。</p>
+<p>一种可行的学生姓名哈希函数是：将字符串中每个字符的 ASCII 值乘以它在字符串中的位置，然后把这些结果加起来。例如，对于一个姓名字符串 <code>s</code>，可以计算：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hash = s[0] * 1 + s[1] * 2 + s[2] * 3 + ...</span><br></pre></td></tr></table></figure>
+
+<p>这是一个合法的哈希函数，因为它能确定性地把同一个字符串转换成同一个数字。</p>
+<p>Part 2.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">get_initials</span><span class="params">(<span class="type">const</span> std::string&amp; full_name, <span class="type">char</span>&amp; first_initial, <span class="type">char</span>&amp; last_initial)</span> </span>&#123;</span><br><span class="line">  std::string::size_type first_pos = full_name.<span class="built_in">find_first_not_of</span>(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> (first_pos == std::string::npos) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  first_initial = full_name[first_pos];</span><br><span class="line">  std::string::size_type space_pos = full_name.<span class="built_in">find</span>(<span class="string">&#x27; &#x27;</span>, first_pos);</span><br><span class="line">  <span class="keyword">if</span> (space_pos == std::string::npos) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  std::string::size_type last_pos = full_name.<span class="built_in">find_first_not_of</span>(<span class="string">&#x27; &#x27;</span>, space_pos);</span><br><span class="line">  <span class="keyword">if</span> (last_pos == std::string::npos) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  last_initial = full_name[last_pos];</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">std::queue&lt;<span class="type">const</span> std::string*&gt; <span class="title">find_matches</span><span class="params">(std::string name, </span></span></span><br><span class="line"><span class="params"><span class="function">                                            std::set&lt;std::string&gt;&amp; students)</span> </span>&#123;</span><br><span class="line">  std::queue&lt;<span class="type">const</span> std::string*&gt; matched;</span><br><span class="line">  <span class="type">char</span> my_first_initial;</span><br><span class="line">  <span class="type">char</span> my_last_initial;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">get_initials</span>(name, my_first_initial, my_last_initial)) &#123;</span><br><span class="line">    <span class="keyword">return</span> matched;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; str : students) &#123;</span><br><span class="line">    <span class="type">char</span> curr_first_initial;</span><br><span class="line">    <span class="type">char</span> curr_last_initial;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">get_initials</span>(str, curr_first_initial, curr_last_initial)) &#123;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (curr_first_initial == my_first_initial &amp;&amp; </span><br><span class="line">        curr_last_initial == my_last_initial) &#123;</span><br><span class="line">      matched.<span class="built_in">push</span>(&amp;str);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> matched;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Part 3.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::string <span class="title">get_match</span><span class="params">(std::queue&lt;<span class="type">const</span> std::string*&gt;&amp; matches)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (matches.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;NO MATCHES FOUND.&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> *(matches.<span class="built_in">front</span>()); <span class="comment">//懒得想算法了先这样吧</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Q2：注意，我们在队列中保存的是指向姓名的指针，而不是姓名本身。为什么在这个问题中这样做可能更合适？如果原来储存姓名的集合失效之后，再访问这些指针会发生什么？</p>
+<p>保存指针而不是完整的字符串，可以避免把学生姓名再次复制到队列中。因为这些姓名已经储存在原来的集合里了，所以队列中只需要保存指向这些已有字符串的地址即可。这样在姓名较长或匹配人数较多时，可以节省一定的内存和复制开销。</p>
+<p>但是，这种做法只有在原来的集合仍然存在时才是安全的。如果这个集合离开了作用域，集合中的所有字符串都会被销毁，队列中保存的指针就会变成悬空指针。之后如果继续访问这些指针，就会产生未定义行为，因为它们已经不再指向有效的字符串对象。</p>
+<h2 id="Assignment-3"><a href="#Assignment-3" class="headerlink" title="Assignment 3"></a>Assignment 3</h2><h3 id="题目概述-2"><a href="#题目概述-2" class="headerlink" title="题目概述"></a>题目概述</h3><p>本作业要求我们自定义一个 C++ 类，并分别在头文件和源文件中完成类的声明与实现。该类可以表示任意对象，但需要满足若干基本要求：包含默认构造函数和带参数的自定义构造函数，具有私有成员变量和私有成员函数，并至少提供一个用于访问私有成员的 getter 函数和一个用于修改私有成员的 setter 函数。</p>
+<p>作业包中主要包含四个需要修改或完成的文件：</p>
+<ul>
+<li><code>class.h</code>：用于编写自定义类的声明，包括成员变量、成员函数以及构造函数的声明。</li>
+<li><code>class.cpp</code>：用于编写类成员函数的具体实现，包括构造函数、getter、setter 和私有辅助函数等。</li>
+<li><code>sandbox.cpp</code>：用于在 <code>sandbox</code> 函数中创建该类的实例，测试类是否能够被正常构造和使用。</li>
+<li><code>short_answer.txt</code>：用于回答与 <code>const</code> 正确性相关的简答题。</li>
+</ul>
+<p>Part 1：完成自定义类的声明与实现</p>
+<p>该部分要求在 <code>class.h</code> 和 <code>class.cpp</code> 中设计并实现一个自定义类。类中需要包含至少一个私有成员变量、一个私有成员函数、一个默认构造函数、一个带参数的构造函数、一个 getter 函数和一个 setter 函数。其中，getter 函数应当被声明为 <code>const</code> 成员函数，以保证它只读取对象状态而不会修改对象内容。</p>
+<p>Part 2：在 <code>sandbox.cpp</code> 中创建类的实例</p>
+<p>该部分要求在 <code>sandbox</code> 函数中构造一个自定义类的对象实例。可以使用默认构造函数创建对象，也可以使用带参数的构造函数创建对象。该步骤用于确认类能够被正常实例化，并能够通过编译和运行测试。</p>
+<p>Part 3：完成简答题</p>
+<p>该部分要求在 <code>short_answer.txt</code> 中回答两个与 <code>const</code> 正确性有关的问题：一是解释什么是 const-correctness 以及它为什么重要；二是说明自己编写的类是否满足 const-correctness，并给出判断依据。</p>
+<h3 id="Solutions-2"><a href="#Solutions-2" class="headerlink" title="Solutions"></a>Solutions</h3><p>Part 1.</p>
+<p>以下是 <code>class.h</code> 的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Album</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  std::string title;</span><br><span class="line">  std::string artist;</span><br><span class="line">  std::string genre;</span><br><span class="line">  std::string release_time;</span><br><span class="line">  std::vector&lt;std::string&gt; tracklist;</span><br><span class="line">  <span class="function">std::string <span class="title">findTrack</span><span class="params">(<span class="type">int</span> num)</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">Album</span>();</span><br><span class="line">  <span class="built_in">Album</span>(std::string title, std::string artist, std::string genre, </span><br><span class="line">    std::string release_time, std::vector&lt;std::string&gt; tracklist);</span><br><span class="line">  <span class="function">std::string <span class="title">getTitle</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">  <span class="function">std::string <span class="title">getTrack</span><span class="params">(<span class="type">int</span> num)</span> <span class="type">const</span></span>;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">setTrack</span><span class="params">(<span class="type">int</span> num, std::string trackname)</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>以下是 <code>class.cpp</code> 的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;class.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">Album::<span class="built_in">Album</span>() &#123;</span><br><span class="line">    title = <span class="string">&quot;Detour&quot;</span>;</span><br><span class="line">    artist = <span class="string">&quot;Kim Petras&quot;</span>;</span><br><span class="line">    genre = <span class="string">&quot;Pop&quot;</span>;</span><br><span class="line">    release_time = <span class="string">&quot;29/05/2026&quot;</span>;</span><br><span class="line">    tracklist.<span class="built_in">push_back</span>(<span class="string">&quot;Detour&quot;</span>);</span><br><span class="line">    tracklist.<span class="built_in">push_back</span>(<span class="string">&quot;DTLA&quot;</span>);</span><br><span class="line">    tracklist.<span class="built_in">push_back</span>(<span class="string">&quot;I Like Ur Look&quot;</span>);</span><br><span class="line">    tracklist.<span class="built_in">push_back</span>(<span class="string">&quot;Check it&quot;</span>);</span><br><span class="line">    tracklist.<span class="built_in">push_back</span>(<span class="string">&quot;Polo&quot;</span>);</span><br><span class="line">    tracklist.<span class="built_in">push_back</span>(<span class="string">&quot;Brutalist&quot;</span>);</span><br><span class="line">    tracklist.<span class="built_in">push_back</span>(<span class="string">&quot;Need for Speed&quot;</span>);</span><br><span class="line">    tracklist.<span class="built_in">push_back</span>(<span class="string">&quot;Jeep&quot;</span>);</span><br><span class="line">    tracklist.<span class="built_in">push_back</span>(<span class="string">&quot;101&quot;</span>);</span><br><span class="line">    tracklist.<span class="built_in">push_back</span>(<span class="string">&quot;Basketball&quot;</span>);</span><br><span class="line">    tracklist.<span class="built_in">push_back</span>(<span class="string">&quot;Bitch Ball Out&quot;</span>);</span><br><span class="line">    tracklist.<span class="built_in">push_back</span>(<span class="string">&quot;Korea&quot;</span>);</span><br><span class="line">    tracklist.<span class="built_in">push_back</span>(<span class="string">&quot;Freak it&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Album::<span class="built_in">Album</span>(std::string title, std::string artist, std::string genre, </span><br><span class="line">             std::string release_time,std::vector&lt;std::string&gt; tracklist) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;title = title;</span><br><span class="line">    <span class="keyword">this</span>-&gt;artist = artist;</span><br><span class="line">    <span class="keyword">this</span>-&gt;genre = genre;</span><br><span class="line">    <span class="keyword">this</span>-&gt;release_time = release_time;</span><br><span class="line">    <span class="keyword">this</span>-&gt;tracklist.<span class="built_in">clear</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> track : tracklist) &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;tracklist.<span class="built_in">push_back</span>(track);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">std::string <span class="title">Album::findTrack</span><span class="params">(<span class="type">int</span> num)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (num &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="string">&quot;NULL&quot;</span>;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = tracklist.<span class="built_in">begin</span>(); it != tracklist.<span class="built_in">end</span>(); ++it) &#123;</span><br><span class="line">        count++;</span><br><span class="line">        <span class="keyword">if</span> (count == num) &#123;</span><br><span class="line">            <span class="keyword">return</span> *it;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;NULL&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">std::string <span class="title">Album::getTitle</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> title;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">std::string <span class="title">Album::getTrack</span><span class="params">(<span class="type">int</span> num)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">findTrack</span>(num);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Album::setTrack</span><span class="params">(<span class="type">int</span> num, std::string trackname)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = tracklist.<span class="built_in">begin</span>(); it != tracklist.<span class="built_in">end</span>(); ++it) &#123;</span><br><span class="line">        count++;</span><br><span class="line">        <span class="keyword">if</span> (count == num) &#123;</span><br><span class="line">            *it = trackname;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Part 2.</p>
+<p>以下是 <code>sandbox.cpp</code> 的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;class.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">sandbox</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Album detour;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Part 3.</p>
+<p>Q1：什么是 const-correctness？它为什么重要？</p>
+<p>Const-correctness 指的是：当某个函数或对象不应该修改数据时，就用 <code>const</code> 对它进行标记。它很重要，因为这样可以让代码更加安全、清晰：其他程序员可以直接看出哪些函数只是读取对象内容，而编译器也可以帮助我们避免意外修改数据。</p>
+<p>Q2：你的类满足 const-correctness 吗？你怎么知道？</p>
+<p>是的，我的类满足 const-correctness，因为我的 getter 函数被标记为了 <code>const</code>，所以它们可以在不修改对象内容的情况下返回专辑信息。例如，<code>getTitle()</code> 和 <code>getTrack()</code> 只会读取私有成员变量，而 <code>setTrack()</code> 这样的 setter 函数才负责修改曲目列表。</p>
+
+  </div>
+
+  
+  <div class="about" data-pagefind-ignore>
+    <h2>About this Post</h2>
+    <div class="details">This post is written by Ezra Yang, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</div>
+    
+    <p class="tags">
+      <i class="bi bi-tags icon"></i>
+      
+      <a href="/tags/solutions/" class="tag">#solutions</a>
+      
+      <a href="/tags/C/" class="tag">#C++</a>
+      
+    </p>
+    
+    
+  </div>
+  
+
+  <div class="container post-prev-next" data-pagefind-ignore>
+    
+    <a href="/2026/07/12/CS61B-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="next">
+      <div class="text">
+        <p class="label">Next</p>
+        <h3 class="title">CS61B 学习笔记</h3>
+      </div>
+    </a>
+    
+    
+    <a href="/2026/06/30/CS106L-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="prev">
+      <div class="text">
+        <p class="label">Previous</p>
+        <h3 class="title">CS106L 学习笔记</h3>
+      </div>
+    </a>
+    
+  </div>
+
+  
+    <section class="giscus-comments" style="width:min(100% - 48px, 860px); margin:96px auto 72px auto; padding-top:40px; border-top:1px solid rgba(120,150,180,0.22); box-sizing:border-box;">
+  <h2 style="margin:0 0 28px 0; font-size:28px; line-height:1.1;">Comments</h2>
+  <script src="https://giscus.app/client.js"
+    data-repo="ezrablake2006/ezrablake2006.github.io"
+    data-repo-id="R_kgDOTIW0HA"
+    data-category="General"
+    data-category-id="DIC_kwDOTIW0HM4DAJj3"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+
+  
+</article>
+
+
+    </main>
+    <footer>
+  <div class="inner">
+    <div class="links">
+      
+      <div class="group">
+        <h2 class="title">Site</h2>
+        
+        <a href="/" class="item">Home</a>
+        
+        <a href="/archives/" class="item">Archive</a>
+        
+        <a href="/categories/" class="item">Categories</a>
+        
+      </div>
+      
+      <div class="group">
+        <h2 class="title">Me</h2>
+        
+        <a target="_blank" rel="noopener" href="https://github.com/ezrablake2006" class="item">GitHub</a>
+        
+        <a href="mailto:EzraBlake2006@outlook.com" class="item">Email</a>
+        
+      </div>
+      
+    </div>
+    <span>&copy; 2026 Ezra Yang<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></span>
+    
+    
+      <br>
+      <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+        <label>
+          <input type="radio" value="light">
+          <span>Light</span>
+        </label>
+        <label>
+          <input type="radio" value="dark">
+          <span>Dark</span>
+        </label>
+        <label>
+          <input type="radio" value="auto">
+          <span>Auto</span>
+        </label>
+      </div>
+    
+  </div>
+</footer>
+
+
+    
+<script src="/js/main.js"></script>
+
+
+    
+
+    
+    
+<script src="/js/scroll-reveal.js"></script>
+
+    
+
+    <script src="/js/hero-scroll.js?v=1"></script>
+
+  </body>
+</html>

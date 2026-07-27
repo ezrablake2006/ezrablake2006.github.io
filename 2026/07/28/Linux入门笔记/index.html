@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Linux 入门笔记 - @Ezra_Yang</title>
+  
+    <link rel="shortcut icon" href="/img/favicon.png">
+  
+  
+  <link rel='manifest' href='/manifest.json'>
+  
+
+  <meta name="description" content="本文参考：Linux 入门 - SAST skill docs §1  What is Linux?Linux 是一种自由和开放源码的类 UNIX 操作系统，Linux 也是自由软件和开放源代码软件发展中最著名的例子，只要遵循 GNU，任何个人和机构都可以自由地使用 Linux 的所有底层源代码，这使得它得到来自全世界软件爱好者和组织的开发支持。 狭义的Linux单指其内核，而平时说的Linux指">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 入门笔记">
+<meta property="og:url" content="http://ezrablake2006.github.io/2026/07/28/Linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="@Ezra_Yang">
+<meta property="og:description" content="本文参考：Linux 入门 - SAST skill docs §1  What is Linux?Linux 是一种自由和开放源码的类 UNIX 操作系统，Linux 也是自由软件和开放源代码软件发展中最著名的例子，只要遵循 GNU，任何个人和机构都可以自由地使用 Linux 的所有底层源代码，这使得它得到来自全世界软件爱好者和组织的开发支持。 狭义的Linux单指其内核，而平时说的Linux指">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-07-27T16:31:04.000Z">
+<meta property="article:modified_time" content="2026-07-27T16:53:17.966Z">
+<meta property="article:author" content="Ezra Yang">
+<meta property="article:tag" content="Basics">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+  <script>window.ThemeCupertino = {}</script>
+
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/simple-icons-font@16/font/simple-icons.min.css">
+
+  
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1/font/bootstrap-icons.min.css">
+
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+
+  
+  
+<link rel="stylesheet" href="/css/components/card.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/button.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/badge.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/utilities.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/carousel.css">
+
+  
+  
+  <script>ThemeCupertino['_calloutStyles'] = `
+<link rel="stylesheet" href="/css/components/callout.css">
+`</script>
+  
+<script src="/js/components/callout.js"></script>
+
+  
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/scroll-reveal.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/view-transition.css">
+
+  
+  
+  <script src="https://unpkg.com/lenis@1/dist/lenis.min.js"></script>
+  
+<link rel="stylesheet" href="https://unpkg.com/lenis@1/dist/lenis.css">
+
+  
+<script src="/js/smooth-scroll.js"></script>
+
+  
+
+  
+<script src="/js/head.js"></script>
+
+  <link rel="stylesheet" href="/css/custom.css?v=5">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body
+    data-color-scheme="auto"
+    data-uppercase-categories="true"
+    
+    data-rainbow-banner="true"
+    data-rainbow-banner-shown="always"
+    data-rainbow-banner-month="6"
+    data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+    
+    data-config-root="/"
+    
+    data-toc="true"
+    data-toc-max-depth="3"
+    
+    
+    
+    data-scroll-reveal-disappear="false"
+    data-scroll-reveal-query=".scroll-reveal, .post-list-item, .card, .content p img, .content .block-large img"
+    
+    data-nav-blur-gradient="false"
+    style="--config-corner-squircle: true"
+  >
+    
+<script src="/js/body-top.js"></script>
+
+    <a href="#main-content" id="skip-to-content">Skip to content</a>
+    
+
+<nav id="theme-nav">
+  <div class="inner">
+    <a class="title" href="/">Ezra Yang</a>
+    <div class="nav-arrow"></div>
+    <div class="nav-items">
+      <a class="nav-item nav-item-home" href="/" style="--index: 0">Home</a>
+
+      
+      <a class="nav-item" href="/categories/CStudy/" style="--index: 1">CStudy</a>
+      
+      <a class="nav-item" href="/categories/Music/" style="--index: 2">Music</a>
+      
+      <a class="nav-item" href="/categories/Language/" style="--index: 3">Language</a>
+      
+      <a class="nav-item" href="/categories/Diary/" style="--index: 4">Diary</a>
+      
+      <a class="nav-item" href="/tags" style="--index: 5">Tags</a>
+      
+      <a class="nav-item" href="/about" style="--index: 6">About</a>
+      
+    </div>
+  </div>
+</nav>
+
+    <main id="main-content" data-pagefind-body>
+      
+<article class="post">
+  
+  <div class="meta">
+    
+    <div class="categories text-uppercase">
+    
+      <a href="/categories/CStudy/">CStudy</a>
+    
+    </div>
+    
+
+    
+    <time class="date" datetime="2026-07-28T00:31:04+08:00">
+      July 28, 2026
+    </time>
+    
+
+    <h1 class="title" data-pagefind-meta="title">Linux 入门笔记</h1>
+  </div>
+
+  <div class="content">
+    <p>本文参考：<a target="_blank" rel="noopener" href="https://docs.net9.org/basic/linux/#basic-tools">Linux 入门 - SAST skill docs</a></p>
+<h2 id="§1-What-is-Linux"><a href="#§1-What-is-Linux" class="headerlink" title="§1  What is Linux?"></a>§1  What is Linux?</h2><p><strong>Linux</strong> 是一种自由和开放源码的类 UNIX 操作系统，Linux 也是自由软件和开放源代码软件发展中最著名的例子，只要遵循 GNU，任何个人和机构都可以自由地使用 Linux 的所有底层源代码，这使得它得到来自全世界软件爱好者和组织的开发支持。</p>
+<p>狭义的Linux单指其内核，而平时说的Linux指的是其<strong>发行版本</strong>，还包括安装工具、系统配置、图形桌面界面、各种 GNU 软件等。常见的 Linux 发行版有 Debian、Ubuntu、Fedora、CentOS、Arch Linux 等。笔者使用的是WSL Ubuntu。其他使用Linux的方法有Linux系统、虚拟机（Virtualbox、Docker）、服务器远程连接（SSH、RDP）。</p>
+<h2 id="§2-Shell-101"><a href="#§2-Shell-101" class="headerlink" title="§2  Shell 101"></a>§2  Shell 101</h2><p><strong>Shell</strong>：一种软件，我们可以将它视为“用户到内核之间的中介”，它接受并解析（英语：Parse）用户输入命令行的指令，并调用内核所提供的对应服务。分为图形界面和命令行界面两种，比如 Windows 的文件浏览器、程序管理器都可以算是 GUI Shell，但用 Linux 时我们一般说的都是 CLI Shell。</p>
+<p>常见的 Shell 包括 sh、bash、zsh、fish 等。</p>
+<p><strong>Linux终端提示符</strong>：<code>training@SAST-Training:~$</code></p>
+<p>含义：</p>
+<ul>
+<li>身份：<code>training</code></li>
+<li>主机名：<code>SAST-Training</code></li>
+<li>当前工作目录：<code>~</code> （指的是 <code>home/username</code> ）</li>
+<li>美元符号表示当前用户不是 <code>root</code> （反之是 <code>#</code> ）</li>
+</ul>
+<p>解析命令的过程：每输入一个命令，Shell解析、运行，将结果输入终端。</p>
+<p>最基本的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">training@SAST:~$ <span class="built_in">echo</span> <span class="string">&quot;Hello Linux!&quot;</span></span><br><span class="line">Hello Linux!</span><br></pre></td></tr></table></figure>
+
+<p>Shell 的命令由空格分割，第一个是要运行的程序（如上例 <code>echo</code>），后面跟它的参数（如上例 <code>&quot;Hello World!&quot;</code>）。</p>
+<p><strong>基本指令</strong>：</p>
+<table>
+<thead>
+<tr>
+<th align="center">Command</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>目录相关</strong></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">pwd</td>
+<td align="center">当前目录</td>
+</tr>
+<tr>
+<td align="center">cd</td>
+<td align="center">切换目录</td>
+</tr>
+<tr>
+<td align="center">ls</td>
+<td align="center">查看目录列表</td>
+</tr>
+<tr>
+<td align="center">mkdir</td>
+<td align="center">创建目录</td>
+</tr>
+<tr>
+<td align="center">find</td>
+<td align="center">在层级目录下搜索文件</td>
+</tr>
+<tr>
+<td align="center"><strong>文件相关</strong></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">man</td>
+<td align="center">了解软件具体命令用法</td>
+</tr>
+<tr>
+<td align="center">tldr</td>
+<td align="center">更清晰的man</td>
+</tr>
+<tr>
+<td align="center">touch</td>
+<td align="center">创建</td>
+</tr>
+<tr>
+<td align="center">mv</td>
+<td align="center">移动（可用于重命名）</td>
+</tr>
+<tr>
+<td align="center">cp</td>
+<td align="center">拷贝</td>
+</tr>
+<tr>
+<td align="center">rm</td>
+<td align="center">删除</td>
+</tr>
+<tr>
+<td align="center">chmod</td>
+<td align="center">更改文件权限</td>
+</tr>
+<tr>
+<td align="center">chown</td>
+<td align="center">更改文件所属</td>
+</tr>
+<tr>
+<td align="center">echo</td>
+<td align="center">输出提供的文本</td>
+</tr>
+<tr>
+<td align="center">file</td>
+<td align="center">查看文件类型</td>
+</tr>
+<tr>
+<td align="center">cat</td>
+<td align="center">将文件内容输出到标准输出</td>
+</tr>
+<tr>
+<td align="center"><strong>用户和组相关</strong></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">useradd</td>
+<td align="center">创建用户</td>
+</tr>
+<tr>
+<td align="center">groupadd</td>
+<td align="center">创建组</td>
+</tr>
+<tr>
+<td align="center">passwd</td>
+<td align="center">更改密码</td>
+</tr>
+<tr>
+<td align="center">chpasswd</td>
+<td align="center">批量更改密码</td>
+</tr>
+<tr>
+<td align="center">su</td>
+<td align="center">一般用于切换用户</td>
+</tr>
+<tr>
+<td align="center">sudo</td>
+<td align="center">一般用于执行 root 权限指令</td>
+</tr>
+</tbody></table>
+<p><strong>查看文件系统</strong>：</p>
+<p>基本的表示：<code>/</code> 表示根路径，<code>~</code> 表示家路径（<code>/home/username/</code>，如果是 root 则为 <code>/root/</code>），<code>.</code> 表示当前目录，<code>..</code> 表示上一级目录。</p>
+<p>根路径下的文件夹：</p>
+<ul>
+<li><code>/etc</code> 目录是系统根路径下最重要的目录之一，它是用来存储操作系统文件的公共区域，比如 <code>/etc/sudoers</code>、<code>/etc/passwd</code> 分别记录了拥有 root 权限的用户、系统内的所有用户信息。</li>
+<li><code>/var</code> 目录是系统的服务或应用频繁写入的地方，比如 <code>/var/log</code> 存储了程序的 log 文件。</li>
+<li><code>/tmp</code> 里是一些程序只需要访问一两次的文件，每当系统重启时，这里的文件都会被清空。注意这个文件夹默认可被任何用户写入。</li>
+<li><code>/home</code> 这个文件夹下是各个用户的家目录。</li>
+<li><code>/mnt</code> 是数据卷的挂载点；通过 USB 等接口连接的外部媒体也可能出现在 <code>/media</code> 文件夹中。</li>
+<li><code>/srv</code> 存放这个服务器提供的服务所需的文件（如网站资源）。</li>
+<li><code>/proc</code>：虚拟文件系统，用于存储内核和进程的运行时信息，例如 <code>/proc/cpuinfo</code> 查看 CPU 信息，<code>/proc/meminfo</code> 查看内存信息。</li>
+<li><code>/sys</code>：虚拟文件系统，提供设备和驱动相关的系统信息。</li>
+<li><code>/dev</code>：设备文件目录，例如 <code>/dev/null</code>（空设备文件）和 <code>/dev/sda</code>（磁盘设备文件）。</li>
+</ul>
+<p><strong>Shell</strong> <strong>中的常见操作符</strong>：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Operator</th>
+<th align="left">Description</th>
+<th align="left">Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&amp;</td>
+<td align="left">允许命令在后台执行</td>
+<td align="left"><code>cp -r ./here ./there &amp;</code></td>
+</tr>
+<tr>
+<td align="left">&amp;&amp;</td>
+<td align="left">执行多条指令，逻辑和 C++ 类似</td>
+<td align="left"><code>wget someurl/install.sh . &amp;&amp; ./install.sh</code></td>
+</tr>
+<tr>
+<td align="left">&gt;</td>
+<td align="left">重定向输出</td>
+<td align="left"><code>echo &quot;Hello&quot; &gt; hello.txt</code></td>
+</tr>
+<tr>
+<td align="left">&lt;</td>
+<td align="left">重定向输入</td>
+<td align="left"><code>./main &lt; in.txt</code></td>
+</tr>
+<tr>
+<td align="left">&gt;&gt;</td>
+<td align="left">重定向输出并采取“追加”模式</td>
+<td align="left"><code>echo cirno &gt;&gt; visitors.txt</code></td>
+</tr>
+<tr>
+<td align="left">|</td>
+<td align="left">连接前后两个程序的输出和输入</td>
+<td align="left">&#96;ls ~&#x2F;Documents</td>
+</tr>
+</tbody></table>
+<p><strong>软件包管理系统</strong>是在电脑中自动安装、配置、卸载和升级软件包的工作组合。使用软件包管理系统可以大大简化在 Linux 发行版中安装软件的流程。常见的软件包有两种类型：deb 软件包（由 dpkg 和它的前端 apt 管理，使用于 Debian、Ubuntu）和 RPM 软件包（由 dnf、yum、ZYpp 等前端管理）。</p>
+
+  </div>
+
+  
+  <div class="about" data-pagefind-ignore>
+    <h2>About this Post</h2>
+    <div class="details">This post is written by Ezra Yang, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</div>
+    
+    <p class="tags">
+      <i class="bi bi-tags icon"></i>
+      
+      <a href="/tags/Basics/" class="tag">#Basics</a>
+      
+      <a href="/tags/Linux/" class="tag">#Linux</a>
+      
+    </p>
+    
+    
+  </div>
+  
+
+  <div class="container post-prev-next" data-pagefind-ignore>
+    <a class="next"></a>
+    
+    <a href="/2026/07/12/CS61B-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="prev">
+      <div class="text">
+        <p class="label">Previous</p>
+        <h3 class="title">CS61B 学习笔记</h3>
+      </div>
+    </a>
+    
+  </div>
+
+  
+    <section class="giscus-comments" style="width:min(100% - 48px, 860px); margin:96px auto 72px auto; padding-top:40px; border-top:1px solid rgba(120,150,180,0.22); box-sizing:border-box;">
+  <h2 style="margin:0 0 28px 0; font-size:28px; line-height:1.1;">Comments</h2>
+  <script src="https://giscus.app/client.js"
+    data-repo="ezrablake2006/ezrablake2006.github.io"
+    data-repo-id="R_kgDOTIW0HA"
+    data-category="General"
+    data-category-id="DIC_kwDOTIW0HM4DAJj3"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+
+  
+</article>
+
+
+    </main>
+    <footer>
+  <div class="inner">
+    <div class="links">
+      
+      <div class="group">
+        <h2 class="title">Site</h2>
+        
+        <a href="/" class="item">Home</a>
+        
+        <a href="/archives/" class="item">Archive</a>
+        
+        <a href="/categories/" class="item">Categories</a>
+        
+      </div>
+      
+      <div class="group">
+        <h2 class="title">Me</h2>
+        
+        <a target="_blank" rel="noopener" href="https://github.com/ezrablake2006" class="item">GitHub</a>
+        
+        <a href="mailto:EzraBlake2006@outlook.com" class="item">Email</a>
+        
+      </div>
+      
+    </div>
+    <span>&copy; 2026 Ezra Yang<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></span>
+    
+    
+      <br>
+      <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+        <label>
+          <input type="radio" value="light">
+          <span>Light</span>
+        </label>
+        <label>
+          <input type="radio" value="dark">
+          <span>Dark</span>
+        </label>
+        <label>
+          <input type="radio" value="auto">
+          <span>Auto</span>
+        </label>
+      </div>
+    
+  </div>
+</footer>
+
+
+    
+<script src="/js/main.js"></script>
+
+
+    
+
+    
+    
+<script src="/js/scroll-reveal.js"></script>
+
+    
+
+    <script src="/js/hero-scroll.js?v=1"></script>
+
+  </body>
+</html>

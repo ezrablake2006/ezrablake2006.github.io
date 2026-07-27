@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>CS61B 学习笔记 - @Ezra_Yang</title>
+  
+    <link rel="shortcut icon" href="/img/favicon.png">
+  
+  
+  <link rel='manifest' href='/manifest.json'>
+  
+
+  <meta name="description" content="§1  Java入门1.1 Java基础语法Java的Hello-world程序如下： 12345public class HelloWorld &#123;    public static void main(String[] args) &#123;        System.out.println(&quot;Hello world!&quot;);    &#125;&#125;  所">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS61B 学习笔记">
+<meta property="og:url" content="http://ezrablake2006.github.io/2026/07/12/CS61B-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="@Ezra_Yang">
+<meta property="og:description" content="§1  Java入门1.1 Java基础语法Java的Hello-world程序如下： 12345public class HelloWorld &#123;    public static void main(String[] args) &#123;        System.out.println(&quot;Hello world!&quot;);    &#125;&#125;  所">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-07-12T06:37:11.000Z">
+<meta property="article:modified_time" content="2026-07-16T05:57:49.265Z">
+<meta property="article:author" content="Ezra Yang">
+<meta property="article:tag" content="Data Structure">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+
+  <script>window.ThemeCupertino = {}</script>
+
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/simple-icons-font@16/font/simple-icons.min.css">
+
+  
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1/font/bootstrap-icons.min.css">
+
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+
+  
+  
+<link rel="stylesheet" href="/css/components/card.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/button.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/badge.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/utilities.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/carousel.css">
+
+  
+  
+  <script>ThemeCupertino['_calloutStyles'] = `
+<link rel="stylesheet" href="/css/components/callout.css">
+`</script>
+  
+<script src="/js/components/callout.js"></script>
+
+  
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/scroll-reveal.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/view-transition.css">
+
+  
+  
+  <script src="https://unpkg.com/lenis@1/dist/lenis.min.js"></script>
+  
+<link rel="stylesheet" href="https://unpkg.com/lenis@1/dist/lenis.css">
+
+  
+<script src="/js/smooth-scroll.js"></script>
+
+  
+
+  
+<script src="/js/head.js"></script>
+
+  <link rel="stylesheet" href="/css/custom.css?v=5">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body
+    data-color-scheme="auto"
+    data-uppercase-categories="true"
+    
+    data-rainbow-banner="true"
+    data-rainbow-banner-shown="always"
+    data-rainbow-banner-month="6"
+    data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+    
+    data-config-root="/"
+    
+    data-toc="true"
+    data-toc-max-depth="3"
+    
+    
+    
+    data-scroll-reveal-disappear="false"
+    data-scroll-reveal-query=".scroll-reveal, .post-list-item, .card, .content p img, .content .block-large img"
+    
+    data-nav-blur-gradient="false"
+    style="--config-corner-squircle: true"
+  >
+    
+<script src="/js/body-top.js"></script>
+
+    <a href="#main-content" id="skip-to-content">Skip to content</a>
+    
+
+<nav id="theme-nav">
+  <div class="inner">
+    <a class="title" href="/">Ezra Yang</a>
+    <div class="nav-arrow"></div>
+    <div class="nav-items">
+      <a class="nav-item nav-item-home" href="/" style="--index: 0">Home</a>
+
+      
+      <a class="nav-item" href="/categories/CStudy/" style="--index: 1">CStudy</a>
+      
+      <a class="nav-item" href="/categories/Music/" style="--index: 2">Music</a>
+      
+      <a class="nav-item" href="/categories/Language/" style="--index: 3">Language</a>
+      
+      <a class="nav-item" href="/categories/Diary/" style="--index: 4">Diary</a>
+      
+      <a class="nav-item" href="/tags" style="--index: 5">Tags</a>
+      
+      <a class="nav-item" href="/about" style="--index: 6">About</a>
+      
+    </div>
+  </div>
+</nav>
+
+    <main id="main-content" data-pagefind-body>
+      
+<article class="post">
+  
+  <div class="meta">
+    
+    <div class="categories text-uppercase">
+    
+      <a href="/categories/CStudy/">CStudy</a>
+    
+    </div>
+    
+
+    
+    <time class="date" datetime="2026-07-12T14:37:11+08:00">
+      July 12, 2026
+    </time>
+    
+
+    <h1 class="title" data-pagefind-meta="title">CS61B 学习笔记</h1>
+  </div>
+
+  <div class="content">
+    <h2 id="§1-Java入门"><a href="#§1-Java入门" class="headerlink" title="§1  Java入门"></a>§1  Java入门</h2><h3 id="1-1-Java基础语法"><a href="#1-1-Java基础语法" class="headerlink" title="1.1 Java基础语法"></a>1.1 Java基础语法</h3><p>Java的Hello-world程序如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所有需要执行的代码都必须位于被声明为 <code>public static void main(String[] args)</code> 的方法内部。</p>
+<p>在 Java 中，将一个程序文件转换为可执行文件的过程主要包括两个步骤：<strong>编译</strong>和<strong>解释</strong>。要运行 <code>Hello.java</code> 中的代码，我们首先需要使用 <code>javac HelloWorld.java</code> 命令将代码编译为 <code>.class</code> 文件。然后，要运行代码，我们就会使用 <code>java HelloWorld</code> 命令。</p>
+<p>Java程序的几个规则：</p>
+<ol>
+<li>所有变量必须在使用之前被声明出来，并且还需要指定其类型。在整个程序中，<strong>类型不可改变</strong>。Java 是一种静态类型语言，这意味着所有的变量、参数和方法都必须声明其类型。一旦声明后，类型就不能再更改。表达式也具有隐式类型；例如，表达式 <code>3 + 5</code> 的类型就是 <code>int</code> 。</li>
+<li>因为所有类型都是<strong>静态声明</strong>的，所以在程序运行之前，编译器就会检查这些类型是否兼容。这意味着，如果表达式中的类型不兼容，那么表达式将无法编译，而不会导致程序在运行时崩溃。</li>
+<li>由于<strong>所有的 Java 代码都属于某个类</strong>，因此我们必须定义那些<strong>属于某个类的函数</strong>。属于某个类的函数通常被称为“<strong>方法 methods</strong>”。我们使用 <code>public static</code> 这个关键字来声明方法。</li>
+</ol>
+<p>一些Java的基础语法：（大部分和C++相同）</p>
+<p><code>System.out.print()</code> 表示输出不带换行，<code>System.out.println()</code> 表示输出+换行。</p>
+<p>Java没有 <code>float</code> 类型，只有 <code>double</code> ，并且字符串类型为 <code>String</code> 。</p>
+<p>Java定义数组：<code>int[] numbers = new int[5];</code> </p>
+<p>Java计算数组长度：<code>numbers.length</code> </p>
+<h3 id="1-2-Java定义和使用类"><a href="#1-2-Java定义和使用类" class="headerlink" title="1.2  Java定义和使用类"></a>1.2  Java定义和使用类</h3><p>Java所有的代码都必须放在一个类里。</p>
+<p>一个类可以使用另一个类。一个类使用另一个类的情况，有时被称为该类的“<strong>客户端</strong>”。如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Dog</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">makeNoise</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Bark!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DogLauncher</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Dog.makeNoise();   <span class="comment">//使用了Dog类</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>类可以被<strong>实例化</strong>，而这些实例可以存储数据。我们创建 <code>Dog</code> 类的实例，然后让 <code>Dog</code> 方法的行为取决于具体的 <code>Dog</code> 对象的属性。考虑下面的类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Dog</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> weightInPounds;  <span class="comment">//Dog 类拥有自己的变量，这些变量也被称为实例变量或非静态变量。</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">makeNoise</span><span class="params">()</span> &#123;  <span class="comment">//方法并没有使用 static 关键字。称为实例方法或非静态方法。</span></span><br><span class="line">        <span class="keyword">if</span> (weightInPounds &lt; <span class="number">10</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;yipyipyip!&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (weightInPounds &lt; <span class="number">30</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;bark. bark.&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;woof!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DogLauncher</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Dog d;   <span class="comment">//实例化对象并调用</span></span><br><span class="line">        d = <span class="keyword">new</span> <span class="title class_">Dog</span>();   </span><br><span class="line">        d.weightInPounds = <span class="number">20</span>;</span><br><span class="line">        d.makeNoise();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以使用<strong>构造函数</strong>来实例化对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Dog</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> weight;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Dog</span><span class="params">(<span class="type">int</span> w)</span> &#123;  <span class="comment">//构造函数声明与定义</span></span><br><span class="line">        weight = w;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DogLauncher</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Dog d;</span><br><span class="line">        d = <span class="keyword">new</span> <span class="title class_">Dog</span>(<span class="number">20</span>);  <span class="comment">//构造函数调用</span></span><br><span class="line">        Dog[] dogs = <span class="keyword">new</span> <span class="title class_">Dog</span>[<span class="number">2</span>];  <span class="comment">//类的数组声明</span></span><br><span class="line">        System.out.println(d.weight);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在Java中，方法&#x2F;函数有类方法（静态方法）和实例方法（非静态方法）两种类型。实例方法是指只能由类的特定实例才能执行的操作。而静态方法则是由类本身直接执行的操作。</p>
+<p>下面是静态方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Dog <span class="title function_">maxDog</span><span class="params">(Dog d1, Dog d2)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (d1.weightInPounds &gt; d2.weightInPounds) &#123;</span><br><span class="line">        <span class="keyword">return</span> d1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> d2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用方式</span></span><br><span class="line"><span class="type">Dog</span> <span class="variable">d</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dog</span>(<span class="number">15</span>);</span><br><span class="line"><span class="type">Dog</span> <span class="variable">d2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dog</span>(<span class="number">100</span>);</span><br><span class="line">Dog.maxDog(d, d2);</span><br></pre></td></tr></table></figure>
+
+<p>实例方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Dog <span class="title function_">maxDog</span><span class="params">(Dog d2)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.weightInPounds &gt; d2.weightInPounds) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> d2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用方式</span></span><br><span class="line"><span class="type">Dog</span> <span class="variable">d</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dog</span>(<span class="number">15</span>);</span><br><span class="line"><span class="type">Dog</span> <span class="variable">d2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dog</span>(<span class="number">100</span>);</span><br><span class="line">d.maxDog(d2);</span><br></pre></td></tr></table></figure>
+
+<p>在某些情况下，让类具有<strong>静态变量</strong>是很有用的。这些变量是类本身固有的属性，而不是由具体实例来携带的。静态变量应该通过类的名称来访问，而不是通过具体的实例。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Dog</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> weightInPounds;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">binomen</span> <span class="operator">=</span> <span class="string">&quot;Canis familiaris&quot;</span>;  <span class="comment">//静态变量</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>目前为止，我们已经知道了主函数命令 <code>public static void main(String args[])</code> 括号外的内容的含义。</p>
+<p>括号内的 <code>String args[]</code> 是命令行参数。</p>
+<h3 id="1-3-引用、递归和列表"><a href="#1-3-引用、递归和列表" class="headerlink" title="1.3  引用、递归和列表"></a>1.3  引用、递归和列表</h3><p>平等黄金法则（GRoE）：当你写 <code> x = y</code> 时<code>y = x</code>，你是在告诉 Java 解释器将 x 中的位复制到 y 中。当你向函数传递参数时，实际上就是在复制数据位。换句话说，GRoE 也适用于参数传递。复制数据位通常被称为“按值传递”。在 Java 中，我们<strong>总是</strong>按值传递数据。</p>
+<p>整数列表可以使用递归实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IntList</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> first;</span><br><span class="line">    <span class="keyword">public</span> IntList rest;        </span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">IntList</span><span class="params">(<span class="type">int</span> f, IntList r)</span> &#123;</span><br><span class="line">        first = f;</span><br><span class="line">        rest = r;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实例化整数列表：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">IntList</span> <span class="variable">L</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IntList</span>(<span class="number">5</span>, <span class="literal">null</span>);</span><br><span class="line">L.rest = <span class="keyword">new</span> <span class="title class_">IntList</span>(<span class="number">10</span>, <span class="literal">null</span>);</span><br><span class="line">L.rest.rest = <span class="keyword">new</span> <span class="title class_">IntList</span>(<span class="number">15</span>, <span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p>例：编写一个方法<code>get(int i)</code>，返回列表的第 i 个元素。例如，如果<code>L</code>列表为 5 -&gt; 10 -&gt; 15，则该方法<code>L.get(0)</code>应返回 5，<code>L.get(1)</code>应返回 10，<code>L.get(2)</code>应返回 15。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IntList</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> first;</span><br><span class="line">    <span class="keyword">public</span> IntList rest;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">IntList</span><span class="params">(<span class="type">int</span> f, IntList r)</span> &#123;</span><br><span class="line">        first = f;</span><br><span class="line">        rest = r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> IntList <span class="title function_">get</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> rest.get(i - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UseIntList</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">IntList</span> <span class="variable">L</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IntList</span>(<span class="number">5</span>, <span class="literal">null</span>);</span><br><span class="line">        L.rest = <span class="keyword">new</span> <span class="title class_">IntList</span>(<span class="number">10</span>, <span class="literal">null</span>);</span><br><span class="line">        L.rest.rest = <span class="keyword">new</span> <span class="title class_">IntList</span>(<span class="number">15</span>, <span class="literal">null</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">            System.out.print(L.get(i).first + <span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+  </div>
+
+  
+  <div class="about" data-pagefind-ignore>
+    <h2>About this Post</h2>
+    <div class="details">This post is written by Ezra Yang, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</div>
+    
+    <p class="tags">
+      <i class="bi bi-tags icon"></i>
+      
+      <a href="/tags/Data-Structure/" class="tag">#Data Structure</a>
+      
+      <a href="/tags/Java/" class="tag">#Java</a>
+      
+      <a href="/tags/Git/" class="tag">#Git</a>
+      
+    </p>
+    
+    
+  </div>
+  
+
+  <div class="container post-prev-next" data-pagefind-ignore>
+    
+    <a href="/2026/07/28/Linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" class="next">
+      <div class="text">
+        <p class="label">Next</p>
+        <h3 class="title">Linux 入门笔记</h3>
+      </div>
+    </a>
+    
+    
+    <a href="/2026/07/01/CS106L-Assignments-Solutions/" class="prev">
+      <div class="text">
+        <p class="label">Previous</p>
+        <h3 class="title">CS106L Assignments &amp; Solutions</h3>
+      </div>
+    </a>
+    
+  </div>
+
+  
+    <section class="giscus-comments" style="width:min(100% - 48px, 860px); margin:96px auto 72px auto; padding-top:40px; border-top:1px solid rgba(120,150,180,0.22); box-sizing:border-box;">
+  <h2 style="margin:0 0 28px 0; font-size:28px; line-height:1.1;">Comments</h2>
+  <script src="https://giscus.app/client.js"
+    data-repo="ezrablake2006/ezrablake2006.github.io"
+    data-repo-id="R_kgDOTIW0HA"
+    data-category="General"
+    data-category-id="DIC_kwDOTIW0HM4DAJj3"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+
+  
+</article>
+
+
+    </main>
+    <footer>
+  <div class="inner">
+    <div class="links">
+      
+      <div class="group">
+        <h2 class="title">Site</h2>
+        
+        <a href="/" class="item">Home</a>
+        
+        <a href="/archives/" class="item">Archive</a>
+        
+        <a href="/categories/" class="item">Categories</a>
+        
+      </div>
+      
+      <div class="group">
+        <h2 class="title">Me</h2>
+        
+        <a target="_blank" rel="noopener" href="https://github.com/ezrablake2006" class="item">GitHub</a>
+        
+        <a href="mailto:EzraBlake2006@outlook.com" class="item">Email</a>
+        
+      </div>
+      
+    </div>
+    <span>&copy; 2026 Ezra Yang<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></span>
+    
+    
+      <br>
+      <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+        <label>
+          <input type="radio" value="light">
+          <span>Light</span>
+        </label>
+        <label>
+          <input type="radio" value="dark">
+          <span>Dark</span>
+        </label>
+        <label>
+          <input type="radio" value="auto">
+          <span>Auto</span>
+        </label>
+      </div>
+    
+  </div>
+</footer>
+
+
+    
+<script src="/js/main.js"></script>
+
+
+    
+
+    
+    
+<script src="/js/scroll-reveal.js"></script>
+
+    
+
+    <script src="/js/hero-scroll.js?v=1"></script>
+
+  </body>
+</html>
