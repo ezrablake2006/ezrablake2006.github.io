@@ -21,7 +21,7 @@
 <meta property="og:description" content="本文参考：Linux 入门 - SAST skill docs §1  What is Linux?Linux 是一种自由和开放源码的类 UNIX 操作系统，Linux 也是自由软件和开放源代码软件发展中最著名的例子，只要遵循 GNU，任何个人和机构都可以自由地使用 Linux 的所有底层源代码，这使得它得到来自全世界软件爱好者和组织的开发支持。 狭义的Linux单指其内核，而平时说的Linux指">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-07-27T16:31:04.000Z">
-<meta property="article:modified_time" content="2026-07-27T16:53:17.966Z">
+<meta property="article:modified_time" content="2026-07-27T17:04:34.564Z">
 <meta property="article:author" content="Ezra Yang">
 <meta property="article:tag" content="Basics">
 <meta property="article:tag" content="Linux">
@@ -226,6 +226,23 @@
     <p>本文参考：<a target="_blank" rel="noopener" href="https://docs.net9.org/basic/linux/#basic-tools">Linux 入门 - SAST skill docs</a></p>
 <h2 id="§1-What-is-Linux"><a href="#§1-What-is-Linux" class="headerlink" title="§1  What is Linux?"></a>§1  What is Linux?</h2><p><strong>Linux</strong> 是一种自由和开放源码的类 UNIX 操作系统，Linux 也是自由软件和开放源代码软件发展中最著名的例子，只要遵循 GNU，任何个人和机构都可以自由地使用 Linux 的所有底层源代码，这使得它得到来自全世界软件爱好者和组织的开发支持。</p>
 <p>狭义的Linux单指其内核，而平时说的Linux指的是其<strong>发行版本</strong>，还包括安装工具、系统配置、图形桌面界面、各种 GNU 软件等。常见的 Linux 发行版有 Debian、Ubuntu、Fedora、CentOS、Arch Linux 等。笔者使用的是WSL Ubuntu。其他使用Linux的方法有Linux系统、虚拟机（Virtualbox、Docker）、服务器远程连接（SSH、RDP）。</p>
+<blockquote>
+<p>为什么更推荐 Linux 作为程序员的开发环境？</p>
+<ol>
+<li><p>开发环境和服务器环境一致</p>
+<p>绝大多数网站后端、云服务器、Docker 容器、科研计算服务器都运行 Linux。如果在 Windows 本地开发、最后部署到 Linux，可能遇到换行符 CRLF 和 LF 不同、Shell 命令不同、权限机制不同、某些依赖只在 Linux 上正常运行等问题。</p>
+</li>
+<li><p>安装开发工具更统一</p>
+<p>Linux 安装工具通常可以直接使用包管理器，很多工具不需要到处找安装包、点击安装向导、设置环境变量。</p>
+</li>
+<li><p>命令行和自动化能力强</p>
+<p>Linux Shell 不只是“输入命令的黑框”，它可以把多个程序像积木一样组合。这种自动化能力在大型项目、科研实验、服务器运维中非常重要。</p>
+</li>
+<li><p>Git、SSH、Docker 等工具属于 Linux 的“主场”</p>
+<p>Git、SSH、Docker、Kubernetes、GCC、CMake、Make 等工具都与 Unix&#x2F;Linux 生态关系很深。它们在 Windows 上也能使用，但在 Linux 中通常文档中的命令可以直接复制、路径和权限行为更符合预期、不需要额外的兼容层、与远程服务器操作方式一致、Shell 脚本兼容性更好。</p>
+</li>
+</ol>
+</blockquote>
 <h2 id="§2-Shell-101"><a href="#§2-Shell-101" class="headerlink" title="§2  Shell 101"></a>§2  Shell 101</h2><p><strong>Shell</strong>：一种软件，我们可以将它视为“用户到内核之间的中介”，它接受并解析（英语：Parse）用户输入命令行的指令，并调用内核所提供的对应服务。分为图形界面和命令行界面两种，比如 Windows 的文件浏览器、程序管理器都可以算是 GUI Shell，但用 Linux 时我们一般说的都是 CLI Shell。</p>
 <p>常见的 Shell 包括 sh、bash、zsh、fish 等。</p>
 <p><strong>Linux终端提示符</strong>：<code>training@SAST-Training:~$</code></p>
