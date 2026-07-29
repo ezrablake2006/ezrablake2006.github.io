@@ -21,7 +21,7 @@
 <meta property="og:description" content="本文参考：Linux 入门 - SAST skill docs §1  What is Linux?Linux 是一种自由和开放源码的类 UNIX 操作系统，Linux 也是自由软件和开放源代码软件发展中最著名的例子，只要遵循 GNU，任何个人和机构都可以自由地使用 Linux 的所有底层源代码，这使得它得到来自全世界软件爱好者和组织的开发支持。 狭义的Linux单指其内核，而平时说的Linux指">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-07-27T16:31:04.000Z">
-<meta property="article:modified_time" content="2026-07-27T17:04:34.564Z">
+<meta property="article:modified_time" content="2026-07-29T06:40:41.944Z">
 <meta property="article:author" content="Ezra Yang">
 <meta property="article:tag" content="Basics">
 <meta property="article:tag" content="Linux">
@@ -422,6 +422,21 @@
 </tr>
 </tbody></table>
 <p><strong>软件包管理系统</strong>是在电脑中自动安装、配置、卸载和升级软件包的工作组合。使用软件包管理系统可以大大简化在 Linux 发行版中安装软件的流程。常见的软件包有两种类型：deb 软件包（由 dpkg 和它的前端 apt 管理，使用于 Debian、Ubuntu）和 RPM 软件包（由 dnf、yum、ZYpp 等前端管理）。</p>
+<h2 id="§3-SSH"><a href="#§3-SSH" class="headerlink" title="§3  SSH"></a>§3  SSH</h2><p><strong>Secure SHell</strong>, 是一种用于在不安全网络上<strong>安全访问远程计算机</strong> 的协议. 它提供了一种加密的方法, 使得用户可以通过不安全的网络连接上安全地 <strong>远程登录 (ssh) 和传输文件 (scp &#x2F; sftp)</strong>. SSH 提供了完整的 Linux Shell 支持, 且协议开源可信, 常用终端开源, 安全漏洞较少, 因此被广泛使用.</p>
+<p><strong>远程执行命令</strong>：SSH 可以直接远程执行命令而不需要连接到远程的 Shell 中，在连接命令后加上需要执行的命令.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh username@server [<span class="built_in">command</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>远程拷贝文件</strong>：<code>scp</code> 指令可以从远程拷贝文件到本地&#x2F;从本地拷贝文件到远程，基本格式是 <code>scp &lt;from&gt; &lt;to&gt;</code>。如果要拷贝一个文件夹，应该使用 flag <code>-r</code> 表示递归深入目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将本地当前目录的 test.zip 拷贝到远程的 ~/test.zip</span></span><br><span class="line">scp test.zip training@153.223.56.12:~/test.zip </span><br><span class="line"><span class="comment"># 将远程的 data.csv 拷贝到本地当前目录</span></span><br><span class="line">scp training@152.32.34.12:~/data.csv . </span><br></pre></td></tr></table></figure>
+
+<p><strong>SSH配置文件</strong>：每次连接服务器都要输入用户名、IP 和端口未免过于繁琐，我们可以通过编辑 SSH 配置文件来简化命令。这个配置文件位于家路径的 <code>.ssh</code> 文件夹下，名字为 <code>config</code>（如果不存在需自己创建），即 <code>~/.ssh/config</code>。对于 Windows 系统而言，这个 <code>.ssh</code> 文件夹位于用户目录下 <code>C:\Users\&lt;username&gt;\.ssh\config</code>。配置文件写法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HOST sast    HostName 152.136.177.53    Port 8000     (默认22，此时不需要指定)    User root </span><br></pre></td></tr></table></figure>
+
+<p>这样每次我们想连接到 <code>root@152.136.177.53 -p 8000</code> 时只需要输入 <code>ssh sast</code> 即可。</p>
+<p>这个配置文件同样适用于 <code>scp</code> 命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 前一小节例子的简略版 scp test.zip sast:~/test.zip  scp sast:~/data.csv . </span></span><br></pre></td></tr></table></figure>
+
+<p><strong>PubKey Authentication</strong>：利用密码学中的公钥-私钥非对称加密机制，我们只需要在服务器中预存好自己的公钥，就可以在登录时自动化验证流程而免去密码。</p>
 
   </div>
 
