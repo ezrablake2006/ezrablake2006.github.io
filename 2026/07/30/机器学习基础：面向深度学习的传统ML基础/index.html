@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>机器学习基础：面向深度学习的传统ML基础 - @Ezra_Yang</title>
+  
+    <link rel="shortcut icon" href="/img/favicon.png">
+  
+  
+  <link rel='manifest' href='/manifest.json'>
+  
+
+  <meta name="description" content="Introduction: 知识提纲 数据预处理：数据清洗、数据变换 特征工程 监督学习： 分类算法：K-近邻算法，决策树，朴素贝叶斯，Logistic 回归，SVM，Softmax 回归 回归算法：线性回归，局部加权线性回归   无监督学习： K-means，层次聚类，DBSCAN   模型评估方法：准确率，召回率，P-R 曲线，ROC，AUC，MSE  §1  数据预处理 数据预处理：在数据挖">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习基础：面向深度学习的传统ML基础">
+<meta property="og:url" content="http://ezrablake2006.github.io/2026/07/30/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%EF%BC%9A%E9%9D%A2%E5%90%91%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%BC%A0%E7%BB%9FML%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="@Ezra_Yang">
+<meta property="og:description" content="Introduction: 知识提纲 数据预处理：数据清洗、数据变换 特征工程 监督学习： 分类算法：K-近邻算法，决策树，朴素贝叶斯，Logistic 回归，SVM，Softmax 回归 回归算法：线性回归，局部加权线性回归   无监督学习： K-means，层次聚类，DBSCAN   模型评估方法：准确率，召回率，P-R 曲线，ROC，AUC，MSE  §1  数据预处理 数据预处理：在数据挖">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://ezrablake2006.github.io/img/Data-Cleaning-Mindmap.png">
+<meta property="article:published_time" content="2026-07-30T11:20:49.000Z">
+<meta property="article:modified_time" content="2026-07-30T14:27:35.024Z">
+<meta property="article:author" content="Ezra Yang">
+<meta property="article:tag" content="notes">
+<meta property="article:tag" content="Machine Learning">
+<meta property="article:tag" content="Deep Learning">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ezrablake2006.github.io/img/Data-Cleaning-Mindmap.png">
+
+  <script>window.ThemeCupertino = {}</script>
+
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/simple-icons-font@16/font/simple-icons.min.css">
+
+  
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1/font/bootstrap-icons.min.css">
+
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+
+  
+  
+<link rel="stylesheet" href="/css/components/card.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/button.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/badge.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/utilities.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/carousel.css">
+
+  
+  
+  <script>ThemeCupertino['_calloutStyles'] = `
+<link rel="stylesheet" href="/css/components/callout.css">
+`</script>
+  
+<script src="/js/components/callout.js"></script>
+
+  
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/scroll-reveal.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/view-transition.css">
+
+  
+  
+  <script src="https://unpkg.com/lenis@1/dist/lenis.min.js"></script>
+  
+<link rel="stylesheet" href="https://unpkg.com/lenis@1/dist/lenis.css">
+
+  
+<script src="/js/smooth-scroll.js"></script>
+
+  
+
+  
+<script src="/js/head.js"></script>
+
+  <link rel="stylesheet" href="/css/custom.css?v=5">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body
+    data-color-scheme="auto"
+    data-uppercase-categories="true"
+    
+    data-rainbow-banner="true"
+    data-rainbow-banner-shown="always"
+    data-rainbow-banner-month="6"
+    data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+    
+    data-config-root="/"
+    
+    data-toc="true"
+    data-toc-max-depth="3"
+    
+    
+    
+    data-scroll-reveal-disappear="false"
+    data-scroll-reveal-query=".scroll-reveal, .post-list-item, .card, .content p img, .content .block-large img"
+    
+    data-nav-blur-gradient="false"
+    style="--config-corner-squircle: true"
+  >
+    
+<script src="/js/body-top.js"></script>
+
+    <a href="#main-content" id="skip-to-content">Skip to content</a>
+    
+
+<nav id="theme-nav">
+  <div class="inner">
+    <a class="title" href="/">Ezra Yang</a>
+    <div class="nav-arrow"></div>
+    <div class="nav-items">
+      <a class="nav-item nav-item-home" href="/" style="--index: 0">Home</a>
+
+      
+      <a class="nav-item" href="/categories/CStudy/" style="--index: 1">CStudy</a>
+      
+      <a class="nav-item" href="/categories/Music/" style="--index: 2">Music</a>
+      
+      <a class="nav-item" href="/categories/Language/" style="--index: 3">Language</a>
+      
+      <a class="nav-item" href="/categories/Diary/" style="--index: 4">Diary</a>
+      
+      <a class="nav-item" href="/tags" style="--index: 5">Tags</a>
+      
+      <a class="nav-item" href="/about" style="--index: 6">About</a>
+      
+    </div>
+  </div>
+</nav>
+
+    <main id="main-content" data-pagefind-body>
+      
+<article class="post">
+  
+  <div class="meta">
+    
+    <div class="categories text-uppercase">
+    
+      <a href="/categories/CStudy/">CStudy</a>
+    
+    </div>
+    
+
+    
+    <time class="date" datetime="2026-07-30T19:20:49+08:00">
+      July 30, 2026
+    </time>
+    
+
+    <h1 class="title" data-pagefind-meta="title">机器学习基础：面向深度学习的传统ML基础</h1>
+  </div>
+
+  <div class="content">
+    <h2 id="Introduction-知识提纲"><a href="#Introduction-知识提纲" class="headerlink" title="Introduction: 知识提纲"></a>Introduction: 知识提纲</h2><ul>
+<li>数据预处理：数据清洗、数据变换</li>
+<li>特征工程</li>
+<li>监督学习：<ul>
+<li>分类算法：K-近邻算法，决策树，朴素贝叶斯，Logistic 回归，SVM，Softmax 回归</li>
+<li>回归算法：线性回归，局部加权线性回归</li>
+</ul>
+</li>
+<li>无监督学习：<ul>
+<li>K-means，层次聚类，DBSCAN</li>
+</ul>
+</li>
+<li>模型评估方法：准确率，召回率，P-R 曲线，ROC，AUC，MSE</li>
+</ul>
+<h2 id="§1-数据预处理"><a href="#§1-数据预处理" class="headerlink" title="§1  数据预处理"></a>§1  数据预处理</h2><p><img src="/img/Data-Cleaning-Mindmap.png" alt="data-cleaning-mindmap"></p>
+<p><strong>数据预处理</strong>：在数据挖掘中，海量的原始数据中存在着大量不完整（有缺失值）、不一致、有异常的数据，严重影响到数据挖掘建模的执行效率，甚至可能导致挖掘结果的偏差，所以进行数据清洗显得尤为重要，数据清洗完成后接着进行或者同时进行数据集成、转换、规约等一系列的处理。</p>
+<p>数据预处理的主要内容包括数据清洗、数据集成、数据变换和数据规约。</p>
+<h3 id="1-1-数据清洗"><a href="#1-1-数据清洗" class="headerlink" title="1.1  数据清洗"></a>1.1  数据清洗</h3><p>删除原始数据集中的无关数据、重复数据，平滑噪声数据，筛选掉与挖掘主题无关的数据，处理缺失值、异常值等。</p>
+<h4 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h4><p>删除记录：小部分有效，但会造成资源大量浪费</p>
+<p><strong>数据插补</strong>：常用五种方法</p>
+<ul>
+<li>均值&#x2F;中位数&#x2F;众数填充：scikit-learn 中常用的方法；</li>
+<li>使用固定值：将缺失的属性值用常量替换；</li>
+<li>最近临插补：在记录中找到与缺失样本中最接近的样本的该属性值插补；</li>
+<li>回归方法：根据已有数据和其他变量数据建立拟合模型来预测缺失的属性值；</li>
+<li>插值法：利用已知点建立合适的插值函数f(x)，再求未知点的插值，如拉格朗日插值法、牛顿插值法等。</li>
+</ul>
+<h4 id="异常值处理"><a href="#异常值处理" class="headerlink" title="异常值处理"></a>异常值处理</h4><p>异常值是否剔除，需<strong>视情况而定</strong>，因为有些异常值可能蕴含着有用的信息。</p>
+<p>判断异常值的方法：简单统计量分析、3∂原则、箱型图分析等。</p>
+<p>异常值处理方法：删除、视为缺失值、平均值修正、不处理。</p>
+<h3 id="1-2-数据集成"><a href="#1-2-数据集成" class="headerlink" title="1.2  数据集成"></a>1.2  数据集成</h3><p><strong>数据集成</strong>就是将多个数据源合并并存放在一个一致的数据存储中的过程。</p>
+<p>在数据集成时，来自多个数据源的现实世界实体的表达形式是不一样的，有可能不匹配，要考虑实体识别问题和属性冗余问题，从而将源数据在最底层上加以转换、提炼和集成。</p>
+<h4 id="实体识别"><a href="#实体识别" class="headerlink" title="实体识别"></a>实体识别</h4><p>实体识别是指从不同数据源识别出现实世界的实体，它的任务是统一不同源数据的矛盾之处。比如：同名异义、异名同义、单位不统一等。</p>
+<h4 id="冗余属性识别"><a href="#冗余属性识别" class="headerlink" title="冗余属性识别"></a>冗余属性识别</h4><p>数据集成往往往往导致数据冗余，当然对于有些冗余属性可以用相关分析检测。给定两个数值型的属性A和B，根据其属性值，用相关系数度量一个属性在多大程度上蕴含另一个属性。</p>
+<h3 id="1-3-数据变换"><a href="#1-3-数据变换" class="headerlink" title="1.3  数据变换"></a>1.3  数据变换</h3><p><strong>数据变换</strong>主要是对数据进行规范化处理，将数据转换成“适当的”形式，也就是适用于算法的要求形式，以适用于挖掘任务及算法的需要。</p>
+<p><strong>简单函数变换</strong>：对原始数据进行某些数学函数变换，常用的变换包括平方、开方、取对数、差分运算等，常用来将不具有正态分布的数据变换成具有正态分布的数据。</p>
+<h4 id="规范化-归一化"><a href="#规范化-归一化" class="headerlink" title="规范化&#x2F;归一化"></a>规范化&#x2F;归一化</h4><p>数据规范化（归一化）处理是数据挖掘的一项基础工作。不同评价指标往往具有不同的量纲，数值间的差别可能很大，不进行处理可能会影响到数据分析的结果。为了消除指标之间的量纲和取值范围差异的影响，需要进行标准化处理，将数据按照比例进行缩放，使之落入一个特定的区域，便于进行综合分析。</p>
+<p><strong>① 最小-最大规范化</strong></p>
+<p>最小-最大规范化也称为<strong>离差标准化</strong>，是对原始数据进行线性变换，将数值映射到 $[0,1]$ 区间。转换公式如下：<br>$$<br>x^*&#x3D;\frac{x-\min}{\max-\min}<br>$$<br>其中，$\max$ 为样本数据中的最大值，$\min$ 为样本数据中的最小值，$\max-\min$ 为极差。离差标准化保留了原始数据中存在的关系，是消除量纲和数据取值范围影响的最简单方法。</p>
+<p>这种处理方法的缺点是：若数据集中某个数值很大，则规范化后各值会接近于 $0$，并且彼此之间的差异会变小。</p>
+<p><strong>② 零-均值规范化</strong></p>
+<p>零-均值规范化也称为<strong>标准差标准化</strong>。经过处理的数据均值为 $0$，标准差为 $1$。转换公式为：<br>$$<br>x^*&#x3D;\frac{x-\bar{x}}{\delta}<br>$$<br>其中，$\bar{x}$ 为原始数据的均值，$\delta$ 为原始数据的标准差。这是当前使用较多的数据标准化方法。</p>
+<p><strong>③</strong> <strong>小数定标规范化</strong></p>
+<p>小数定标规范化通过移动属性值的小数位数，将属性值映射到 $[-1,1]$ 区间。移动的小数位数取决于属性值绝对值的最大值。转换公式为：<br>$$<br>x^*&#x3D;\frac{x}{10^j}<br>$$<br>当然在sklearn库中有专门的API可以做数据的标准化。</p>
+<h4 id="类别特征编码"><a href="#类别特征编码" class="headerlink" title="类别特征编码"></a>类别特征编码</h4><p>在机器学习中，特征经常不是连续的数值型而是标称型的，这些特征能够被有效地编码成整数。要把标称型特征（categorical features）转换为这样的整数编码（inter codes），我们可以使用<strong>OrdinalEncoder</strong>。这个估计器把每一个categorical feature变换成一个新的整数数字特征（0到n-categories-1）。但是，这样的整数特征表示并不能在scikit-learn的估计器中直接使用，因为这样的连续输入，估计器会认为类别之间是有序的，但实际上是无序的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">enc = preprocessing.OrdinalEncoder()</span><br><span class="line">x = [[<span class="string">&#x27;male&#x27;</span>, <span class="string">&#x27;from US&#x27;</span>, <span class="string">&#x27;uses Safari&#x27;</span>], [<span class="string">&#x27;female&#x27;</span>, <span class="string">&#x27;from Europe&#x27;</span>, <span class="string">&#x27;uses Firefox&#x27;</span>]]</span><br><span class="line">enc.fit(x)</span><br><span class="line"><span class="built_in">print</span>(enc.transform([[<span class="string">&#x27;female&#x27;</span>, <span class="string">&#x27;from US&#x27;</span>, <span class="string">&#x27;uses Safari&#x27;</span>]]))</span><br><span class="line"></span><br><span class="line">[[<span class="number">0.</span> <span class="number">1.</span> <span class="number">1.</span>]]</span><br></pre></td></tr></table></figure>
+
+<p>另外一种比较常用的是模型是使用one-hot编码。这种编码类型在OneHotEncoder中实现。默认情况下，每个特征使用几维的数值可以从数据集自动推断。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">enc = preprocessing.OneHotEncoder()</span><br><span class="line">x = [[<span class="string">&#x27;male&#x27;</span>, <span class="string">&#x27;from US&#x27;</span>, <span class="string">&#x27;uses Safari&#x27;</span>], [<span class="string">&#x27;female&#x27;</span>, <span class="string">&#x27;from Europe&#x27;</span>, <span class="string">&#x27;uses Firefox&#x27;</span>]]</span><br><span class="line">enc.fit(x)</span><br><span class="line"><span class="built_in">print</span>(enc.transform([[<span class="string">&#x27;female&#x27;</span>, <span class="string">&#x27;from US&#x27;</span>, <span class="string">&#x27;uses Safari&#x27;</span>], [<span class="string">&#x27;male&#x27;</span>, <span class="string">&#x27;from Europe&#x27;</span>, <span class="string">&#x27;uses Firefox&#x27;</span>]]).toarray())</span><br><span class="line"></span><br><span class="line">[[<span class="number">1.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">1.</span> <span class="number">0.</span> <span class="number">1.</span>]</span><br><span class="line"> [<span class="number">0.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">0.</span> <span class="number">1.</span> <span class="number">0.</span>]]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">genders = [<span class="string">&#x27;female&#x27;</span>, <span class="string">&#x27;male&#x27;</span>]</span><br><span class="line">locations = [<span class="string">&#x27;from Asia&#x27;</span>, <span class="string">&#x27;from Africa&#x27;</span>, <span class="string">&#x27;from Europe&#x27;</span>, <span class="string">&#x27;from US&#x27;</span>]</span><br><span class="line">browsers = [<span class="string">&#x27;uses Chrome&#x27;</span>, <span class="string">&#x27;uses Firefox&#x27;</span>, <span class="string">&#x27;uses IE&#x27;</span>, <span class="string">&#x27;uses Safari&#x27;</span>]</span><br><span class="line">enc = preprocessing.OneHotEncoder(categories=[genders, locations, browsers])</span><br><span class="line">x = [[<span class="string">&#x27;male&#x27;</span>, <span class="string">&#x27;from US&#x27;</span>, <span class="string">&#x27;uses Safari&#x27;</span>], [<span class="string">&#x27;female&#x27;</span>, <span class="string">&#x27;from Europe&#x27;</span>, <span class="string">&#x27;uses Firefox&#x27;</span>]]</span><br><span class="line">enc.fit(x)</span><br><span class="line"><span class="built_in">print</span>(enc.transform([[<span class="string">&#x27;female&#x27;</span>, <span class="string">&#x27;from Asia&#x27;</span>, <span class="string">&#x27;uses Chrome&#x27;</span>]]).toarray())</span><br><span class="line"><span class="comment"># 查看类别特征</span></span><br><span class="line"><span class="built_in">print</span>(enc.categories_)</span><br><span class="line"></span><br><span class="line">[[<span class="number">1.</span> <span class="number">0.</span> <span class="number">1.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">1.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span>]]</span><br><span class="line">[array([<span class="string">&#x27;female&#x27;</span>, <span class="string">&#x27;male&#x27;</span>], dtype=<span class="built_in">object</span>), array([<span class="string">&#x27;from Asia&#x27;</span>, <span class="string">&#x27;from Africa&#x27;</span>, <span class="string">&#x27;from Europe&#x27;</span>, <span class="string">&#x27;from US&#x27;</span>], dtype=<span class="built_in">object</span>), array([<span class="string">&#x27;uses Chrome&#x27;</span>, <span class="string">&#x27;uses Firefox&#x27;</span>, <span class="string">&#x27;uses IE&#x27;</span>, <span class="string">&#x27;uses Safari&#x27;</span>],</span><br><span class="line">      dtype=<span class="built_in">object</span>)]</span><br></pre></td></tr></table></figure>
+
+<p>如果训练数据可能缺少分类特性，通常最好指定handle_unknown &#x3D; ‘ignore’，而不是像上面手动设置类别。当指定handle_unknown &#x3D; ‘ignore’，并且在转换过程中遇到未知类别时，不会产生错误，但是为该特性生成的一热编码列将全部为零（handle_unknown&#x3D;’ignore’只支持一热编码）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">enc = preprocessing.OneHotEncoder(handle_unknown=<span class="string">&#x27;ignore&#x27;</span>)</span><br><span class="line">x = [[<span class="string">&#x27;male&#x27;</span>, <span class="string">&#x27;from US&#x27;</span>, <span class="string">&#x27;uses Safari&#x27;</span>], [<span class="string">&#x27;female&#x27;</span>, <span class="string">&#x27;from Europe&#x27;</span>, <span class="string">&#x27;uses Firefox&#x27;</span>]]</span><br><span class="line">enc.fit(x)</span><br><span class="line"><span class="built_in">print</span>(enc.transform([[<span class="string">&#x27;female&#x27;</span>, <span class="string">&#x27;from Asia&#x27;</span>, <span class="string">&#x27;uses Chrome&#x27;</span>]]).toarray())</span><br><span class="line"></span><br><span class="line">[[<span class="number">1.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span>]]</span><br></pre></td></tr></table></figure>
+
+<h4 id="连续属性离散化"><a href="#连续属性离散化" class="headerlink" title="连续属性离散化"></a>连续属性离散化</h4><p>一些数据挖掘算法，特别是某些分类算法，要求数据是分类属性。这样，常常需要将连续属性变成分类属性，即连续属性离散化。</p>
+<p>连续属性的离散化就是在数据的取值范围内设定若干个离散的划分点，将取值范围划分为一些离散化的区间，最后用不同的符号或整数值代表落在每个子区间中的数据值。所以，离散化涉及两个子任务：确定分类数以及如何将连续属性值映射到这些分类值。</p>
+<p>常用的离散化方法：等宽法、等频法、基于聚类分析的方法。</p>
+<h4 id="生成多项式特征"><a href="#生成多项式特征" class="headerlink" title="生成多项式特征"></a>生成多项式特征</h4><p>在机器学习中，通过增加一些输入数据的非线性特征来增加模型的复杂度通常是有效的。一个简单的办法是使用多项式特征，这可以获得特征的更高维度和相互间关系的项。</p>
+<h4 id="数据规约"><a href="#数据规约" class="headerlink" title="数据规约"></a>数据规约</h4><p>在大数据集上进行复杂的数据分析和数据挖掘需要很长的时间，数据规约产生更小但保持原数据完整性的新数据集。在规约后的数据集上进行分析和挖掘将更有效率。</p>
+<p>种类：属性规约、数值规约。</p>
+
+  </div>
+
+  
+  <div class="about" data-pagefind-ignore>
+    <h2>About this Post</h2>
+    <div class="details">This post is written by Ezra Yang, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</div>
+    
+    <p class="tags">
+      <i class="bi bi-tags icon"></i>
+      
+      <a href="/tags/notes/" class="tag">#notes</a>
+      
+      <a href="/tags/Machine-Learning/" class="tag">#Machine Learning</a>
+      
+      <a href="/tags/Deep-Learning/" class="tag">#Deep Learning</a>
+      
+      <a href="/tags/AI/" class="tag">#AI</a>
+      
+    </p>
+    
+    
+  </div>
+  
+
+  <div class="container post-prev-next" data-pagefind-ignore>
+    <a class="next"></a>
+    
+    <a href="/2026/07/28/Linux%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" class="prev">
+      <div class="text">
+        <p class="label">Previous</p>
+        <h3 class="title">Linux 入门笔记</h3>
+      </div>
+    </a>
+    
+  </div>
+
+  
+    <section class="giscus-comments" style="width:min(100% - 48px, 860px); margin:96px auto 72px auto; padding-top:40px; border-top:1px solid rgba(120,150,180,0.22); box-sizing:border-box;">
+  <h2 style="margin:0 0 28px 0; font-size:28px; line-height:1.1;">Comments</h2>
+  <script src="https://giscus.app/client.js"
+    data-repo="ezrablake2006/ezrablake2006.github.io"
+    data-repo-id="R_kgDOTIW0HA"
+    data-category="General"
+    data-category-id="DIC_kwDOTIW0HM4DAJj3"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+
+  
+</article>
+
+
+    </main>
+    <footer>
+  <div class="inner">
+    <div class="links">
+      
+      <div class="group">
+        <h2 class="title">Site</h2>
+        
+        <a href="/" class="item">Home</a>
+        
+        <a href="/archives/" class="item">Archive</a>
+        
+        <a href="/categories/" class="item">Categories</a>
+        
+      </div>
+      
+      <div class="group">
+        <h2 class="title">Me</h2>
+        
+        <a target="_blank" rel="noopener" href="https://github.com/ezrablake2006" class="item">GitHub</a>
+        
+        <a href="mailto:EzraBlake2006@outlook.com" class="item">Email</a>
+        
+      </div>
+      
+    </div>
+    <span>&copy; 2026 Ezra Yang<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></span>
+    
+    
+      <br>
+      <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+        <label>
+          <input type="radio" value="light">
+          <span>Light</span>
+        </label>
+        <label>
+          <input type="radio" value="dark">
+          <span>Dark</span>
+        </label>
+        <label>
+          <input type="radio" value="auto">
+          <span>Auto</span>
+        </label>
+      </div>
+    
+  </div>
+</footer>
+
+
+    
+<script src="/js/main.js"></script>
+
+
+    
+
+    
+    
+<script src="/js/scroll-reveal.js"></script>
+
+    
+
+    <script src="/js/hero-scroll.js?v=1"></script>
+
+  </body>
+</html>
