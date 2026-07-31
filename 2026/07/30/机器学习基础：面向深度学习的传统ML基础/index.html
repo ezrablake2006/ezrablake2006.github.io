@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   
-  <title>机器学习基础：面向深度学习的传统ML基础 - @Ezra_Yang</title>
+  <title>机器学习：面向深度学习的传统ML基础 - @Ezra_Yang</title>
   
     <link rel="shortcut icon" href="/img/favicon.png">
   
@@ -15,14 +15,14 @@
 
   <meta name="description" content="Introduction: 知识提纲 数据预处理：数据清洗、数据变换 特征工程 监督学习： 分类算法：K-近邻算法，决策树，朴素贝叶斯，Logistic 回归，SVM，Softmax 回归 回归算法：线性回归，局部加权线性回归   无监督学习： K-means，层次聚类，DBSCAN   模型评估方法：准确率，召回率，P-R 曲线，ROC，AUC，MSE  §1  数据预处理 数据预处理：在数据挖">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习基础：面向深度学习的传统ML基础">
+<meta property="og:title" content="机器学习：面向深度学习的传统ML基础">
 <meta property="og:url" content="http://ezrablake2006.github.io/2026/07/30/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%EF%BC%9A%E9%9D%A2%E5%90%91%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%BC%A0%E7%BB%9FML%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="@Ezra_Yang">
 <meta property="og:description" content="Introduction: 知识提纲 数据预处理：数据清洗、数据变换 特征工程 监督学习： 分类算法：K-近邻算法，决策树，朴素贝叶斯，Logistic 回归，SVM，Softmax 回归 回归算法：线性回归，局部加权线性回归   无监督学习： K-means，层次聚类，DBSCAN   模型评估方法：准确率，召回率，P-R 曲线，ROC，AUC，MSE  §1  数据预处理 数据预处理：在数据挖">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://ezrablake2006.github.io/img/Data-Cleaning-Mindmap.png">
 <meta property="article:published_time" content="2026-07-30T11:20:49.000Z">
-<meta property="article:modified_time" content="2026-07-30T14:27:35.024Z">
+<meta property="article:modified_time" content="2026-07-31T17:21:20.335Z">
 <meta property="article:author" content="Ezra Yang">
 <meta property="article:tag" content="notes">
 <meta property="article:tag" content="Machine Learning">
@@ -149,6 +149,15 @@
 <script src="/js/head.js"></script>
 
   <link rel="stylesheet" href="/css/custom.css?v=5">
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: {'[+]': [['$', '$']]},
+      processEscapes: true
+    }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
 
 <meta name="generator" content="Hexo 7.3.0"></head>
 
@@ -223,7 +232,7 @@
     </time>
     
 
-    <h1 class="title" data-pagefind-meta="title">机器学习基础：面向深度学习的传统ML基础</h1>
+    <h1 class="title" data-pagefind-meta="title">机器学习：面向深度学习的传统ML基础</h1>
   </div>
 
   <div class="content">
@@ -265,12 +274,18 @@
 <p><strong>简单函数变换</strong>：对原始数据进行某些数学函数变换，常用的变换包括平方、开方、取对数、差分运算等，常用来将不具有正态分布的数据变换成具有正态分布的数据。</p>
 <h4 id="规范化-归一化"><a href="#规范化-归一化" class="headerlink" title="规范化&#x2F;归一化"></a>规范化&#x2F;归一化</h4><p>数据规范化（归一化）处理是数据挖掘的一项基础工作。不同评价指标往往具有不同的量纲，数值间的差别可能很大，不进行处理可能会影响到数据分析的结果。为了消除指标之间的量纲和取值范围差异的影响，需要进行标准化处理，将数据按照比例进行缩放，使之落入一个特定的区域，便于进行综合分析。</p>
 <p><strong>① 最小-最大规范化</strong></p>
-<p>最小-最大规范化也称为<strong>离差标准化</strong>，是对原始数据进行线性变换，将数值映射到 $[0,1]$ 区间。转换公式如下：<br>$$<br>x^*&#x3D;\frac{x-\min}{\max-\min}<br>$$<br>其中，$\max$ 为样本数据中的最大值，$\min$ 为样本数据中的最小值，$\max-\min$ 为极差。离差标准化保留了原始数据中存在的关系，是消除量纲和数据取值范围影响的最简单方法。</p>
+<p>最小-最大规范化也称为<strong>离差标准化</strong>，是对原始数据进行线性变换，将数值映射到 $[0,1]$ 区间。转换公式如下：</p>
+<p>$$<br>x^*&#x3D;\frac{x-\min}{\max-\min}<br>$$</p>
+<p>其中，$\max$ 为样本数据中的最大值，$\min$ 为样本数据中的最小值，$\max-\min$ 为极差。离差标准化保留了原始数据中存在的关系，是消除量纲和数据取值范围影响的最简单方法。</p>
 <p>这种处理方法的缺点是：若数据集中某个数值很大，则规范化后各值会接近于 $0$，并且彼此之间的差异会变小。</p>
 <p><strong>② 零-均值规范化</strong></p>
-<p>零-均值规范化也称为<strong>标准差标准化</strong>。经过处理的数据均值为 $0$，标准差为 $1$。转换公式为：<br>$$<br>x^*&#x3D;\frac{x-\bar{x}}{\delta}<br>$$<br>其中，$\bar{x}$ 为原始数据的均值，$\delta$ 为原始数据的标准差。这是当前使用较多的数据标准化方法。</p>
+<p>零-均值规范化也称为<strong>标准差标准化</strong>。经过处理的数据均值为 $0$，标准差为 $1$。转换公式为：</p>
+<p>$$<br>x^*&#x3D;\frac{x-\bar{x}}{\delta}<br>$$</p>
+<p>其中，$\bar{x}$ 为原始数据的均值，$\delta$ 为原始数据的标准差。这是当前使用较多的数据标准化方法。</p>
 <p><strong>③</strong> <strong>小数定标规范化</strong></p>
-<p>小数定标规范化通过移动属性值的小数位数，将属性值映射到 $[-1,1]$ 区间。移动的小数位数取决于属性值绝对值的最大值。转换公式为：<br>$$<br>x^*&#x3D;\frac{x}{10^j}<br>$$<br>当然在sklearn库中有专门的API可以做数据的标准化。</p>
+<p>小数定标规范化通过移动属性值的小数位数，将属性值映射到 $[-1,1]$ 区间。移动的小数位数取决于属性值绝对值的最大值。转换公式为：</p>
+<p>$$<br>x^*&#x3D;\frac{x}{10^j}<br>$$</p>
+<p>当然在sklearn库中有专门的API可以做数据的标准化。</p>
 <h4 id="类别特征编码"><a href="#类别特征编码" class="headerlink" title="类别特征编码"></a>类别特征编码</h4><p>在机器学习中，特征经常不是连续的数值型而是标称型的，这些特征能够被有效地编码成整数。要把标称型特征（categorical features）转换为这样的整数编码（inter codes），我们可以使用<strong>OrdinalEncoder</strong>。这个估计器把每一个categorical feature变换成一个新的整数数字特征（0到n-categories-1）。但是，这样的整数特征表示并不能在scikit-learn的估计器中直接使用，因为这样的连续输入，估计器会认为类别之间是有序的，但实际上是无序的。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">enc = preprocessing.OrdinalEncoder()</span><br><span class="line">x = [[<span class="string">&#x27;male&#x27;</span>, <span class="string">&#x27;from US&#x27;</span>, <span class="string">&#x27;uses Safari&#x27;</span>], [<span class="string">&#x27;female&#x27;</span>, <span class="string">&#x27;from Europe&#x27;</span>, <span class="string">&#x27;uses Firefox&#x27;</span>]]</span><br><span class="line">enc.fit(x)</span><br><span class="line"><span class="built_in">print</span>(enc.transform([[<span class="string">&#x27;female&#x27;</span>, <span class="string">&#x27;from US&#x27;</span>, <span class="string">&#x27;uses Safari&#x27;</span>]]))</span><br><span class="line"></span><br><span class="line">[[<span class="number">0.</span> <span class="number">1.</span> <span class="number">1.</span>]]</span><br></pre></td></tr></table></figure>
 
@@ -288,7 +303,237 @@
 <h4 id="生成多项式特征"><a href="#生成多项式特征" class="headerlink" title="生成多项式特征"></a>生成多项式特征</h4><p>在机器学习中，通过增加一些输入数据的非线性特征来增加模型的复杂度通常是有效的。一个简单的办法是使用多项式特征，这可以获得特征的更高维度和相互间关系的项。</p>
 <h4 id="数据规约"><a href="#数据规约" class="headerlink" title="数据规约"></a>数据规约</h4><p>在大数据集上进行复杂的数据分析和数据挖掘需要很长的时间，数据规约产生更小但保持原数据完整性的新数据集。在规约后的数据集上进行分析和挖掘将更有效率。</p>
 <p>种类：属性规约、数值规约。</p>
-
+<h2 id="§2-特征工程"><a href="#§2-特征工程" class="headerlink" title="§2  特征工程"></a>§2  特征工程</h2><h3 id="2-1-特征工程概述"><a href="#2-1-特征工程概述" class="headerlink" title="2.1  特征工程概述"></a>2.1  特征工程概述</h3><p>在机器学习中，<strong>特征</strong> 是用来描述数据的变量。比如在预测房价的任务中，特征可能包括房子的面积、房龄、地段等信息，而<strong>目标变量（Target）</strong> 就是房价本身。</p>
+<p>特征的质量直接决定了模型的效果。如果你选择了不相关的特征，或者没有正确处理数据，那么你的模型可能无法准确预测。</p>
+<p>特征工程的目标是通过合理的特征选择和转换，找到能够更好地描述数据的特征，使得模型更容易学习并做出准确的预测。</p>
+<h3 id="2-2-特征选择"><a href="#2-2-特征选择" class="headerlink" title="2.2  特征选择"></a>2.2  特征选择</h3><p><strong>定义</strong>：从给定的特征集合中选出相关特征子集的过程称为特征选择(feature selection)。</p>
+<p><strong>相关特征 &amp; 无关特征</strong>：以对学习的关联程度划分</p>
+<p>冗余特征：可以从其他特征推演出来的特征</p>
+<p>采用特征选择的原因：</p>
+<ul>
+<li><p>维数灾难问题。因为属性或者特征过多造成的问题，如果可以选择重要的特征，使得仅需要一部分特征就可以构建模型，可以大大减轻维数灾难问题，从这个意义上讲，特征选择和降维技术有相似的动机，事实上它们也是处理高维数据的两大主流技术。</p>
+</li>
+<li><p>去除无关特征可以降低学习任务的难度，也同样让模型变得简单，降低计算复杂度。</p>
+</li>
+</ul>
+<p>特征选择的两个部分：子集搜索、子集评价</p>
+<h4 id="常见的特征选择方法"><a href="#常见的特征选择方法" class="headerlink" title="常见的特征选择方法"></a>常见的特征选择方法</h4><ul>
+<li>过滤式（filter）：先对数据集进行特征选择，其过程与后续学习器无关，即设计一些统计量来过滤特征，并不考虑后续学习器问题。</li>
+<li>包裹式（wrapper）：直接把最终将要使用的学习器的性能作为特征子集的评价原则。其目的就是为给定学习器选择最有利于其性能、量身定做的特征子集。</li>
+<li>嵌入式（embedded）：将特征选择与学习器训练过程融为一体，两者在同一个优化过程中完成的。即学习器训练过程中自动进行了特征选择。</li>
+</ul>
+<h3 id="2-3-特征提取"><a href="#2-3-特征提取" class="headerlink" title="2.3  特征提取"></a>2.3  特征提取</h3><p><strong>定义</strong>：将原始数据转换为一组具有明显物理意义（比如 Gabor、几何特征、纹理特征）或者统计意义的特征。</p>
+<p>一般常用的方法包括降维（PCA、ICA、LDA等）、图像方面的SIFT、Gabor、HOG等、文本方面的词袋模型、词嵌入模型等。</p>
+<h4 id="降维：PCA（主成分分析）"><a href="#降维：PCA（主成分分析）" class="headerlink" title="降维：PCA（主成分分析）"></a>降维：PCA（主成分分析）</h4><p>PCA 是降维最经典的方法，寻找一组相互正交的新坐标轴，使数据投影到前几个坐标轴后具有尽可能大的方差，从而用较少维度保留尽可能多的整体变化信息。</p>
+<p>PCA 的思想是通过坐标轴转换，寻找数据分布的最优子空间。（如果三维数据点大致分布在一个二维平面附近，就可以把它们投影到该平面，用两个坐标近似表示。）</p>
+<p>PCA 的解法一般分为以下几个步骤：</p>
+<ul>
+<li>对样本数据进行中心化处理；</li>
+<li>求样本协方差矩阵；</li>
+<li>对协方差矩阵进行特征值分解，将特征值从大到小排列；</li>
+<li>取特征值前 n 个最大的对应的特征向量 <code>W1, W2, …, Wn</code> ，这样将原来 m 维的样本降低到 n 维。</li>
+</ul>
+<p>特征向量可以理解为坐标转换中新坐标轴的方向，特征值表示在对应特征向量上的方差，<strong>特征值越大，方差越大，信息量也就越大</strong>。这也是为什么选择前 n 个最大的特征值对应的特征向量，因为这些特征包含更多重要的信息。</p>
+<p>局限性：PCA 是一种线性降维方法，对某些复杂数据集效果不佳。</p>
+<h4 id="图像特征提取：SIFT、HOG"><a href="#图像特征提取：SIFT、HOG" class="headerlink" title="图像特征提取：SIFT、HOG"></a>图像特征提取：SIFT、HOG</h4><p>SIFT、HOG 等属于传统计算机视觉中的人工图像特征。</p>
+<p>传统计算机视觉：<br>图像 → 人工设计 SIFT&#x2F;HOG 等特征 → 分类器</p>
+<p>深度学习：<br>图像 → CNN 自动学习多层表示 → 分类结果</p>
+<h4 id="文本特征提取：词袋模型、N-gram模型、词嵌入模型"><a href="#文本特征提取：词袋模型、N-gram模型、词嵌入模型" class="headerlink" title="文本特征提取：词袋模型、N-gram模型、词嵌入模型"></a>文本特征提取：词袋模型、N-gram模型、词嵌入模型</h4><p><strong>词袋模型</strong>：将整段文本以词为单位切分开，然后每篇文章可以表示成一个长向量，向量的每一个维度代表一个单词，而该维度的权重反映了该单词在原来文章中的重要程度。通常采用 <strong>TF-IDF</strong> 计算权重。</p>
+<p><strong>N-gram模型</strong>：N-gram 将连续出现的 (n) 个词或字符视为一个整体特征。例如二元模型会使用“机器学习”“学习模型”等连续两个词组成的特征。</p>
+<p><strong>词嵌入模型</strong>：是一类将词向量化的模型的统称，核心思想是将每个词都映射成低维空间（通常 K&#x3D;50~300 维）上的一个稠密向量（Dense Vector）。实际应用中，如果直接将该矩阵作为原文本的特征表示输入到模型中训练，通常很难得到满意的结果，一般还需要对该矩阵进行处理，提取和构造更高层的特征。</p>
+<h4 id="特征提取和特征选择的区别"><a href="#特征提取和特征选择的区别" class="headerlink" title="特征提取和特征选择的区别"></a>特征提取和特征选择的区别</h4><ul>
+<li><p><strong>特征选择</strong>：从原有特征中挑出一部分，特征本身没有改变。</p>
+</li>
+<li><p><strong>特征提取</strong>：把原始特征转换成一组新的特征。</p>
+</li>
+</ul>
+<p>特征提取强调转换，特征选择强调选取子集。</p>
+<h3 id="2-4-特征构建"><a href="#2-4-特征构建" class="headerlink" title="2.4  特征构建"></a>2.4  特征构建</h3><p>特征构建是指<strong>从原始数据中人工的构建新的特征</strong>。需要花时间去观察原始数据，思考问题的潜在形式和数据结构，对数据敏感性和机器学习实战经验能帮助特征构建。</p>
+<table>
+<thead>
+<tr>
+<th>原始特征</th>
+<th>构建的新特征</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>身高、体重</td>
+<td>BMI</td>
+</tr>
+<tr>
+<td>出生日期</td>
+<td>年龄</td>
+</tr>
+<tr>
+<td>时间戳</td>
+<td>小时、星期、是否周末</td>
+</tr>
+<tr>
+<td>长度、宽度</td>
+<td>面积</td>
+</tr>
+<tr>
+<td>总消费、购买次数</td>
+<td>平均每次消费金额</td>
+</tr>
+<tr>
+<td>两个地点的经纬度</td>
+<td>两地距离</td>
+</tr>
+</tbody></table>
+<p>特征构建需要很强的洞察力和分析能力，要求我们能够从原始数据中找出一些具有物理意义的特征。假设原始数据是表格数据，一般你可以使用<strong>混合属性或者组合属性</strong>来创建新的特征，或是<strong>分解或切分原有的特征</strong>来创建新的特征。</p>
+<p>特征构建非常需要相关的领域知识或者丰富的实践经验才能很好构建出更好的有用的新特征。</p>
+<h2 id="§3-监督学习"><a href="#§3-监督学习" class="headerlink" title="§3  监督学习"></a>§3  监督学习</h2><h3 id="3-1-监督学习概述"><a href="#3-1-监督学习概述" class="headerlink" title="3.1  监督学习概述"></a>3.1  监督学习概述</h3><p><strong>监督学习</strong>是指利用带有标签的数据训练模型，使模型学习从输入特征到目标输出之间的映射关系。训练完成后，模型可以根据新样本的特征，对其未知标签或数值结果进行预测。</p>
+<p>监督学习的数据集通常由特征和标签组成。训练时，需要使用损失函数衡量预测结果与真实标签之间的差异，并不断调整模型参数，使损失尽可能减小。</p>
+<p>在训练模型之前，通常会将已有数据划分为训练集、验证集和测试集：</p>
+<ul>
+<li><strong>训练集</strong>用于学习和更新模型参数；</li>
+<li><strong>验证集</strong>用于选择模型结构、调整超参数，并观察模型是否出现过拟合；</li>
+<li><strong>测试集</strong>用于在模型确定后，对其泛化能力进行最终评估。</li>
+</ul>
+<p>模型在训练集上学习输入特征与标签之间的关系，并根据验证集的表现进行调整。模型和超参数确定后，再使用测试集进行一次相对独立的评价。如果模型在未参与训练的新数据上仍能取得较好的效果，就说明它具有一定的泛化能力，可以进一步用于实际预测。</p>
+<p>监督学习主要包括两类任务：</p>
+<ul>
+<li><strong>分类</strong>：预测离散的类别标签，例如判断邮件是否为垃圾邮件；</li>
+<li><strong>回归</strong>：预测连续的数值结果，例如预测房屋价格。</li>
+</ul>
+<h3 id="3-3-分类算法"><a href="#3-3-分类算法" class="headerlink" title="3.3  分类算法"></a>3.3  分类算法</h3><p>监督学习中的分类问题是指，给定一些数据，其中每个数据都有一个标签或类别，我们需要根据这些数据构建一个模型，使得该模型能够对新的数据进行分类。</p>
+<p>从数据中学习一个分类模型或分类决策函数，称为分类器。分类器对新的输入进行预测，称为分类。可能的输出称为类别。</p>
+<p>评价分类器性能的指标一般是分类准确率（accuracy），其定义是：对于给定的测试数据集，分类器正确分类的样本数与总样本数之比。</p>
+<h4 id="逻辑回归（Logistic-Regression）"><a href="#逻辑回归（Logistic-Regression）" class="headerlink" title="逻辑回归（Logistic Regression）"></a>逻辑回归（Logistic Regression）</h4><p>逻辑回归（Logistic Regression）是一种统计分析模型，常用于二分类问题，也可以通过一些扩展应用到多分类问题上。它<strong>通过拟合一个逻辑函数来预测一个事件发生的概率</strong>。</p>
+<p>核心思想：通过拟合一个 S 型的<strong>逻辑函数</strong>（也称为 sigmoid 函数、假设函数），将输入变量映射到输出变量的概率。Sigmoid 函数的数学表达式如下所示：</p>
+<p>$$<br>y &#x3D; \frac{1}{1 + e^{-x}}<br>$$</p>
+<p>该函数将线性函数的输出转换为一个概率值，范围在0到1之间。sigmoid函数是一个s形的曲线，它的取值在[0, 1]之间，在远离0的地方函数的值会很快接近0或者1。它的这个特性对于解决二分类问题十分重要。</p>
+<p><strong>逻辑回归的假设函数</strong></p>
+<p>逻辑回归的假设函数形式如下：</p>
+<p>$<br>h_\theta(x)&#x3D;g(\theta^T x),<br>\qquad<br>g(z)&#x3D;\frac{1}{1+e^{-z}}<br>$</p>
+<p>所以：</p>
+<p>$<br>h_\theta(x)&#x3D;\frac{1}{1+e^{-\theta^T x}}<br>$</p>
+<p>其中，$x$ 是我们的输入，$\theta$ 为我们要求取的参数。</p>
+<p>一个机器学习模型，实际上是把决策函数限定在某一组条件下，这组限定条件就决定了模型的<strong>假设空间</strong>。当然，我们还希望这组限定条件简单而合理。</p>
+<p>逻辑回归模型所作的假设是：</p>
+<p>$$<br>P(y&#x3D;1\mid x;\theta)&#x3D;g(\theta^T x)&#x3D;\frac{1}{1+e^{-\theta^T x}}<br>$$</p>
+<p>这个函数的含义是：在给定 $x$ 和 $\theta$ 的条件下，$y&#x3D;1$ 的概率。</p>
+<p>这里的 $g(z)$ 就是上面提到的 Sigmoid 函数，与之相对应的决策函数为：</p>
+<p>$$<br>y^*&#x3D;1,<br>\qquad<br>\text{if }P(y&#x3D;1\mid x)&gt;0.5<br>$$</p>
+<p>选择 $0.5$ 作为阈值是一种常见做法。实际应用时，可以根据具体情况选择不同的阈值：</p>
+<ul>
+<li>如果对正例的判别准确性要求较高，可以选择更大的阈值；</li>
+<li>如果对正例的召回率要求较高，则可以选择更小的阈值。</li>
+</ul>
+<p><strong>决策边界</strong>：也称决策面，是用于在N维空间，将不同样本分开的平面或曲面。分为线性与非线性两种。在逻辑回归中表示为 $\theta^T x&#x3D;0$。</p>
+<blockquote>
+<p>决策边界是模型假设函数的属性，由模型参数决定；而模型参数通常是通过数据集学习得到的，因此数据集会间接影响决策边界。</p>
+</blockquote>
+<p><strong>代价函数</strong>：概况来讲，任何能够衡量模型预测出来的值与真实值之间的差异的函数都可以叫做代价函数。一个好的代价函数需要满足两个最基本的要求：能够评价模型的准确性，对参数可微。</p>
+<p>在Logistic 回归中，最常用的代价函数是<strong>交叉熵</strong>。</p>
+<p>Logistic 回归标签只有两种情况：</p>
+<p>$$y\in{0,1} $$</p>
+<p>单个样本的真实标签出现概率，可以统一写为：</p>
+<p>$$ P(y\mid x)&#x3D;p^y(1-p)^{1-y} $$</p>
+<p>为了把乘法变成更方便计算的加法，对它取对数：</p>
+<p>$$\log P(y\mid x) &#x3D; y\log p+(1-y)\log(1-p)$$</p>
+<p>训练通常写成最小化问题，所以加一个负号：</p>
+<p>$$L&#x3D;-\left[y\log p+(1-y)\log(1-p)\right] $$</p>
+<p>这就是二元交叉熵，也就是 Logistic 回归常用的损失函数。</p>
+<h4 id="决策树（Decision-Tree）"><a href="#决策树（Decision-Tree）" class="headerlink" title="决策树（Decision Tree）"></a>决策树（Decision Tree）</h4><p>决策树是<strong>根据某种决策不断的对数据集进行分裂，使得到的子数据集上的标签越来越纯净</strong>，最终得到的模型就是一个树形结构，故其名曰决策树。</p>
+<p>下面介绍三种经典决策树，唯一区别是<strong>节点划分的决策选择</strong>不同。</p>
+<p><strong>ID3决策树</strong></p>
+<p>决策选择：选择<strong>信息增益最大</strong>的特征进行数据集划分</p>
+<blockquote>
+<p><strong>信息熵</strong>用于衡量一个数据集合中类别的混乱程度：</p>
+<p>$$H(D)&#x3D;-\sum_{k&#x3D;1}^{K}p_k\log_2p_k $$</p>
+<p>其中：$D$ 当前数据集， $K$ 类别数量，$p_k$ 第 $k$ 类样本所占比例</p>
+<p>假设使用特征 $a$ 划分数据，数据被分成若干子集。划分后的整体混乱程度是各子集熵的加权平均：</p>
+<p>$$H(D\mid a) &#x3D; \sum_{v} \frac{|D_v|}{|D|} H(D_v) $$</p>
+<p>其中：$D_v$：特征 $a$ 取值为 $v$ 的样本子集；$|D_v|$：该子集的样本数；$|D|$ ：整个数据集的样本数。</p>
+<p><strong>信息增益</strong>表示划分前后，混乱程度减少了多少：</p>
+<p>$$ \operatorname{Gain}(D,a) &#x3D; H(D)-H(D\mid a) $$ </p>
+<p>信息增益越大，说明这个特征越能把不同类别分开。</p>
+</blockquote>
+<p>ID3决策树的缺点：对可取值数目较多的特征有所偏好；只能用于处理离散分布的特征，不能处理连续值与缺失值；只能用于分类。</p>
+<p><strong>C4.5决策树</strong></p>
+<p>决策选择：选择<strong>信息增益率大</strong>的特征进行数据集划分，对取值过多的特征进行一定惩罚</p>
+<p>$$\operatorname{GainRatio}(D,a) &#x3D; \frac{\operatorname{Gain}(D,a)} {\operatorname{IV}(a)}$$</p>
+<p>优点：改进ID3倾向于选择取值较多的特征的缺点；可处理连续值与缺失值</p>
+<p>缺点：只能用于分类；计算有大量对数运算</p>
+<p><strong>CART</strong></p>
+<p>决策选择：使用<strong>基尼系数小</strong>的特征进行数据集划分</p>
+<p>$$\operatorname{Gini}(D) &#x3D; 1-\sum_{k&#x3D;1}^{K}p_k^2$$</p>
+<p>优点：减少大量对数运算；可同时用于分类与回归</p>
+<p>缺点：倾向于多取值特征</p>
+<p><strong>总结</strong></p>
+<table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>ID3</th>
+<th>C4.5</th>
+<th>CART</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>划分标准</strong></td>
+<td>使用<strong>信息增益</strong>，容易偏向取值较多的特征</td>
+<td>使用<strong>信息增益率</strong>，缓解信息增益偏好多值特征的问题，但可能偏向取值较少的特征</td>
+<td>分类树使用<strong>基尼指数</strong>，回归树使用平方误差；无需计算对数，计算相对简单</td>
+</tr>
+<tr>
+<td><strong>适用任务</strong></td>
+<td>只能用于分类</td>
+<td>只能用于分类</td>
+<td>可以用于分类和回归</td>
+</tr>
+<tr>
+<td><strong>树的结构</strong></td>
+<td>通常生成多叉树</td>
+<td>通常生成多叉树</td>
+<td>只生成二叉树</td>
+</tr>
+<tr>
+<td><strong>连续特征</strong></td>
+<td>原始算法主要处理离散特征</td>
+<td>可以处理连续特征</td>
+<td>可以处理连续特征</td>
+</tr>
+<tr>
+<td><strong>缺失值处理</strong></td>
+<td>对缺失值较敏感，原始算法缺少完善的处理方法</td>
+<td>可以处理缺失值</td>
+<td>可以通过代理划分等方式处理缺失值</td>
+</tr>
+<tr>
+<td><strong>计算复杂度</strong></td>
+<td>计算相对简单</td>
+<td>需要计算信息增益率，并对连续特征寻找划分点，计算成本较高</td>
+<td>基尼指数计算简单，通常效率较高</td>
+</tr>
+<tr>
+<td><strong>特征能否重复使用</strong></td>
+<td>离散特征在一条路径中通常只使用一次</td>
+<td>离散特征在一条路径中通常只使用一次；连续特征可在不同节点再次使用</td>
+<td>同一特征可以在不同节点多次使用</td>
+</tr>
+<tr>
+<td><strong>剪枝策略</strong></td>
+<td>原始 ID3 没有完善的剪枝策略</td>
+<td>通常采用悲观剪枝</td>
+<td>通常采用代价复杂度剪枝</td>
+</tr>
+<tr>
+<td><strong>主要优点</strong></td>
+<td>原理简单，容易理解</td>
+<td>改进了 ID3，支持连续特征、缺失值和剪枝</td>
+<td>结构统一，效率较高，同时支持分类和回归</td>
+</tr>
+<tr>
+<td><strong>主要缺点</strong></td>
+<td>偏好多值特征、容易过拟合、适用范围有限</td>
+<td>计算较复杂，信息增益率本身也存在偏好问题</td>
+<td>二叉划分可能使树更深，单棵树仍容易过拟合且对数据变化敏感</td>
+</tr>
+</tbody></table>
+<h4 id="支持向量机（Support-Vector-Machine-SVM）"><a href="#支持向量机（Support-Vector-Machine-SVM）" class="headerlink" title="支持向量机（Support Vector Machine, SVM）"></a>支持向量机（Support Vector Machine, SVM）</h4>
   </div>
 
   
