@@ -21,8 +21,10 @@
 <meta property="og:description" content="Introduction: 知识提纲 数据预处理：数据清洗、数据变换 特征工程 监督学习： 分类算法：K-近邻算法，决策树，朴素贝叶斯，Logistic 回归，SVM，Softmax 回归 回归算法：线性回归，局部加权线性回归   无监督学习： K-means，层次聚类，DBSCAN   模型评估方法：准确率，召回率，P-R 曲线，ROC，AUC，MSE  §1  数据预处理 数据预处理：在数据挖">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://ezrablake2006.github.io/img/Data-Cleaning-Mindmap.png">
+<meta property="og:image" content="http://ezrablake2006.github.io/img/P-R-curve.png">
+<meta property="og:image" content="http://ezrablake2006.github.io/img/ROC-curve.png">
 <meta property="article:published_time" content="2026-07-30T11:20:49.000Z">
-<meta property="article:modified_time" content="2026-08-01T08:55:58.145Z">
+<meta property="article:modified_time" content="2026-08-01T12:12:19.013Z">
 <meta property="article:author" content="Ezra Yang">
 <meta property="article:tag" content="notes">
 <meta property="article:tag" content="Machine Learning">
@@ -383,8 +385,8 @@
 </tbody></table>
 <p>特征构建需要很强的洞察力和分析能力，要求我们能够从原始数据中找出一些具有物理意义的特征。假设原始数据是表格数据，一般你可以使用<strong>混合属性或者组合属性</strong>来创建新的特征，或是<strong>分解或切分原有的特征</strong>来创建新的特征。</p>
 <p>特征构建非常需要相关的领域知识或者丰富的实践经验才能很好构建出更好的有用的新特征。</p>
-<h2 id="§3-监督学习"><a href="#§3-监督学习" class="headerlink" title="§3  监督学习"></a>§3  监督学习</h2><h3 id="3-1-监督学习概述"><a href="#3-1-监督学习概述" class="headerlink" title="3.1  监督学习概述"></a>3.1  监督学习概述</h3><p><strong>监督学习</strong>是指利用带有标签的数据训练模型，使模型学习从输入特征到目标输出之间的映射关系。训练完成后，模型可以根据新样本的特征，对其未知标签或数值结果进行预测。</p>
-<p>监督学习的数据集通常由特征和标签组成。训练时，需要使用损失函数衡量预测结果与真实标签之间的差异，并不断调整模型参数，使损失尽可能减小。</p>
+<h2 id="§3-监督学习"><a href="#§3-监督学习" class="headerlink" title="§3  监督学习"></a>§3  监督学习</h2><h3 id="3-1-监督学习概述"><a href="#3-1-监督学习概述" class="headerlink" title="3.1  监督学习概述"></a>3.1  监督学习概述</h3><p><strong>监督学习</strong>是指<strong>利用带有标签的数据训练模型，使模型学习从输入特征到目标输出之间的映射关系</strong>。训练完成后，模型可以根据新样本的特征，对其未知标签或数值结果进行预测。</p>
+<p>监督学习的数据集通常由<strong>特征</strong>和<strong>标签</strong>组成。训练时，需要使用损失函数衡量预测结果与真实标签之间的差异，并不断调整模型参数，使损失尽可能减小。</p>
 <p>在训练模型之前，通常会将已有数据划分为训练集、验证集和测试集：</p>
 <ul>
 <li><strong>训练集</strong>用于学习和更新模型参数；</li>
@@ -397,6 +399,84 @@
 <li><strong>分类</strong>：预测离散的类别标签，例如判断邮件是否为垃圾邮件；</li>
 <li><strong>回归</strong>：预测连续的数值结果，例如预测房屋价格。</li>
 </ul>
+<h3 id="3-2-回归算法"><a href="#3-2-回归算法" class="headerlink" title="3.2  回归算法"></a>3.2  回归算法</h3><p>监督学习中的回归问题是指，利用带有特征和连续标签的训练数据，学习输入特征与目标值之间的映射关系，使模型能够对新样本的目标数值进行预测。</p>
+<h4 id="线性回归（Linear-Regression）"><a href="#线性回归（Linear-Regression）" class="headerlink" title="线性回归（Linear Regression）"></a>线性回归（Linear Regression）</h4><p>线性回归就是<strong>假设样本的feature和label之间满足线性关系，线性回归模型训练过程就是找到能让损失函数值最小的，斜率w的值</strong>。</p>
+<p><strong>线性回归方程&#x2F;线性回归的假设函数</strong></p>
+<p>在机器学习中，线性回归模型的方程式如下所示：</p>
+<p>$$y^{\prime}&#x3D;b+{w_1}{x_1}$$</p>
+<p>其中，$y^{\prime}$ 是<strong>预测标签（输出）</strong>，$b$ 是模型的<strong>偏差</strong>（代数方程式中的截距），$w_1$ 是特征的<strong>权重</strong>（代数方程式中的斜率），$x_1$ 是<strong>特征（输入）</strong>。</p>
+<p>在训练期间，模型会计算出可生成最佳模型的权重和偏差。</p>
+<p>更复杂的模型可能依赖于多项特征，每项特征都有一个单独的权重，方程线性叠加即可。</p>
+<p>$$h_w(x)&#x3D;w_0+{w_1}{x_1}+{w_2}{x_2}+⋅⋅⋅+{w_n}{x_n}$$</p>
+<p>线性回归的假设函数也可以表示为两个向量的点积，一个是模型参数 $\omega$ 合并偏置和特征系数，另一个是特征 $x$ 向量，在第一个位置增加一个1和代表偏置的参数对应。</p>
+<p><strong>损失函数</strong></p>
+<p><strong>损失</strong>用于衡量模型预测与实际标签之间的距离。训练模型的目标是尽可能降低损失，使其达到最低值。损失侧重于值之间的距离，而不是方向，因此，所有用于计算损失的方法都会移除符号。通常用绝对值或平方的方法去除符号。</p>
+<p>在线性回归中有5种主要类型的损失：</p>
+<table>
+<thead>
+<tr>
+<th>损失类型</th>
+<th>定义</th>
+<th>公式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>$L_1$ 损失</strong></td>
+<td>预测值与真实值之间绝对误差的总和。</td>
+<td>$\displaystyle L_1&#x3D;\sum_{i&#x3D;1}^{N}\lvert y_i-\hat{y}_i\rvert$</td>
+</tr>
+<tr>
+<td><strong>平均绝对误差（MAE）</strong></td>
+<td>一组 $N$ 个样本的平均 $L_1$ 损失。</td>
+<td>$\displaystyle \operatorname{MAE}&#x3D;\frac{1}{N}\sum_{i&#x3D;1}^{N}\lvert y_i-\hat{y}_i\rvert$</td>
+</tr>
+<tr>
+<td><strong>$L_2$ 损失</strong></td>
+<td>预测值与真实值之间平方误差的总和。</td>
+<td>$\displaystyle L_2&#x3D;\sum_{i&#x3D;1}^{N}(y_i-\hat{y}_i)^2$</td>
+</tr>
+<tr>
+<td><strong>均方误差（MSE）</strong></td>
+<td>一组 $N$ 个样本的平均 $L_2$ 损失。</td>
+<td>$\displaystyle \operatorname{MSE}&#x3D;\frac{1}{N}\sum_{i&#x3D;1}^{N}(y_i-\hat{y}_i)^2$</td>
+</tr>
+<tr>
+<td><strong>均方根误差（RMSE）</strong></td>
+<td>均方误差（MSE）的平方根。</td>
+<td>$\displaystyle \operatorname{RMSE}&#x3D;\sqrt{\frac{1}{N}\sum_{i&#x3D;1}^{N}(y_i-\hat{y}_i)^2}$</td>
+</tr>
+</tbody></table>
+<p>选择损失函数的一个重要依据是<strong>离群值</strong>。</p>
+<ul>
+<li><strong>MSE</strong>。模型更接近离群点，但距离大多数其他数据点更远。</li>
+<li><strong>MAE</strong>。模型离离群点的距离更远，但离大多数其他数据点的距离更近。</li>
+</ul>
+<p><strong>梯度下降法</strong></p>
+<p>梯度下降法是一种数学技巧，可迭代地找到能使模型产生最低损失的权重和偏差。梯度下降法通过重复以下过程（迭代次数由用户定义）来找到最佳权重和偏差。</p>
+<p>模型开始训练时，权重和偏差会随机化为接近于零的值，然后重复执行以下步骤：</p>
+<ol>
+<li>使用当前权重和偏差计算损失。</li>
+<li>确定可减少损失的权重和偏差移动方向。</li>
+<li>将权重和偏差值沿可减少损失的方向移动少量距离。</li>
+<li>返回到第 1 步，重复此过程，直到模型无法进一步减少损失为止。</li>
+</ol>
+<p>线性回归模型的损失函数始终会生成凸面。根据这一属性，当线性回归模型收敛时，我们知道该模型已找到可产生最低损失的权重和偏差。</p>
+<p><strong>超参数</strong></p>
+<p>超参数是控制训练不同方面的变量，常见的超参数有学习率、批次大小、周期等。</p>
+<p><strong>学习率</strong>用于影响模型收敛的速度。学习率决定了在梯度下降过程的每一步中，对权重和偏差所做的更改幅度。</p>
+<p>如果学习率过低，模型可能需要很长时间才能收敛。不过，如果学习速率过高，模型将永远无法收敛，而是在可最大限度减少损失的权重和偏差附近跳动。目标是选择一个既不太高也不太低的学习速率，以便模型快速收敛。</p>
+<p><strong>批次大小</strong>指的是模型在更新权重和偏差之前处理的示例数量。当批次过大时，很难计算每个样本的损失再更新权重和偏差。有2种方法解决这个问题：</p>
+<ul>
+<li><strong>随机梯度下降法（SGD）</strong>：在每次迭代中仅使用一个示例（批次大小为 1）。在迭代次数足够多的情况下，SGD 可以正常运行，但噪声非常大。“噪声”是指训练期间导致损失在迭代过程中增加而非减少的变化。“随机”一词表示每个批次中的一个示例是随机选择的。</li>
+<li><strong>小批次随机梯度下降法（小批次SGD）</strong>：小批次随机梯度下降法是全批次和 SGD 之间的折衷方案。对于N个数据点，批次大小可以是大于 1 且小于N的任意数字。模型会随机选择每个批次中包含的示例，对它们的梯度求平均值，然后在每次迭代中更新一次权重和偏差。</li>
+</ul>
+<p><strong>周期数</strong>是指模型已处理训练集中每个示例的次数。训练通常需要多个周期。也就是说，系统需要多次处理训练集中的每个示例。一般来说，训练周期数越多，模型效果越好，但训练时间也越长。</p>
+<blockquote>
+<p>线性回归不是只能拟合直线。我们可以通过构造高次特征来解决。一般的做法是先从二次项开始，逐步增加，直到达到我们满意的效果。假如你在构造特征的二次项，需要注意的是，构造的特征不光可以是一个特征的平方，也可以是任意两个特征之间的乘积。</p>
+</blockquote>
+<p>下面是用Python实现的简单的线性回归：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Feature 数据</span></span><br><span class="line">X = [[<span class="number">10</span>, <span class="number">3</span>], [<span class="number">20</span>, <span class="number">3</span>], [<span class="number">25</span>, <span class="number">3</span>], [<span class="number">28</span>, <span class="number">2.5</span>], [<span class="number">30</span>, <span class="number">2</span>], [<span class="number">35</span>, <span class="number">2.5</span>], [<span class="number">40</span>, <span class="number">2.5</span>]]</span><br><span class="line">y = [<span class="number">60</span>, <span class="number">85</span>, <span class="number">100</span>, <span class="number">120</span>, <span class="number">140</span>, <span class="number">145</span>, <span class="number">163</span>]  <span class="comment"># Label 数据</span></span><br><span class="line"><span class="comment"># 初始化参数</span></span><br><span class="line">w = [<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>]  <span class="comment"># w0, w1, w2</span></span><br><span class="line">lr = <span class="number">0.0001</span>  <span class="comment"># 学习率</span></span><br><span class="line">num_iterations = <span class="number">10000</span>  <span class="comment"># 迭代次数</span></span><br><span class="line"><span class="comment"># 梯度下降</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num_iterations):</span><br><span class="line">    <span class="comment"># 预测值</span></span><br><span class="line">    y_pred = [w[<span class="number">0</span>] + w[<span class="number">1</span>] * x[<span class="number">0</span>] + w[<span class="number">2</span>] * x[<span class="number">1</span>] <span class="keyword">for</span> x <span class="keyword">in</span> X]</span><br><span class="line">    <span class="comment"># 计算损失</span></span><br><span class="line">    loss = <span class="built_in">sum</span>((y_pred[j] - y[j]) ** <span class="number">2</span> <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(y))) / <span class="built_in">len</span>(y)</span><br><span class="line">    <span class="comment"># 计算梯度</span></span><br><span class="line">    grad_w0 = <span class="number">2</span> * <span class="built_in">sum</span>(y_pred[j] - y[j] <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(y))) / <span class="built_in">len</span>(y)</span><br><span class="line">    grad_w1 = <span class="number">2</span> * <span class="built_in">sum</span>((y_pred[j] - y[j]) * X[j][<span class="number">0</span>] <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(y))) / <span class="built_in">len</span>(y)</span><br><span class="line">    grad_w2 = <span class="number">2</span> * <span class="built_in">sum</span>((y_pred[j] - y[j]) * X[j][<span class="number">1</span>] <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(y))) / <span class="built_in">len</span>(y)</span><br><span class="line">    <span class="comment"># 更新参数</span></span><br><span class="line">    w[<span class="number">0</span>] -= lr * grad_w0</span><br><span class="line">    w[<span class="number">1</span>] -= lr * grad_w1</span><br><span class="line">    w[<span class="number">2</span>] -= lr * grad_w2</span><br><span class="line">    <span class="comment"># 打印损失</span></span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Iteration <span class="subst">&#123;i&#125;</span>: Loss = <span class="subst">&#123;loss&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># 输出最终参数</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Final parameters: w0 = <span class="subst">&#123;w[<span class="number">0</span>]&#125;</span>, w1 = <span class="subst">&#123;w[<span class="number">1</span>]&#125;</span>, w2 = <span class="subst">&#123;w[<span class="number">2</span>]&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
 <h3 id="3-3-分类算法"><a href="#3-3-分类算法" class="headerlink" title="3.3  分类算法"></a>3.3  分类算法</h3><p>监督学习中的分类问题是指，给定一些数据，其中每个数据都有一个标签或类别，我们需要根据这些数据构建一个模型，使得该模型能够对新的数据进行分类。</p>
 <p>从数据中学习一个分类模型或分类决策函数，称为分类器。分类器对新的输入进行预测，称为分类。可能的输出称为类别。</p>
 <p>评价分类器性能的指标一般是分类准确率（accuracy），其定义是：对于给定的测试数据集，分类器正确分类的样本数与总样本数之比。</p>
@@ -410,6 +490,8 @@
 <p>所以：</p>
 <p>$<br>h_\theta(x)&#x3D;\frac{1}{1+e^{-\theta^T x}}<br>$</p>
 <p>其中，$x$ 是我们的输入，$\theta$ 为我们要求取的参数。</p>
+<p>实际上，逻辑回归就是在线性回归的计算结果上，增加了一个Sigmoid激活函数。</p>
+<p>$$<br>\begin{aligned}<br>\operatorname{LogisticRegression}(x_1,x_2,\ldots,x_n)<br>&amp;&#x3D;\operatorname{Sigmoid}\left(<br>w_1x_1+w_2x_2+\cdots+w_nx_n+b<br>\right)<br>\end{aligned}<br>$$</p>
 <p>一个机器学习模型，实际上是把决策函数限定在某一组条件下，这组限定条件就决定了模型的<strong>假设空间</strong>。当然，我们还希望这组限定条件简单而合理。</p>
 <p>逻辑回归模型所作的假设是：</p>
 <p>$$<br>P(y&#x3D;1\mid x;\theta)&#x3D;g(\theta^T x)&#x3D;\frac{1}{1+e^{-\theta^T x}}<br>$$</p>
@@ -617,6 +699,129 @@
 </ul>
 <p>优点：逻辑简单，基于统计而非权重迭代优化；时间与空间复杂度都较小。</p>
 <p>缺点：只能处理分类任务，且样本少的情况下效果最好；特征之间相互独立的假设通常不成立。</p>
+<h2 id="§4-无监督学习"><a href="#§4-无监督学习" class="headerlink" title="§4  无监督学习"></a>§4  无监督学习</h2><h3 id="4-1-概述"><a href="#4-1-概述" class="headerlink" title="4.1  概述"></a>4.1  概述</h3><p>在无监督学习中，数据集中只有输入特征（X），没有标签（Y）。算法自动发现数据中的模式对数据进行分析。</p>
+<p>无监督学习的主要任务有聚类、降维、密度估计、表示学习等。其中，主要的任务是<strong>聚类</strong>，将数据集中的样本划分成若干个互不相交的子集（称为簇或类），使得同一个簇内的样本彼此相似，而不同簇中的样本彼此不相似。</p>
+<h3 id="4-2-聚类算法"><a href="#4-2-聚类算法" class="headerlink" title="4.2  聚类算法"></a>4.2  聚类算法</h3><h4 id="K-Means"><a href="#K-Means" class="headerlink" title="K-Means"></a>K-Means</h4><p><code>K-Means</code> 是最著名、最常用的聚类算法之一，其思想直观，实现相对简单。</p>
+<p>具体步骤：</p>
+<ol>
+<li><strong>确定簇的数量 K</strong>：首先，你需要决定想把数据分成几类。这个 K 值需要预先指定，这是 K-Means 的一个关键参数。</li>
+<li><strong>初始化代表（质心）</strong>：随机在数据空间中选取 K 个点，作为每个簇的初始”中心点”，我们称之为<strong>质心</strong>。</li>
+<li><strong>分配居民（样本）</strong>：计算数据集中每一个样本点到这 K 个质心的距离。遵循”近者归其类”的原则，将每个样本分配给距离它<strong>最近</strong>的那个质心所在的簇。这样，所有样本就被划分到了 K 个簇中。</li>
+<li><strong>改选新代表更新质心）</strong>：现在，每个簇里都有了一批样本。重新计算每个簇的质心，新的质心就是该簇内所有样本点的<strong>平均值</strong>（均值点）。</li>
+<li><strong>重复与收敛</strong>：重复步骤 3（分配）和步骤 4（更新），直到质心的位置不再发生显著变化（即算法收敛）。此时，每个样本的所属簇也不再变化。</li>
+</ol>
+<p>选择K值的方法：一个常用的方法是 <strong>“肘部法则”<strong>。其思想是：随着簇数量 K 的增加，样本点到其所属簇质心的平均距离（称为</strong>畸变程度</strong>或 <code>inertia</code>）会下降。当 K 小于真实簇数时，增加 K 会大幅降低这个距离；当 K 达到真实簇数后，再增加 K，距离的下降幅度会骤减。这个拐点就像手肘的关节，对应的 K 值就是较好的选择。</p>
+<h4 id="层次聚类"><a href="#层次聚类" class="headerlink" title="层次聚类"></a>层次聚类</h4><p>层次聚类算法(Hierarchical Clustering)将数据集划分为一层一层的clusters，后面一层生成的clusters基于前面一层的结果。层次聚类算法一般分为两类：</p>
+<ul>
+<li>Divisive 层次聚类：又称自顶向下（top-down）的层次聚类，最开始所有的对象均属于一个cluster，每次按一定的准则将某个cluster 划分为多个cluster，如此往复，直至每个对象均是一个cluster。</li>
+<li>Agglomerative 层次聚类：又称自底向上（bottom-up）的层次聚类，每一个对象最开始都是一个cluster，每次按一定的准则将最相近的两个cluster合并生成一个新的cluster，如此往复，直至最终所有的对象都属于一个cluster。</li>
+</ul>
+<h4 id="DBSCAN"><a href="#DBSCAN" class="headerlink" title="DBSCAN"></a>DBSCAN</h4><p>DBSCAN（Density-Based Spatial Clustering of Applications with Noise）是一种<strong>基于密度的无监督聚类算法</strong>。它认为：同一簇中的样本通常分布得比较密集，而不同簇之间由密度较低的区域分隔。</p>
+<p>DBSCAN 需要设置两个参数：</p>
+<ul>
+<li>$\varepsilon$：邻域半径，表示两个样本距离多近才算邻居；</li>
+<li><code>MinPts</code>：形成密集区域所需的最少样本数。</li>
+</ul>
+<p>根据邻域内的样本数量，可以将样本分为：</p>
+<ul>
+<li><strong>核心点</strong>：$\varepsilon$ 邻域内的样本数不少于 <code>MinPts</code>；</li>
+<li><strong>边界点</strong>：自身邻居不足，但位于某个核心点的邻域内；</li>
+<li><strong>噪声点</strong>：既不是核心点，也不属于任何核心点的邻域。</li>
+</ul>
+<p><strong>算法步骤</strong></p>
+<ol>
+<li>任意选择一个尚未访问的样本；</li>
+<li>找出其 $\varepsilon$ 邻域内的所有样本；</li>
+<li>如果邻域内样本数不少于 <code>MinPts</code>，则将其作为核心点，并建立一个新簇；</li>
+<li>继续检查该核心点邻域中的样本，将与它密度相连的核心点和边界点加入同一簇；</li>
+<li>重复上述过程，直到该簇无法继续扩展；</li>
+<li>选择下一个未访问样本，直到所有样本都被处理；</li>
+<li>无法被加入任何簇的样本被标记为噪声点。</li>
+</ol>
+<p><strong>算法效果</strong></p>
+<p>DBSCAN 不需要提前指定聚类数量，能够发现圆形以外的任意形状簇，并且可以自动识别噪声点和异常点。</p>
+<p>其主要缺点是对 $\varepsilon$ 和 <code>MinPts</code> 的选择较敏感。当不同簇的密度差异较大时，DBSCAN 可能难以同时识别所有簇；在高维数据中，距离度量的效果也可能下降。</p>
+<h2 id="§5-模型评估方法"><a href="#§5-模型评估方法" class="headerlink" title="§5  模型评估方法"></a>§5  模型评估方法</h2><p>建模的评估一般可以分为回归、分类和聚类的评估。</p>
+<h3 id="5-1-回归模型的评估"><a href="#5-1-回归模型的评估" class="headerlink" title="5.1  回归模型的评估"></a>5.1  回归模型的评估</h3><p>主要有以下方法：</p>
+<table>
+<thead>
+<tr>
+<th align="left">指标</th>
+<th align="left">描述</th>
+<th align="left">metrics方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Mean Absolute Error(MAE)</td>
+<td align="left">平均绝对误差</td>
+<td align="left">from sklearn.metrics import mean_absolute_error</td>
+</tr>
+<tr>
+<td align="left">Mean Square Error(MSE)</td>
+<td align="left">均方误差</td>
+<td align="left">from sklearn.metrics import mean_squared_error</td>
+</tr>
+<tr>
+<td align="left">R-Squared</td>
+<td align="left">R平方值</td>
+<td align="left">from sklearn.metrics import r2_score</td>
+</tr>
+</tbody></table>
+<p><strong>平均绝对误差（Mean Absolute Error，MAE）</strong>指预测值与真实值之间平均相差多大：</p>
+<p>$$\operatorname{MAE} &#x3D; \frac{1}{N} \sum_{i&#x3D;1}^{N}|y_i-\hat y_i|$$</p>
+<p>平均绝对误差能更好地反映预测值误差的实际情况，对异常值相对不那么敏感。</p>
+<p><strong>均方误差（Mean Squared Error，MSE）</strong>指观测值与真值偏差的平方和与观测次数的比值：</p>
+<p>$$\operatorname{MSE} &#x3D; \frac{1}{N} \sum_{i&#x3D;1}^{N}(y_i-\hat y_i)^2$$</p>
+<p>这也是线性回归中最常用的损失函数，线性回归过程中尽量让该损失函数最小。那么模型之间的对比也可以用它来比较。 MSE可以评价数据的变化程度，MSE的值越小，说明预测模型描述实验数据具有更好的精确度。</p>
+<p>**R-square(决定系数)**通过数据的变化来表征一个拟合的好坏。分母理解为原始数据的离散程度，分子为预测数据和原始数据的误差，二者相除可以消除原始数据离散程度的影响：</p>
+<p>$$R^2 &#x3D; 1- \frac{\sum_{i&#x3D;1}^{N}(y_i-\hat y_i)^2} {\sum_{i&#x3D;1}^{N}(y_i-\bar y)^2}$$</p>
+<p>$R^2&#x3D;1$ 表示完美预测，$R^2&#x3D;0$ 表示模型大致相当于始终预测平均值，$R^2$ 也可能小于 $0$，说明模型甚至不如该基准。</p>
+<h3 id="5-2-分类模型的评估"><a href="#5-2-分类模型的评估" class="headerlink" title="5.2  分类模型的评估"></a>5.2  分类模型的评估</h3><h4 id="混淆矩阵"><a href="#混淆矩阵" class="headerlink" title="混淆矩阵"></a>混淆矩阵</h4><p>混淆矩阵也称误差矩阵，是表示精度评价的一种标准格式，用n行n列的矩阵形式来表示。具体评价指标有总体精度、制图精度、用户精度等，这些精度指标从不同的侧面反映了图像分类的精度。</p>
+<table>
+<thead>
+<tr>
+<th>实际情况</th>
+<th>预测为正</th>
+<th>预测为负</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>实际为正</td>
+<td>TP</td>
+<td>FN</td>
+</tr>
+<tr>
+<td>实际为负</td>
+<td>FP</td>
+<td>TN</td>
+</tr>
+</tbody></table>
+<h4 id="准确率、精确率、召回率、F1"><a href="#准确率、精确率、召回率、F1" class="headerlink" title="准确率、精确率、召回率、F1"></a>准确率、精确率、召回率、F1</h4><p><strong>准确率（Accuracy）</strong>的定义是：对于给定的测试集，分类模型正确分类的样本数与总样本数之比；</p>
+<p>$$\operatorname{Accuracy} &#x3D; \frac{TP+TN}{TP+TN+FP+FN}$$</p>
+<p><strong>精确率（Precision）</strong>的定义是：对于给定测试集的某一个类别，分类模型预测正确的比例，或者说：分类模型预测的正样本中有多少是真正的正样本；</p>
+<p>$$\operatorname{Precision} &#x3D; \frac{TP}{TP+FP}$$</p>
+<p><strong>召回率（Recall）</strong>的定义为：对于给定测试集的某一个类别，样本中的正类有多少被分类模型预测正确；</p>
+<p>$$\operatorname{Recall} &#x3D; \frac{TP}{TP+FN}$$</p>
+<p>在理想情况下，我们希望模型的精确率越高越好，同时召回率也越高越高，但是，现实情况往往事与愿违，在现实情况下，精确率和召回率像是坐在跷跷板上一样，往往出现一个值升高，另一个值降低，那么，有一个指标来综合考虑精确率和召回率，这个指标就是<strong>F1值</strong>。</p>
+<p>$$F1 &#x3D; \frac{2\cdot Precision\cdot Recall} {Precision+Recall}$$</p>
+<h4 id="P-R-曲线"><a href="#P-R-曲线" class="headerlink" title="P-R 曲线"></a>P-R 曲线</h4><p>P-R曲线是指用横轴表示召回率，纵轴表示精确率，将数据绘制成图表的形式所得到的曲线。</p>
+<p>当提升精确率时，召回率会降低，相反如果要提供召回率，则精确率会相应降低。</p>
+<p><img src="/img/P-R-curve.png" alt="P-R-curve"></p>
+<p>理想的情况是精确率和召回率都相当高的点，但由于两者是成反比的关系，一个升高就会导致另一个降低。不过，PR曲线上存在精确率和召回率相同的点，这个点叫做<strong>平衡点</strong>(Break Even Point, BEP)。在这个点上，精确率和召回率之间达到了最好的平衡状态。</p>
+<h4 id="ROC-曲线和-AUC"><a href="#ROC-曲线和-AUC" class="headerlink" title="ROC 曲线和 AUC"></a>ROC 曲线和 AUC</h4><p>ROC 曲线表示分类阈值不断变化时，TPR 和 FPR 如何变化。其中，纵轴TPR就是Recall，横轴FRP是负正类率（(False Positive Rate），FPR&#x3D;1-TNR。</p>
+<p><img src="/img/ROC-curve.png" alt="ROC-curve"></p>
+<p>AUC就是ROC 曲线下的面积，通常情况下数值介于0.5-1之间，可以评价分类器的好坏，数值越大说明越好。</p>
+<p>AUC评价：</p>
+<ul>
+<li><p>AUC &#x3D; 1 表示模型能够把所有正样本排在所有负样本之前，因此存在一个合适的阈值可以实现完美分类。绝大多数预测的场合，不存在完美分类器。</p>
+</li>
+<li><p>0.5 &lt; AUC &lt; 1，优于随机猜测。这个分类器（模型）妥善设定阈值的话，能有预测价值。</p>
+</li>
+<li><p>AUC &#x3D; 0.5，跟随机猜测一样（例：丢铜板），模型没有预测价值。</p>
+</li>
+<li><p>AUC &lt; 0.5，比随机猜测还差；但只要总是反预测而行，就优于随机猜测，因此不存在AUC &lt; 0.5的情况。</p>
+</li>
+</ul>
 
   </div>
 
