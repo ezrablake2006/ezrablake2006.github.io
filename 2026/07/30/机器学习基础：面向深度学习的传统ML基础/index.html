@@ -22,7 +22,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://ezrablake2006.github.io/img/Data-Cleaning-Mindmap.png">
 <meta property="article:published_time" content="2026-07-30T11:20:49.000Z">
-<meta property="article:modified_time" content="2026-07-31T17:21:20.335Z">
+<meta property="article:modified_time" content="2026-08-01T07:57:40.669Z">
 <meta property="article:author" content="Ezra Yang">
 <meta property="article:tag" content="notes">
 <meta property="article:tag" content="Machine Learning">
@@ -533,7 +533,73 @@
 <td>二叉划分可能使树更深，单棵树仍容易过拟合且对数据变化敏感</td>
 </tr>
 </tbody></table>
-<h4 id="支持向量机（Support-Vector-Machine-SVM）"><a href="#支持向量机（Support-Vector-Machine-SVM）" class="headerlink" title="支持向量机（Support Vector Machine, SVM）"></a>支持向量机（Support Vector Machine, SVM）</h4>
+<h4 id="支持向量机（Support-Vector-Machine-SVM）"><a href="#支持向量机（Support-Vector-Machine-SVM）" class="headerlink" title="支持向量机（Support Vector Machine, SVM）"></a>支持向量机（Support Vector Machine, SVM）</h4><p>SVM支持向量机，是指<strong>寻找到一个超平面使样本分成两类，并且间隔最大</strong>的算法。</p>
+<p>适用范围：线性或非线性分类、回归，甚至是异常值检测任务。</p>
+<p><strong>超平面</strong>：在高维特征空间中分隔数据的决策边界。</p>
+<ul>
+<li><p>线性 SVM 的分类超平面表示为：</p>
+<p>$$ w^Tx+b&#x3D;0 $$</p>
+<p>其中：$x$：输入样本；$w$：决定超平面方向的参数向量；$b$：决定超平面位置的参数；$w^Tx$：各个特征与其参数相乘后求和。</p>
+</li>
+</ul>
+<p><strong>支持向量</strong>：距离决策边界较近、对确定分隔超平面起关键作用的训练样本。在硬间隔 SVM 中，支持向量位于间隔边界上；在软间隔 SVM 中，位于间隔内部或被错误分类的部分样本也可能成为支持向量。</p>
+<p><strong>间隔</strong>：两个平行于决策边界且穿过支持向量的超平面之间的距离。这个距离的计算公式是 $ \frac{2}{|w|} $</p>
+<p><strong>硬间隔分类</strong>：严格让所有实例都不在最大间隔之间，并且位于正确的一边。</p>
+<ul>
+<li><p>硬间隔分类只在数据是线性可分离时才有效；</p>
+</li>
+<li><p>硬间隔分类对异常值非常敏感。</p>
+</li>
+<li><p>硬间隔分类的目标函数为：</p>
+<p>$$\min_{w,b}\frac12|w|^2$$</p>
+<p>其约束为：</p>
+<p>$$y_i(w^Tx_i+b)\geq1$$</p>
+<p>该约束可理解为，位于超平面上方的样本点标签为1，位于下方的样本点标签为-1。</p>
+</li>
+</ul>
+<p><strong>软间隔分类</strong>：尽可能保持最大间隔宽阔和限制间隔违例（即位于最大间隔内部，甚至在错误的一边的实例）之间找到良好的平衡。</p>
+<ul>
+<li><p>在scikit-learn的SVM类中，可以通过<strong>超参数C值</strong>来控制这个平衡。C值越小，间隔越宽，间隔违例也越多；C值越大，间隔违例较少，但间隔也小。</p>
+</li>
+<li><p>软间隔分类的目标函数为：</p>
+<p>$$\min_{w,b,\xi} \frac12|w|^2 + C\sum_{i&#x3D;1}^{m}\xi_i$$</p>
+<p>其中： $\frac12|w|^2$ ：希望间隔尽可能大； $\sum\xi_i$ ：希望违反间隔要求的程度尽可能小； $C$ ：控制这两个目标之间的权衡。</p>
+<p>约束为：</p>
+<p>$$ y_i(w^Tx_i+b)\geq1-\xi_i $$ </p>
+<p>$$ \xi_i\geq0 $$</p>
+<p>其中 $\xi_i$ 是松弛变量，表示第 $i$ 个样本违反间隔要求的程度：</p>
+<ul>
+<li>$\xi_i&#x3D;0$：样本位于间隔边界或间隔之外；</li>
+<li>$0&lt;\xi_i\leq1$：样本位于间隔内部，但仍被正确分类；</li>
+<li>$\xi_i&gt;1$：样本被错误分类。</li>
+</ul>
+</li>
+</ul>
+<p>关于公式具体推导参见：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/259850768">https://zhuanlan.zhihu.com/p/259850768</a></p>
+<p><strong>核技巧</strong>：将二维线性不可分样本点映射到高维空间中，让样本点在高维空间线性可分。用于解决样本点不再线性可分的情形，比如二维空间中环形分布的数据点。核方法使 SVM 能够形成非线性决策边界。</p>
+<p>具体来说，核技巧是利用 $x\longrightarrow\phi(x)$ 将数据映射到新的空间，再利用<strong>核函数</strong> $K(x_i,x_j) &#x3D; \phi(x_i)^T\phi(x_j)$ 直接计算两个样本在新特征空间的内积。</p>
+<p>常见的核函数有：线性核、多项式核、RBF高斯核。</p>
+<h4 id="K-近邻-（K-Nearest-Neighbors-KNN）"><a href="#K-近邻-（K-Nearest-Neighbors-KNN）" class="headerlink" title="K-近邻 （K Nearest Neighbors, KNN）"></a>K-近邻 （K Nearest Neighbors, KNN）</h4><p>KNN算法是指<strong>当预测一个新的值x的时候，根据它距离最近的K个点是什么类别来判断x属于哪个类别</strong>。</p>
+<p>K值选择：一般自己调整，过小容易过拟合，过大容易欠拟合。KNN 通常需要先进行标准化或归一化。</p>
+<p>距离的度量：曼哈顿距离、欧式距离、无穷范式等。最常用的是欧氏距离。</p>
+<p>优点：简单易上手。</p>
+<p>缺点：对K值选择敏感；时间空间复杂度较大；对异常值、噪声和错误标签较敏感。</p>
+<h4 id="朴素贝叶斯（Naive-Bayes）"><a href="#朴素贝叶斯（Naive-Bayes）" class="headerlink" title="朴素贝叶斯（Naive Bayes）"></a>朴素贝叶斯（Naive Bayes）</h4><p><strong>贝叶斯定理</strong>：</p>
+<p>条件概率形式：</p>
+<p>$$<br>P(A\mid B)&#x3D;\frac{P(B\mid A)P(A)}{P(B)}<br>$$</p>
+<p>全概率形式：</p>
+<p>$$<br>P(A_i\mid B)&#x3D;\frac{P(B\mid A_i)P(A_i)}{\sum_{j&#x3D;1}^{n}P(B\mid A_j)P(A_j)}<br>$$</p>
+<p>贝叶斯定理可以用于监督学习。朴素贝叶斯就是<strong>假设样本各个特征之间相互条件独立（朴素的定义），用 $P(特征|类别)$ 、$P(类别)$ 、$P(特征)$  三个概率值算出 $P(类别|特征)$ 的概率值，继而将测试样本分类</strong>的算法。</p>
+<p>因为该概率值只需要用于比较，因此分母 $P(特征)$ 通常不计算。</p>
+<p>由于朴素的前提，特征相关的概率可以由乘法原理简单算得。</p>
+<p>注意事项：</p>
+<ul>
+<li>特征太多时，多个小于1的概率值累乘可能导致下溢出，因此可以转化为对数加法运算，避免下溢出。</li>
+<li>如果某一类别下特征m没有出现，此时P(特征m|类别)&#x3D;0, 这会造成最终的概率值为0, 所以可使用<strong>拉普拉斯平滑</strong>，就是在分子分母分别加1，可避免0概率出现的情况。在样本量充足的情况下，平滑不会对结果产生影响。</li>
+</ul>
+<p>优点：逻辑简单，基于统计而非权重迭代优化；时间与空间复杂度都较小。</p>
+<p>缺点：只能处理分类任务，且样本少的情况下效果最好；特征之间相互独立的假设通常不成立。</p>
+
   </div>
 
   
