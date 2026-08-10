@@ -2,6 +2,7 @@
 html,
 body {
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* 首页 Hero */
@@ -130,4 +131,195 @@ body:has(.hero) #main-content > .container > .post-list {
 /* Prevent footer from sticking too close to comments */
 footer {
   margin-top: 80px;
+}
+
+/* 文章右侧目录 */
+.post > .post-toc {
+  position: sticky;
+  top: 80px;
+  z-index: 10;
+  width: clamp(168px, calc((100vw - 944px) / 2), 260px);
+  height: 0;
+  margin-left: calc(50% + 448px);
+  overflow: visible;
+}
+
+.post-toc__title {
+  margin: 0 0 10px;
+  color: var(--color-text-primary);
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+}
+
+.post-toc__toggle {
+  display: none;
+}
+
+.post > .post-toc > .toc {
+  box-sizing: border-box;
+  max-width: none;
+  max-height: calc(100vh - 132px);
+  margin: 0;
+  padding: 2px 8px 2px 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: var(--color-border-primary) transparent;
+  scrollbar-width: thin;
+}
+
+.post > .post-toc > .toc::-webkit-scrollbar {
+  width: 5px;
+}
+
+.post > .post-toc > .toc::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.post > .post-toc > .toc::-webkit-scrollbar-thumb {
+  background: var(--color-border-primary);
+  border-radius: 999px;
+}
+
+.post-toc .toc > p > a {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 6px 10px 6px 12px;
+  border-left: 2px solid var(--color-border-primary);
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.post-toc .toc > p[data-toc-level="2"] > a {
+  font-weight: 550;
+}
+
+.post-toc .toc > p[data-toc-level="3"] > a {
+  padding-left: 24px;
+  font-size: 12px;
+}
+
+.post-toc .toc > p[data-toc-level="4"] > a,
+.post-toc .toc > p[data-toc-level="5"] > a,
+.post-toc .toc > p[data-toc-level="6"] > a {
+  padding-left: 36px;
+  font-size: 12px;
+}
+
+.post-toc .toc > p > a:hover,
+.post-toc .toc > p > a:focus-visible {
+  border-color: var(--color-text-secondary-hover);
+  color: var(--color-text-secondary-hover);
+  text-decoration: none;
+}
+
+.post-toc .toc > p > a.is-active {
+  border-color: var(--color-text-accent);
+  background-color: color-mix(in srgb, var(--color-background-accent) 9%, transparent);
+  color: var(--color-text-accent);
+  font-weight: 650;
+}
+
+.post > .content > h1,
+.post > .content > h2,
+.post > .content > h3,
+.post > .content > h4,
+.post > .content > h5,
+.post > .content > h6 {
+  scroll-margin-top: 80px;
+}
+
+/* 页脚使用不透明层盖住滚动到页面底部时仍在视口内的目录。 */
+footer {
+  position: relative;
+  z-index: 20;
+  background-color: var(--color-background-underlying);
+}
+
+/* 横向空间不足时不让目录覆盖正文，改为文章头部的折叠目录。 */
+@media (max-width: 1279px) {
+  .post > .post-toc {
+    position: relative;
+    top: auto;
+    width: min(100% - 32px, 800px);
+    height: auto;
+    margin: 40px auto -24px;
+  }
+
+  .post-toc__title {
+    display: none;
+  }
+
+  .post-toc__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--color-border-primary);
+    border-radius: 12px;
+    background: var(--color-background-secondary);
+    color: var(--color-text-primary);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .post-toc__toggle::after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform 0.2s ease;
+  }
+
+  .post-toc.is-open .post-toc__toggle::after {
+    transform: rotate(225deg) translate(-2px, -2px);
+  }
+
+  .post > .post-toc > .toc {
+    max-height: 0;
+    padding: 0 8px 0 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      max-height 0.25s ease,
+      padding 0.25s ease,
+      opacity 0.2s ease,
+      visibility 0s linear 0.25s;
+  }
+
+  .post > .post-toc.is-open > .toc {
+    max-height: min(50vh, 420px);
+    padding-top: 10px;
+    padding-bottom: 4px;
+    opacity: 1;
+    visibility: visible;
+    transition:
+      max-height 0.25s ease,
+      padding 0.25s ease,
+      opacity 0.2s ease,
+      visibility 0s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .post-toc *,
+  .post-toc *::before,
+  .post-toc *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
