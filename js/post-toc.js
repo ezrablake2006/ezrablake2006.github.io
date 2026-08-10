@@ -26,13 +26,13 @@
   if (!entries.length) return;
 
   aside.classList.add('post-toc');
-  aside.setAttribute('aria-label', '文章目录');
+  aside.setAttribute('aria-label', 'Content');
   toc.id = 'post-toc-list';
   toc.setAttribute('data-lenis-prevent', '');
 
   const title = document.createElement('p');
   title.className = 'post-toc__title';
-  title.textContent = '目录';
+  title.textContent = 'Content';
   aside.insertBefore(title, toc);
 
   const toggle = document.createElement('button');
@@ -40,7 +40,7 @@
   toggle.type = 'button';
   toggle.setAttribute('aria-controls', toc.id);
   toggle.setAttribute('aria-expanded', 'false');
-  toggle.textContent = '文章目录';
+  toggle.textContent = 'Content';
   aside.insertBefore(toggle, toc);
 
   entries.forEach(function (entry) {
