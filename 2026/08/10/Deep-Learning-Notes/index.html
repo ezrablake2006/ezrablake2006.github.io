@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Deep Learning - Notes - @Ezra_Yang</title>
+  
+    <link rel="shortcut icon" href="/img/favicon.png">
+  
+  
+  <link rel='manifest' href='/manifest.json'>
+  
+
+  <meta name="description" content="本笔记参考以下资源：  https:&#x2F;&#x2F;www.rethink.fun&#x2F; 台大李宏毅机器学习课程：https:&#x2F;&#x2F;speech.ee.ntu.edu.tw&#x2F;~hylee&#x2F;ml&#x2F;2021-spring.php Understanding Deep Learning, Simon J. D. Prince  §1  Regression &amp; Classification1.1  Linear">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deep Learning - Notes">
+<meta property="og:url" content="http://ezrablake2006.github.io/2026/08/10/Deep-Learning-Notes/index.html">
+<meta property="og:site_name" content="@Ezra_Yang">
+<meta property="og:description" content="本笔记参考以下资源：  https:&#x2F;&#x2F;www.rethink.fun&#x2F; 台大李宏毅机器学习课程：https:&#x2F;&#x2F;speech.ee.ntu.edu.tw&#x2F;~hylee&#x2F;ml&#x2F;2021-spring.php Understanding Deep Learning, Simon J. D. Prince  §1  Regression &amp; Classification1.1  Linear">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://ezrablake2006.github.io/img/neural-network.png">
+<meta property="og:image" content="http://ezrablake2006.github.io/img/sigmoid.png">
+<meta property="og:image" content="http://ezrablake2006.github.io/img/tanh.png">
+<meta property="og:image" content="http://ezrablake2006.github.io/img/relu.png">
+<meta property="og:image" content="http://ezrablake2006.github.io/img/leaky_relu.png">
+<meta property="article:published_time" content="2026-08-10T13:29:11.000Z">
+<meta property="article:modified_time" content="2026-08-15T16:20:24.518Z">
+<meta property="article:author" content="Ezra Yang">
+<meta property="article:tag" content="notes">
+<meta property="article:tag" content="Deep Learning">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ezrablake2006.github.io/img/neural-network.png">
+
+  <script>window.ThemeCupertino = {}</script>
+
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/simple-icons-font@16/font/simple-icons.min.css">
+
+  
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1/font/bootstrap-icons.min.css">
+
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+
+  
+  
+<link rel="stylesheet" href="/css/components/card.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/button.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/badge.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/utilities.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/carousel.css">
+
+  
+  
+  <script>ThemeCupertino['_calloutStyles'] = `
+<link rel="stylesheet" href="/css/components/callout.css">
+`</script>
+  
+<script src="/js/components/callout.js"></script>
+
+  
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/scroll-reveal.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/view-transition.css">
+
+  
+  
+
+  
+<script src="/js/head.js"></script>
+
+  <link rel="stylesheet" href="/css/custom.css?v=6">
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: {'[+]': [['$', '$']]},
+      processEscapes: true
+    }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body
+    data-color-scheme="auto"
+    data-uppercase-categories="true"
+    
+    data-rainbow-banner="true"
+    data-rainbow-banner-shown="always"
+    data-rainbow-banner-month="6"
+    data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+    
+    data-config-root="/"
+    
+    data-toc="true"
+    data-toc-max-depth="3"
+    
+    
+    
+    data-scroll-reveal-disappear="false"
+    data-scroll-reveal-query=".scroll-reveal, .post-list-item, .card, .content p img, .content .block-large img"
+    
+    data-nav-blur-gradient="false"
+    style="--config-corner-squircle: true"
+  >
+    
+<script src="/js/body-top.js"></script>
+
+    <a href="#main-content" id="skip-to-content">Skip to content</a>
+    
+
+<nav id="theme-nav">
+  <div class="inner">
+    <a class="title" href="/">Ezra Yang</a>
+    <div class="nav-arrow"></div>
+    <div class="nav-items">
+      <a class="nav-item nav-item-home" href="/" style="--index: 0">Home</a>
+
+      
+      <a class="nav-item" href="/categories/CStudy/" style="--index: 1">CStudy</a>
+      
+      <a class="nav-item" href="/categories/Music/" style="--index: 2">Music</a>
+      
+      <a class="nav-item" href="/categories/Language/" style="--index: 3">Language</a>
+      
+      <a class="nav-item" href="/categories/Diary/" style="--index: 4">Diary</a>
+      
+      <a class="nav-item" href="/tags" style="--index: 5">Tags</a>
+      
+      <a class="nav-item" href="/about" style="--index: 6">About</a>
+      
+    </div>
+  </div>
+</nav>
+
+    <main id="main-content" data-pagefind-body>
+      
+<article class="post">
+  
+  <div class="meta">
+    
+    <div class="categories text-uppercase">
+    
+      <a href="/categories/CStudy/">CStudy</a>
+    
+    </div>
+    
+
+    
+    <time class="date" datetime="2026-08-10T21:29:11+08:00">
+      August 10, 2026
+    </time>
+    
+
+    <h1 class="title" data-pagefind-meta="title">Deep Learning - Notes</h1>
+  </div>
+
+  <div class="content">
+    <p>本笔记参考以下资源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.rethink.fun/">https://www.rethink.fun/</a></li>
+<li>台大李宏毅机器学习课程：<a target="_blank" rel="noopener" href="https://speech.ee.ntu.edu.tw/~hylee/ml/2021-spring.php">https://speech.ee.ntu.edu.tw/~hylee/ml/2021-spring.php</a></li>
+<li>Understanding Deep Learning, Simon J. D. Prince</li>
+</ul>
+<h2 id="§1-Regression-Classification"><a href="#§1-Regression-Classification" class="headerlink" title="§1  Regression &amp; Classification"></a>§1  Regression &amp; Classification</h2><h3 id="1-1-Linear-Regression"><a href="#1-1-Linear-Regression" class="headerlink" title="1.1  Linear Regression"></a>1.1  Linear Regression</h3><p>见：<a href="https://ezrablake2006.github.io/2026/07/30/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%EF%BC%9A%E9%9D%A2%E5%90%91%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%BC%A0%E7%BB%9FML%E5%9F%BA%E7%A1%80/#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%EF%BC%88Linear-Regression%EF%BC%89">机器学习：面向深度学习的传统ML基础 - @Ezra_Yang - 线性回归</a></p>
+<h3 id="1-2-Logistic-Regression"><a href="#1-2-Logistic-Regression" class="headerlink" title="1.2  Logistic Regression"></a>1.2  Logistic Regression</h3><p>见：<a href="https://ezrablake2006.github.io/2026/07/30/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%EF%BC%9A%E9%9D%A2%E5%90%91%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%BC%A0%E7%BB%9FML%E5%9F%BA%E7%A1%80/#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%EF%BC%88Logistic-Regression%EF%BC%89">机器学习：面向深度学习的传统ML基础 - @Ezra_Yang - 逻辑回归</a></p>
+<h2 id="§2-Neural-Networks"><a href="#§2-Neural-Networks" class="headerlink" title="§2  Neural Networks"></a>§2  Neural Networks</h2><h3 id="2-1-Neural-Networks"><a href="#2-1-Neural-Networks" class="headerlink" title="2.1  Neural Networks"></a>2.1  Neural Networks</h3><h4 id="2-1-1-What-is-Neural-Networks"><a href="#2-1-1-What-is-Neural-Networks" class="headerlink" title="2.1.1  What is Neural Networks?"></a>2.1.1  What is Neural Networks?</h4><p><strong>神经网络</strong>作为一种机器学习模型，通过将简易的”神经元”分层堆叠，从数据中学习模式识别的权重与偏置，从而建立输入到输出的映射关系。</p>
+<p><strong>层次划分</strong>：整体上神经网络会被分为输入层，隐藏层，和输出层。<strong>输入层</strong>就是原始特征，<strong>输出层</strong>就神经网络最终的输出。除了输入层和输出层，剩下的层都是<strong>隐藏层</strong>。</p>
+<p><img src="/img/neural-network.png" alt="neural-network"></p>
+<p><strong>神经元</strong>：如图，除了输入层，其他层的每一个圆点，都代表一个神经元。</p>
+<p>现阶段可以认为：一个神经元代表一个逻辑回归。</p>
+<p><strong>深度神经网络</strong>：只要隐藏层大于1层的神经网络都可以叫做深度神经网络。</p>
+<p><strong>神经网络的计算</strong>：以上图为例</p>
+<p>对于一个输入 $x$ ，当该输入通过一个神经元时，若该神经元的权重为 $\omega$ ，偏差为 $b$ ，则输入神经元的数据为 ${\omega}x+b$ ，通过神经元时代入激活函数（如逻辑回归的Sigmoid函数），输出函数值。</p>
+<p>整体而言，神经网络通过矩阵进行计算，这种方式十分利好GPU加速计算。</p>
+<p>理论上，神经网络可以拟合任何函数。</p>
+<h4 id="2-1-2-Activation-Functions"><a href="#2-1-2-Activation-Functions" class="headerlink" title="2.1.2  Activation Functions"></a>2.1.2  Activation Functions</h4><p><strong>激活函数</strong>：每层神经元设置的函数，模拟大脑内的神经抑制、激活。没有激活函数，不论几层的神经网络都是一个线性回归。激活函数的作用是引入非线性。</p>
+<p>常见的激活函数：</p>
+<p><strong>Sigmoid 函数</strong>：</p>
+<p>$$sigmoid(x)&#x3D;\frac{1}{1+e^{-x}}$$</p>
+<p><img src="/img/sigmoid.png" alt="sigmoid"></p>
+<p>作用：将任意实数映射到0到1之间。适用于二分类问题神经网络的最后一层唯一神经元的激活函数。</p>
+<p><strong>Tanh 函数</strong>：</p>
+<p>$$tanh(x)&#x3D;\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}$$</p>
+<p><img src="/img/tanh.png" alt="tanh"></p>
+<p><strong>ReLU 函数</strong>：</p>
+<p>$$ReLU(x)&#x3D;max(x,0)$$</p>
+<p><img src="/img/relu.png" alt="relu"></p>
+<p>ReLU函数是目前深度学习里最常用的激活函数。</p>
+<p><strong>Leaky ReLU 函数</strong>：</p>
+<p>$$LeakyReLU(x)&#x3D;x, x&gt;&#x3D;0$$</p>
+<p>$$LeakyReLU(x)&#x3D;{\alpha}x, 0&lt;{\alpha}&lt;1, x&lt;0$$</p>
+<p><img src="/img/leaky_relu.png" alt="leaky-relu"></p>
+<h4 id="2-1-3-Classification-with-Softmax-Regression"><a href="#2-1-3-Classification-with-Softmax-Regression" class="headerlink" title="2.1.3  Classification with Softmax Regression"></a>2.1.3  Classification with Softmax Regression</h4><p>神经网络的多分类方法：<strong>Softmax 函数</strong></p>
+<ul>
+<li><p>设置输出层神经元个数为需分类的总个数，每个神经元输出属于该类的概率；对于神经网络，输出层经过线性回归，还没有经过激活函数的值，叫做 <strong>logits</strong>。</p>
+</li>
+<li><p>对于第i个logits值输出的概率值，通过softmax计算公式如下：</p>
+<p>$$o_i&#x3D;\frac{e^{z_i}}{e^{z_1}+e^{z_2}+…+e^{z_n}}$$</p>
+</li>
+<li><p>softmax可以放大logtis之间的差异，加快训练速度。</p>
+</li>
+<li><p>loss函数：交叉熵。如果是对于批量样本计算loss，batch size 是N，则总的交叉熵损失就为：<br>$$<br>loss &#x3D; -\frac{1}{N}\sum_{n&#x3D;1}^{N}\sum_{i&#x3D;1}^{C} y_i^n \log(p_i^n)<br>$$</p>
+</li>
+</ul>
+<h4 id="2-1-4-Backpropagation"><a href="#2-1-4-Backpropagation" class="headerlink" title="2.1.4  Backpropagation"></a>2.1.4  Backpropagation</h4><p>神经网络里每层的权重和偏置都可以看成是一个由多个参数构成的矩阵。反向传播时需要计算每个权重和偏置的梯度，实际上就是<strong>用最终的loss值对每一个参数求导</strong>，这些对单个参数的求导计算可以通过矩阵运算进行加速。</p>
+<p>梯度消失、梯度爆炸</p>
+<h3 id="2-2-Deep-Neural-Networks"><a href="#2-2-Deep-Neural-Networks" class="headerlink" title="2.2  Deep Neural Networks"></a>2.2  Deep Neural Networks</h3><h4 id="2-2-1-Regularization"><a href="#2-2-1-Regularization" class="headerlink" title="2.2.1  Regularization"></a>2.2.1  Regularization</h4><p>正则化（Regularization）：限制模型的复杂度，从而改进模型泛化能力。</p>
+<p><strong>L1正则化</strong>：在损失函数中额外加入模型所有参数的绝对值之和作为惩罚项</p>
+<p>模型训练时，尽可能让某些参数为0，降低模型复杂度：<br>$$<br>Loss_{L1}&#x3D;Loss(\theta)+\lambda\sum_{i}|{\theta_i}|<br>$$<br>其中 $\theta$ 为模型参数，$ \lambda$ 是控制正则化强度的参数，一般初始设置为1e-3或者1e-4。</p>
+<p>设置过大会导致模型欠拟合。</p>
+<p>在训练过程中可以进根据实际情况进行调整，调整原则为如果数据量越少，模型越复杂，输入特征越多，那么 $λ$ 就越大。</p>
+<p><strong>L2正则化</strong>：在损失函数中额外加入模型所有参数的平方之和作为惩罚项<br>$$<br>Loss_{L1}&#x3D;Loss(\theta)+\lambda\sum_{i}{\theta_i^{2}}<br>$$<br>L2正则化会让模型参数变小，但是不会等于0。</p>
+<p>一般情况下都默认使用L2正则化，很少使用L1正则化。</p>
+<h4 id="2-2-2-Exponentially-Weighted-Average"><a href="#2-2-2-Exponentially-Weighted-Average" class="headerlink" title="2.2.2  Exponentially Weighted Average"></a>2.2.2  Exponentially Weighted Average</h4><p>指数加权平均是指利用加权平均的思想，并且老的数据的权重按照指数衰减的算法。</p>
+<p>对于一个真实数据数列 ${A_i}$ 和其预测数据数列 ${a_i}$ ，$a_0&#x3D;0$ ，设定一个在 $[0, 1]$ 之间的超参数 $\beta$ ，它越小，越老的数据，权重衰减的越厉害，在最终预测结果里占的比重越小。</p>
+<p>则：预测数列的递推公式为<br>$$<br>a_{i+1}&#x3D;{\beta}a_i+(1-{\beta})A_i<br>$$<br>这样我们就可以用前 i 个数据的指数加权平均值来作为对 i+1 个数据的预测。</p>
+<p>问题：前几天的预测数列值很小，和真实值偏差大。</p>
+<p>改进：计算完公式之后，除以 $1-{\beta}^{i}$ 。即：<br>$$<br>a_i&#x3D;\frac{\beta a_{i-1}+(1-\beta)A_{i-1}}{1-\beta^i}<br>$$</p>
+<h4 id="2-2-3-Momentum"><a href="#2-2-3-Momentum" class="headerlink" title="2.2.3  Momentum"></a>2.2.3  Momentum</h4><p>梯度下降算法的两个问题：接近最优点时发生梯度震荡；loss函数极小导致梯度消失</p>
+<p>动量梯度下降：使用指数加权平均来更新参数。作用就是<strong>抑制震荡，惯性加速</strong>。</p>
+<p>以对 $w$ 参数的更新为例，首先计算 $w$ 的梯度：</p>
+<p>$$<br>g_w &#x3D; \frac{\partial loss}{\partial w}<br>$$</p>
+<p>我们定义变量 $V_w$，表示 $g_w$ 的指数加权平均值，每个 batch 按照下边的公式更新自身值：</p>
+<p>$$<br>V_w &#x3D; \beta V_w + (1 - \beta)g_w<br>$$</p>
+<p>更新 $w$ 参数，$lr$ 是学习率：</p>
+<p>$$<br>w &#x3D; w - lrV_w<br>$$</p>
+<p>可以看到在训练过程中，对于参数 $w$，一直需要保存一个指数加权平均值 $V_w$。另外 $\beta$ 的取值一般为 $0.9$。</p>
+
+  </div>
+
+  
+  <div class="about" data-pagefind-ignore>
+    <h2>About this Post</h2>
+    <div class="details">This post is written by Ezra Yang, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</div>
+    
+    <p class="tags">
+      <i class="bi bi-tags icon"></i>
+      
+      <a href="/tags/notes/" class="tag">#notes</a>
+      
+      <a href="/tags/Deep-Learning/" class="tag">#Deep Learning</a>
+      
+      <a href="/tags/AI/" class="tag">#AI</a>
+      
+    </p>
+    
+    
+  </div>
+  
+
+  <div class="container post-prev-next" data-pagefind-ignore>
+    
+    <a href="/2026/08/14/CS168-Intro-to-Internet-Notes/" class="next">
+      <div class="text">
+        <p class="label">Next</p>
+        <h3 class="title">CS168: Intro to Internet - Notes</h3>
+      </div>
+    </a>
+    
+    
+    <a href="/2026/08/02/Learning-Plan-DL-CV/" class="prev">
+      <div class="text">
+        <p class="label">Previous</p>
+        <h3 class="title">Learning Plan: DL &amp; CV</h3>
+      </div>
+    </a>
+    
+  </div>
+
+  
+    <section class="giscus-comments" style="width:min(100% - 48px, 860px); margin:96px auto 72px auto; padding-top:40px; border-top:1px solid rgba(120,150,180,0.22); box-sizing:border-box;">
+  <h2 style="margin:0 0 28px 0; font-size:28px; line-height:1.1;">Comments</h2>
+  <script src="https://giscus.app/client.js"
+    data-repo="ezrablake2006/ezrablake2006.github.io"
+    data-repo-id="R_kgDOTIW0HA"
+    data-category="General"
+    data-category-id="DIC_kwDOTIW0HM4DAJj3"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+
+  
+</article>
+
+
+    </main>
+    <footer>
+  <div class="inner">
+    <div class="links">
+      
+      <div class="group">
+        <h2 class="title">Site</h2>
+        
+        <a href="/" class="item">Home</a>
+        
+        <a href="/archives/" class="item">Archive</a>
+        
+        <a href="/categories/" class="item">Categories</a>
+        
+      </div>
+      
+      <div class="group">
+        <h2 class="title">Me</h2>
+        
+        <a target="_blank" rel="noopener" href="https://github.com/ezrablake2006" class="item">GitHub</a>
+        
+        <a href="mailto:EzraBlake2006@outlook.com" class="item">Email</a>
+        
+      </div>
+      
+    </div>
+    <span>&copy; 2026 Ezra Yang<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></span>
+    
+    
+      <br>
+      <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+        <label>
+          <input type="radio" value="light">
+          <span>Light</span>
+        </label>
+        <label>
+          <input type="radio" value="dark">
+          <span>Dark</span>
+        </label>
+        <label>
+          <input type="radio" value="auto">
+          <span>Auto</span>
+        </label>
+      </div>
+    
+  </div>
+</footer>
+
+
+    
+<script src="/js/main.js"></script>
+
+
+    
+
+    
+    
+<script src="/js/scroll-reveal.js"></script>
+
+    
+
+    <script src="/js/hero-scroll.js?v=1"></script>
+<script src="/js/post-toc.js?v=1"></script>
+
+  </body>
+</html>

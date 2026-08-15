@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>CS168: Intro to Internet - Notes - @Ezra_Yang</title>
+  
+    <link rel="shortcut icon" href="/img/favicon.png">
+  
+  
+  <link rel='manifest' href='/manifest.json'>
+  
+
+  <meta name="description" content="本笔记参考：UCB CS168: Introduction to the Internet 原版 Textbook 链接：Home | CS 168 Textbook 中文译版：首页 - CS 168 Textbook §1  Introduction1.1  Introduction to the InternetInternet 是一种在全球设备之间传输数据的工具。 Internet 是一个联">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS168: Intro to Internet - Notes">
+<meta property="og:url" content="http://ezrablake2006.github.io/2026/08/14/CS168-Intro-to-Internet-Notes/index.html">
+<meta property="og:site_name" content="@Ezra_Yang">
+<meta property="og:description" content="本笔记参考：UCB CS168: Introduction to the Internet 原版 Textbook 链接：Home | CS 168 Textbook 中文译版：首页 - CS 168 Textbook §1  Introduction1.1  Introduction to the InternetInternet 是一种在全球设备之间传输数据的工具。 Internet 是一个联">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-08-14T08:28:24.000Z">
+<meta property="article:modified_time" content="2026-08-15T16:16:27.605Z">
+<meta property="article:author" content="Ezra Yang">
+<meta property="article:tag" content="notes">
+<meta property="article:tag" content="networks">
+<meta name="twitter:card" content="summary">
+
+  <script>window.ThemeCupertino = {}</script>
+
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/simple-icons-font@16/font/simple-icons.min.css">
+
+  
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1/font/bootstrap-icons.min.css">
+
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+
+  
+  
+<link rel="stylesheet" href="/css/components/card.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/button.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/badge.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/utilities.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/carousel.css">
+
+  
+  
+  <script>ThemeCupertino['_calloutStyles'] = `
+<link rel="stylesheet" href="/css/components/callout.css">
+`</script>
+  
+<script src="/js/components/callout.js"></script>
+
+  
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/scroll-reveal.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/view-transition.css">
+
+  
+  
+
+  
+<script src="/js/head.js"></script>
+
+  <link rel="stylesheet" href="/css/custom.css?v=6">
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: {'[+]': [['$', '$']]},
+      processEscapes: true
+    }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body
+    data-color-scheme="auto"
+    data-uppercase-categories="true"
+    
+    data-rainbow-banner="true"
+    data-rainbow-banner-shown="always"
+    data-rainbow-banner-month="6"
+    data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+    
+    data-config-root="/"
+    
+    data-toc="true"
+    data-toc-max-depth="3"
+    
+    
+    
+    data-scroll-reveal-disappear="false"
+    data-scroll-reveal-query=".scroll-reveal, .post-list-item, .card, .content p img, .content .block-large img"
+    
+    data-nav-blur-gradient="false"
+    style="--config-corner-squircle: true"
+  >
+    
+<script src="/js/body-top.js"></script>
+
+    <a href="#main-content" id="skip-to-content">Skip to content</a>
+    
+
+<nav id="theme-nav">
+  <div class="inner">
+    <a class="title" href="/">Ezra Yang</a>
+    <div class="nav-arrow"></div>
+    <div class="nav-items">
+      <a class="nav-item nav-item-home" href="/" style="--index: 0">Home</a>
+
+      
+      <a class="nav-item" href="/categories/CStudy/" style="--index: 1">CStudy</a>
+      
+      <a class="nav-item" href="/categories/Music/" style="--index: 2">Music</a>
+      
+      <a class="nav-item" href="/categories/Language/" style="--index: 3">Language</a>
+      
+      <a class="nav-item" href="/categories/Diary/" style="--index: 4">Diary</a>
+      
+      <a class="nav-item" href="/tags" style="--index: 5">Tags</a>
+      
+      <a class="nav-item" href="/about" style="--index: 6">About</a>
+      
+    </div>
+  </div>
+</nav>
+
+    <main id="main-content" data-pagefind-body>
+      
+<article class="post">
+  
+  <div class="meta">
+    
+    <div class="categories text-uppercase">
+    
+      <a href="/categories/CStudy/">CStudy</a>
+    
+    </div>
+    
+
+    
+    <time class="date" datetime="2026-08-14T16:28:24+08:00">
+      August 14, 2026
+    </time>
+    
+
+    <h1 class="title" data-pagefind-meta="title">CS168: Intro to Internet - Notes</h1>
+  </div>
+
+  <div class="content">
+    <p>本笔记参考：UCB CS168: Introduction to the Internet</p>
+<p>原版 Textbook 链接：<a target="_blank" rel="noopener" href="https://textbook.cs168.io/">Home | CS 168 Textbook</a></p>
+<p>中文译版：<a target="_blank" rel="noopener" href="https://xjn2005.github.io/cs168-textbook-zh/index.html">首页 - CS 168 Textbook</a></p>
+<h1 id="§1-Introduction"><a href="#§1-Introduction" class="headerlink" title="§1  Introduction"></a>§1  Introduction</h1><h2 id="1-1-Introduction-to-the-Internet"><a href="#1-1-Introduction-to-the-Internet" class="headerlink" title="1.1  Introduction to the Internet"></a>1.1  Introduction to the Internet</h2><p>Internet 是一种在全球设备之间传输数据的工具。</p>
+<p>Internet 是一个联邦式系统，它要求不同运营者之间具备互操作性。联邦式结构使 Internet 能够达到巨大的规模。</p>
+<p>Protocol （协议）：规定了实体之间如何通信。</p>
+<p>RFC (Request For Comments) : 许多 protocol 标准会以 RFC 文档发布，并最终被广泛接受，不过并不是所有 RFC 最后都会被采用。RFC 文档带有编号，有时人们会用 RFC 编号来指代 protocol。</p>
+<h2 id="1-2-Layers-of-the-Internet"><a href="#1-2-Layers-of-the-Internet" class="headerlink" title="1.2  Layers of the Internet"></a>1.2  Layers of the Internet</h2><h3 id="Layer-1-Physical"><a href="#Layer-1-Physical" class="headerlink" title="Layer 1: Physical"></a>Layer 1: Physical</h3><p>物理层<strong>进行跨越空间的信号传递</strong>。</p>
+<p>使用的技术需要能跨空间传输 bit。常见技术有电线上的电压变化、无线电波、光纤中的光脉冲等等。</p>
+<h3 id="Layer-2-Link"><a href="#Layer-2-Link" class="headerlink" title="Layer 2: Link"></a>Layer 2: Link</h3><p>这一层<strong>在本地网络创造链路</strong>。</p>
+<p><strong>Link（链路）</strong>：用于连接两台机器。采用有线、无线、光纤等方式实现。</p>
+<p><strong>LAN（局域网）</strong>：用 link 将一批彼此相近的计算机连接起来。</p>
+<p><strong>packet（数据包）</strong>：将 bit 组织成的数据单元。是网络的基本传输单位。</p>
+<p>核心问题：需要定义 packet 在物理信号中的起始与结束位置；解决诸如「多人同时共享同一根线发送数据」之类的问题。</p>
+<h3 id="Layer-3-Internet"><a href="#Layer-3-Internet" class="headerlink" title="Layer 3: Internet"></a>Layer 3: Internet</h3><p>这一层<strong>连接许多网络形成 Internet</strong>。</p>
+<p>一个 network 中包括：一个 router&#x2F;switch + 其他 end host</p>
+<p><strong>switch（交换机）&#x2F; router（路由器）</strong>：负责在不同网络之间通信的“邮局”。当 network A 中的人想与 network B 中的人通信时，他只需将邮件发送到 A 中的邮局。该邮局会把邮件转发到 B 中的邮局，再由后者投递到最终目的地。</p>
+<p><strong>end host（端系统）</strong>：通过 Internet 通信的机器，例如 server、laptop、phone 等。</p>
+<p>在不同 switch 之间继续建立链路，就可以把 local network 连接起来。当 local network 和链路足够多时，就能把全世界连接起来，从而形成 Internet。</p>
+<p>Internet 也被称为“网络的网络”。</p>
+<p>核心问题：当一个 switch 收到 packet 时，它如何知道应当把 packet 转发到哪里，才能让 packet 更接近最终目的地；确保链路具有足够容量（capacity）来承载数据；将网络中的实体视作现实中的企业与组织，并考虑它们的经济与政治激励。</p>
+<p>抽象层：基于抽象的<strong>模块化</strong>是构建大型系统的基本方式。</p>
+<p><strong>Best-Effort 服务模型</strong>：如果你通过 Layer 3 发送数据，Internet 会「尽力」传输它，但并不保证数据一定送达，也不会告诉你传输是否成功。</p>
+<p><strong>Packet 抽象</strong>：如果 application 想要发送大量数据（例如视频），就必须把这些数据拆分成多个 packet，并让每个 packet 独立穿越 network。</p>
+<h3 id="Layer-4-Transport"><a href="#Layer-4-Transport" class="headerlink" title="Layer 4: Transport"></a>Layer 4: Transport</h3><p>这一层<strong>可靠地传输 packet，形成连接。</strong></p>
+<p>这一层以 Layer 3 为基础构件，并实现额外 protocol，用于：</p>
+<ul>
+<li>重传丢失 packet；</li>
+<li>将数据拆分成 packet；</li>
+<li>对乱序到达（out-of-order）的 packet 重新排序；</li>
+<li>以及其他功能。</li>
+</ul>
+<p>这让我们转而从 flow （数据流）的角度理解通信：即两个 endpoint 之间交换的一系列 packet 流。</p>
+<h3 id="Layer-7-Application"><a href="#Layer-7-Application" class="headerlink" title="Layer 7: Application"></a>Layer 7: Application</h3><p>这一层<strong>在互联网基础设施之上部署服务</strong>。</p>
+<p>例：假如在 lower layer 中，我们专门构建了一个「用于视频传输」的基础设施，那么 email client 就不得不再单独建设一套用于邮件传输的基础设施。</p>
+<p>Internet 的设计使它能够成为一个通用通信网络，从而支持任意类型的 application data。</p>
+<p>原本的 Layer 5 和 Layer 6 已过时，功能由 Layer 7 取代。</p>
+<h2 id="1-3-Headers"><a href="#1-3-Headers" class="headerlink" title="1.3  Headers"></a>1.3  Headers</h2><p><strong>header（头部）</strong>：告诉网络基础设施应该如何处理 packets 的元数据（metadata）。</p>
+<p><strong>payload（载荷）</strong>：发送的 packet 除了 header之外的东西。</p>
+<p>Internet 上的所有人（每个 end host、每个 switch）都需要就 header 的格式达成一致。</p>
+<p>header 应该包含的内容：</p>
+<ul>
+<li><strong>目的地址（destination address）</strong></li>
+<li><strong>源地址（source address）</strong></li>
+<li>checksum（校验和）用于确保 packet 是否损坏</li>
+<li>packet 长度等其他 metadata</li>
+</ul>
+<p>多层 headers：在 Internet 上，同一层的 peer 通过在该层建立 protocol 来通信。这个 protocol 只对该特定层的实体有意义。</p>
+<p>network address（网络地址）是某个值，用来告诉我们一个 host 位于 network 中的哪里。</p>
+<p>Internet 中不同 layer 使用最适合该 layer 的不同 addressing scheme（寻址方案）。</p>
+<p>对于 hosts 和 routers 来说，底部3层会在所有地方实现，但顶部2层只需要在 hosts 上实现。每个 router 解析 Layer 1 到 Layer 3，而 end host 解析 Layer 1 到 Layer 7。</p>
+
+  </div>
+
+  
+  <div class="about" data-pagefind-ignore>
+    <h2>About this Post</h2>
+    <div class="details">This post is written by Ezra Yang, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</div>
+    
+    <p class="tags">
+      <i class="bi bi-tags icon"></i>
+      
+      <a href="/tags/notes/" class="tag">#notes</a>
+      
+      <a href="/tags/networks/" class="tag">#networks</a>
+      
+    </p>
+    
+    
+  </div>
+  
+
+  <div class="container post-prev-next" data-pagefind-ignore>
+    <a class="next"></a>
+    
+    <a href="/2026/08/10/Deep-Learning-Notes/" class="prev">
+      <div class="text">
+        <p class="label">Previous</p>
+        <h3 class="title">Deep Learning - Notes</h3>
+      </div>
+    </a>
+    
+  </div>
+
+  
+    <section class="giscus-comments" style="width:min(100% - 48px, 860px); margin:96px auto 72px auto; padding-top:40px; border-top:1px solid rgba(120,150,180,0.22); box-sizing:border-box;">
+  <h2 style="margin:0 0 28px 0; font-size:28px; line-height:1.1;">Comments</h2>
+  <script src="https://giscus.app/client.js"
+    data-repo="ezrablake2006/ezrablake2006.github.io"
+    data-repo-id="R_kgDOTIW0HA"
+    data-category="General"
+    data-category-id="DIC_kwDOTIW0HM4DAJj3"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+
+  
+</article>
+
+
+    </main>
+    <footer>
+  <div class="inner">
+    <div class="links">
+      
+      <div class="group">
+        <h2 class="title">Site</h2>
+        
+        <a href="/" class="item">Home</a>
+        
+        <a href="/archives/" class="item">Archive</a>
+        
+        <a href="/categories/" class="item">Categories</a>
+        
+      </div>
+      
+      <div class="group">
+        <h2 class="title">Me</h2>
+        
+        <a target="_blank" rel="noopener" href="https://github.com/ezrablake2006" class="item">GitHub</a>
+        
+        <a href="mailto:EzraBlake2006@outlook.com" class="item">Email</a>
+        
+      </div>
+      
+    </div>
+    <span>&copy; 2026 Ezra Yang<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></span>
+    
+    
+      <br>
+      <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+        <label>
+          <input type="radio" value="light">
+          <span>Light</span>
+        </label>
+        <label>
+          <input type="radio" value="dark">
+          <span>Dark</span>
+        </label>
+        <label>
+          <input type="radio" value="auto">
+          <span>Auto</span>
+        </label>
+      </div>
+    
+  </div>
+</footer>
+
+
+    
+<script src="/js/main.js"></script>
+
+
+    
+
+    
+    
+<script src="/js/scroll-reveal.js"></script>
+
+    
+
+    <script src="/js/hero-scroll.js?v=1"></script>
+<script src="/js/post-toc.js?v=1"></script>
+
+  </body>
+</html>
