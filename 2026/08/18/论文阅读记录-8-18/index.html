@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>论文阅读记录 8.18 - @Ezra_Yang</title>
+  
+    <link rel="shortcut icon" href="/img/favicon.png">
+  
+  
+  <link rel='manifest' href='/manifest.json'>
+  
+
+  <meta name="description" content="4DNeRF: Representing Scenes as Neural Radiance Fields for View Synthesis解决问题：新视角合成这一根本性挑战——仅使用少量输入照片，从任意新的视点生成3D场景的逼真图像。 先前办法问题：以往的方法通常分为几类，每类都有其明显的缺点，如需要的机位特别多；难以处理细节；受限于存储成本和计算复杂性等。 核心思想：将场景表示为 5D 神">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读记录 8.18">
+<meta property="og:url" content="http://ezrablake2006.github.io/2026/08/18/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95-8-18/index.html">
+<meta property="og:site_name" content="@Ezra_Yang">
+<meta property="og:description" content="4DNeRF: Representing Scenes as Neural Radiance Fields for View Synthesis解决问题：新视角合成这一根本性挑战——仅使用少量输入照片，从任意新的视点生成3D场景的逼真图像。 先前办法问题：以往的方法通常分为几类，每类都有其明显的缺点，如需要的机位特别多；难以处理细节；受限于存储成本和计算复杂性等。 核心思想：将场景表示为 5D 神">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-08-18T12:07:44.000Z">
+<meta property="article:modified_time" content="2026-08-18T12:09:28.404Z">
+<meta property="article:author" content="Ezra Yang">
+<meta property="article:tag" content="notes">
+<meta property="article:tag" content="essays">
+<meta name="twitter:card" content="summary">
+
+  <script>window.ThemeCupertino = {}</script>
+
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/simple-icons-font@16/font/simple-icons.min.css">
+
+  
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1/font/bootstrap-icons.min.css">
+
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+
+  
+  
+<link rel="stylesheet" href="/css/components/card.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/button.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/badge.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/utilities.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/carousel.css">
+
+  
+  
+  <script>ThemeCupertino['_calloutStyles'] = `
+<link rel="stylesheet" href="/css/components/callout.css">
+`</script>
+  
+<script src="/js/components/callout.js"></script>
+
+  
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/scroll-reveal.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/view-transition.css">
+
+  
+  
+
+  
+<script src="/js/head.js"></script>
+
+  <link rel="stylesheet" href="/css/custom.css?v=6">
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: {'[+]': [['$', '$']]},
+      processEscapes: true
+    }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body
+    data-color-scheme="auto"
+    data-uppercase-categories="true"
+    
+    data-rainbow-banner="true"
+    data-rainbow-banner-shown="always"
+    data-rainbow-banner-month="6"
+    data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+    
+    data-config-root="/"
+    
+    data-toc="true"
+    data-toc-max-depth="3"
+    
+    
+    
+    data-scroll-reveal-disappear="false"
+    data-scroll-reveal-query=".scroll-reveal, .post-list-item, .card, .content p img, .content .block-large img"
+    
+    data-nav-blur-gradient="false"
+    style="--config-corner-squircle: true"
+  >
+    
+<script src="/js/body-top.js"></script>
+
+    <a href="#main-content" id="skip-to-content">Skip to content</a>
+    
+
+<nav id="theme-nav">
+  <div class="inner">
+    <a class="title" href="/">Ezra Yang</a>
+    <div class="nav-arrow"></div>
+    <div class="nav-items">
+      <a class="nav-item nav-item-home" href="/" style="--index: 0">Home</a>
+
+      
+      <a class="nav-item" href="/categories/CStudy/" style="--index: 1">CStudy</a>
+      
+      <a class="nav-item" href="/categories/Music/" style="--index: 2">Music</a>
+      
+      <a class="nav-item" href="/categories/Language/" style="--index: 3">Language</a>
+      
+      <a class="nav-item" href="/categories/Diary/" style="--index: 4">Diary</a>
+      
+      <a class="nav-item" href="/tags" style="--index: 5">Tags</a>
+      
+      <a class="nav-item" href="/about" style="--index: 6">About</a>
+      
+    </div>
+  </div>
+</nav>
+
+    <main id="main-content" data-pagefind-body>
+      
+<article class="post">
+  
+  <div class="meta">
+    
+    <div class="categories text-uppercase">
+    
+      <a href="/categories/CStudy/">CStudy</a>
+    
+    </div>
+    
+
+    
+    <time class="date" datetime="2026-08-18T20:07:44+08:00">
+      August 18, 2026
+    </time>
+    
+
+    <h1 class="title" data-pagefind-meta="title">论文阅读记录 8.18</h1>
+  </div>
+
+  <div class="content">
+    <h2 id="4D"><a href="#4D" class="headerlink" title="4D"></a>4D</h2><h3 id="NeRF-Representing-Scenes-as-Neural-Radiance-Fields-for-View-Synthesis"><a href="#NeRF-Representing-Scenes-as-Neural-Radiance-Fields-for-View-Synthesis" class="headerlink" title="NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis"></a>NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis</h3><p>解决问题：新视角合成这一根本性挑战——仅使用少量输入照片，从任意新的视点生成3D场景的逼真图像。</p>
+<p>先前办法问题：以往的方法通常分为几类，每类都有其明显的缺点，如需要的机位特别多；难以处理细节；受限于存储成本和计算复杂性等。</p>
+<p>核心思想：将场景表示为 5D 神经辐射场。该方法使用多层感知机（MLP）对静态场景进行参数化，将一个5D坐标——由3D空间位置（x, y, z）和2D视角方向（θ, φ）组成——映射到体积密度 σ 和视点相关的RGB颜色。</p>
+<p>关键模型结构：神经网络架构经过精心设计，包含两个分支。第一个分支通过8个全连接层处理3D空间坐标，输出体积密度和一个256维的特征向量。至关重要的是，密度仅取决于空间位置，这确保了不同视角方向上的几何一致性。然后，特征向量与视角方向拼接，并传入额外的层，以生成视点相关的RGB颜色，从而能够表示非朗伯效应，如镜面反射。（注：对这一段没有很透彻的理解，主要是很多专业知识不太知道）</p>
+<p>输入：单个连续的5D坐标</p>
+<p>输出：该空间位置的体素密度和视点相关的发射辐射（其实不太理解为什么输出这两个东西，甚至说不出来这两个东西是啥）</p>
+<p>意义：NeRF 从根本上改变了神经渲染和 3D 场景表示领域。通过从离散表示转向连续表示，它同时解决了多个长期存在的问题：存储限制、混叠伪影以及表示复杂视点依赖外观的难度。该方法仅依赖于姿态已知的 2D 图像，使其在实际应用中具有高度实用性。</p>
+<p>其他不理解的内容：体渲染原理；为什么位置编码的映射能解决几何和外观中难以学习的高频变化；分层提及采样是怎样提高效率的；消融研究是什么</p>
+<p>询问GPT后更新理解：NeRF 是用于稀疏视角样本集进行新视角准确合成的方法，首先用一个全连接的神经网络采集场景的5D坐标，这之中使用位置编码捕捉高频、微小的变化，使用分层采样提高采集效率；其次使用这些坐标进行该空间位置的体积密度和视点相关的发射辐射输出；最后根据这些输出利用体渲染原理进行新视角的渲染。</p>
+<h3 id="D-NeRF-Neural-Radiance-Fields-for-Dynamic-Scenes"><a href="#D-NeRF-Neural-Radiance-Fields-for-Dynamic-Scenes" class="headerlink" title="D-NeRF: Neural Radiance Fields for Dynamic Scenes"></a>D-NeRF: Neural Radiance Fields for Dynamic Scenes</h3><p>解决问题：捕捉或表示移动或变形的物体允许从在场景中移动的<strong>单一</strong>摄像机重建和渲染具有刚性及非刚性运动的物体的新图像</p>
+<p>先前办法问题：NeRF 只能用于静态场景。将其扩展到动态场景，面临时间一致性、训练数据有限、复杂变形等挑战。以前的动态场景重建方法通常需要多视图相机设置、显式 3D 模型或密集点对应关系。</p>
+<p>核心思想：将 6D 神经辐射场（3D 空间 + 观察方向 + 时间）分解为<strong>两个协同工作的专用MLP神经网络</strong>。一个形变网络 Ψt，<strong>将点从形变场景映射到规范空间</strong>；以及一个规范网络 Ψx，<strong>在规范配置中预测颜色和密度</strong>。两个网络都实现为8层MLP，使用ReLU激活函数。遵循NeRF的设计，原始坐标通过正弦位置编码进行转换，以帮助网络捕捉高频细节。编码对空间坐标使用L&#x3D;10，对视线方向和时间使用L&#x3D;4。规范网络遵循NeRF的架构，带有跳跃连接，而变形网络输出3D位移向量，不带最终激活函数。</p>
+<p>输入：在场景中移动的<strong>单一</strong>摄像机</p>
+<p>输出：具有刚性及非刚性运动的物体的新图像</p>
+<p>局限性：计算速度慢，2天GPU；无法准确处理复杂场景；仍然需要已知的相机姿态、稳定的光照条件等；仍可以继续扩展与泛化。</p>
+<p>其他不理解的内容：是否可以认为D-NeRF是NeRF+时间维度用于扩展动态+形变网络用于定位？“规范空间”如何确定？</p>
+<h3 id="3D-Gaussian-Splatting-for-Real-Time-Radiance-Field-Rendering"><a href="#3D-Gaussian-Splatting-for-Real-Time-Radiance-Field-Rendering" class="headerlink" title="3D Gaussian Splatting for Real-Time Radiance Field Rendering"></a>3D Gaussian Splatting for Real-Time Radiance Field Rendering</h3><p>解决问题：引入了三个关键要素，使我们能够实现最先进的视觉<strong>质量</strong>，同时保持有竞争力的训练<strong>时间</strong>，能够在1080p分辨率下实现<strong>高质量实时</strong>（≥ 30 帧&#x2F;秒）的新视角合成。</p>
+<p>先前办法问题：实现高视觉质量仍需要训练和渲染<strong>成本高昂</strong>的神经网络，而近期更快速的方法则不可避免地<strong>以速度换取质量</strong>。对于无界和完整的场景（而非孤立物体）以及1080p分辨率渲染，目前没有方法能达到实时显示帧率。</p>
+<p>核心思想：</p>
+<ul>
+<li>从相机标定期间产生的稀疏点开始，使用3D高斯表示场景，其保留了连续体积辐射场在场景优化方面的理想特性，同时避免了空闲空间中的不必要计算。</li>
+<li>对3D高斯进行交错的优化和密度控制，尤其值得一提的是，优化了各向异性协方差，以实现场景的精确表示。</li>
+<li>开发了一种快速的可见性感知渲染算法，该算法支持各向异性点扩散，既加速了训练又实现了实时渲染。</li>
+</ul>
+<p>关键结构：该方法包括三个关键组成部分：</p>
+<ol>
+<li>使用 3D 高斯的场景表示</li>
+<li>交错的优化和密度控制过程</li>
+<li>快速的、可见性感知渲染算法</li>
+</ol>
+<p>与需要密集的多视图立体 (MVS) 重建的传统基于点的方法不同，3D 高斯溅射只需要稀疏的运动结构 (SfM) 点，这些点已经在相机校准期间生成。每个 3D 高斯由以下参数定义：</p>
+<ul>
+<li>一个 3D 位置</li>
+<li>一个代表各向异性形状的 3D 协方差矩阵</li>
+<li>不透明度</li>
+<li>用于视角相关外观的球谐系数</li>
+</ul>
+<p>优化过程迭代地细化每个高斯函数的属性，以最小化渲染图像与真实图像之间的差异。一个关键的创新是自适应密度控制机制，该机制根据渲染质量动态地添加或删除高斯函数。</p>
+<p>渲染算法是系统的关键组成部分，可实现快速训练和实时渲染。该过程包括：</p>
+<ul>
+<li>将 3D 高斯函数投影到 2D 屏幕空间</li>
+<li>按深度对高斯函数进行排序</li>
+<li>应用基于图块的可微光栅化器</li>
+<li>实现高效的向后传递以进行优化</li>
+</ul>
+<h3 id="4D-Gaussian-Splatting-for-Real-Time-Dynamic-Scene-Rendering"><a href="#4D-Gaussian-Splatting-for-Real-Time-Dynamic-Scene-Rendering" class="headerlink" title="4D Gaussian Splatting for Real-Time Dynamic Scene Rendering"></a>4D Gaussian Splatting for Real-Time Dynamic Scene Rendering</h3><p>解决问题：实现动态场景的实时渲染，同时兼顾高训练和存储效率</p>
+<p>核心思想：4D-GS 不为每个时间步存储单独的高斯，而是<strong>维护一组单一的规范 3D 高斯，并使用紧凑的神经网络预测其时间变形</strong>，从而在保持高视觉质量和存储效率的同时实现实时渲染速度。</p>
+<ul>
+<li>该方法在参考空间中维护一组规范的 3D 高斯 G，其中每个高斯的特征由其位置 X、颜色系数 C、不透明度 α、旋转 r 和缩放 s 确定。</li>
+<li>对于任何给定的时间戳 t，一个高斯变形场网络 F 会预测每个规范高斯应如何变换。这个网络分为两个部分：<ul>
+<li>空间-时间结构编码器，将4D神经体积网格分解为6个多分辨率的2D屏幕，有效捕获时空关系；</li>
+<li>多头高斯变形解码器，3个独立的MLP预测特定的变形分量。</li>
+</ul>
+</li>
+<li>在前 3,000 次迭代中，仅优化规范 3D 高斯，这在引入时间变形之前建立了稳定的几何基础，防止变形网络在早期训练中与不稳定高斯作斗争。</li>
+</ul>
+<p>局限性：该方法难以处理非常大的运动、背景结构点的缺失以及不精确的相机姿态，特别是在单目设置中，运动消歧变得具有挑战性。未来的研究方向包括提高对挑战性输入条件的鲁棒性，开发更高效的大规模场景变形网络，以及整合深度或语义信息等额外模态以增强场景理解。</p>
+
+  </div>
+
+  
+  <div class="about" data-pagefind-ignore>
+    <h2>About this Post</h2>
+    <div class="details">This post is written by Ezra Yang, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</div>
+    
+    <p class="tags">
+      <i class="bi bi-tags icon"></i>
+      
+      <a href="/tags/notes/" class="tag">#notes</a>
+      
+      <a href="/tags/essays/" class="tag">#essays</a>
+      
+    </p>
+    
+    
+  </div>
+  
+
+  <div class="container post-prev-next" data-pagefind-ignore>
+    <a class="next"></a>
+    
+    <a href="/2026/08/14/CS168-Intro-to-Internet-Notes/" class="prev">
+      <div class="text">
+        <p class="label">Previous</p>
+        <h3 class="title">CS168: Intro to Internet - Notes</h3>
+      </div>
+    </a>
+    
+  </div>
+
+  
+    <section class="giscus-comments" style="width:min(100% - 48px, 860px); margin:96px auto 72px auto; padding-top:40px; border-top:1px solid rgba(120,150,180,0.22); box-sizing:border-box;">
+  <h2 style="margin:0 0 28px 0; font-size:28px; line-height:1.1;">Comments</h2>
+  <script src="https://giscus.app/client.js"
+    data-repo="ezrablake2006/ezrablake2006.github.io"
+    data-repo-id="R_kgDOTIW0HA"
+    data-category="General"
+    data-category-id="DIC_kwDOTIW0HM4DAJj3"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+
+  
+</article>
+
+
+    </main>
+    <footer>
+  <div class="inner">
+    <div class="links">
+      
+      <div class="group">
+        <h2 class="title">Site</h2>
+        
+        <a href="/" class="item">Home</a>
+        
+        <a href="/archives/" class="item">Archive</a>
+        
+        <a href="/categories/" class="item">Categories</a>
+        
+      </div>
+      
+      <div class="group">
+        <h2 class="title">Me</h2>
+        
+        <a target="_blank" rel="noopener" href="https://github.com/ezrablake2006" class="item">GitHub</a>
+        
+        <a href="mailto:EzraBlake2006@outlook.com" class="item">Email</a>
+        
+      </div>
+      
+    </div>
+    <span>&copy; 2026 Ezra Yang<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></span>
+    
+    
+      <br>
+      <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+        <label>
+          <input type="radio" value="light">
+          <span>Light</span>
+        </label>
+        <label>
+          <input type="radio" value="dark">
+          <span>Dark</span>
+        </label>
+        <label>
+          <input type="radio" value="auto">
+          <span>Auto</span>
+        </label>
+      </div>
+    
+  </div>
+</footer>
+
+
+    
+<script src="/js/main.js"></script>
+
+
+    
+
+    
+    
+<script src="/js/scroll-reveal.js"></script>
+
+    
+
+    <script src="/js/hero-scroll.js?v=1"></script>
+<script src="/js/post-toc.js?v=1"></script>
+
+  </body>
+</html>
