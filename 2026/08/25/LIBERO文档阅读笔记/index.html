@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>LIBERO文档阅读笔记 - @Ezra_Yang</title>
+  
+    <link rel="shortcut icon" href="/img/favicon.png">
+  
+  
+  <link rel='manifest' href='/manifest.json'>
+  
+
+  <meta name="description" content="Preface关于 LIBERO 这个终身机器人benchmark工具的文档阅读笔记。 Aim：如何使用 LIBERO 跑通实验，及如何外部导入 3D 模型构建本地数据集 网址：https:&#x2F;&#x2F;lifelong-robot-learning.github.io&#x2F;LIBERO&#x2F;html&#x2F;index.html 代码结构环境： 123456789101112libero&#x2F;    assets&#x2F; # 物体">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LIBERO文档阅读笔记">
+<meta property="og:url" content="http://ezrablake2006.github.io/2026/08/25/LIBERO%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="@Ezra_Yang">
+<meta property="og:description" content="Preface关于 LIBERO 这个终身机器人benchmark工具的文档阅读笔记。 Aim：如何使用 LIBERO 跑通实验，及如何外部导入 3D 模型构建本地数据集 网址：https:&#x2F;&#x2F;lifelong-robot-learning.github.io&#x2F;LIBERO&#x2F;html&#x2F;index.html 代码结构环境： 123456789101112libero&#x2F;    assets&#x2F; # 物体">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-08-25T14:40:39.000Z">
+<meta property="article:modified_time" content="2026-08-26T13:47:56.446Z">
+<meta property="article:author" content="Ezra Yang">
+<meta property="article:tag" content="notes">
+<meta property="article:tag" content="Embodied AI">
+<meta property="article:tag" content="research">
+<meta name="twitter:card" content="summary">
+
+  <script>window.ThemeCupertino = {}</script>
+
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/simple-icons-font@16/font/simple-icons.min.css">
+
+  
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1/font/bootstrap-icons.min.css">
+
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+
+  
+  
+<link rel="stylesheet" href="/css/components/card.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/button.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/badge.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/utilities.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/carousel.css">
+
+  
+  
+  <script>ThemeCupertino['_calloutStyles'] = `
+<link rel="stylesheet" href="/css/components/callout.css">
+`</script>
+  
+<script src="/js/components/callout.js"></script>
+
+  
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/scroll-reveal.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/view-transition.css">
+
+  
+  
+
+  
+<script src="/js/head.js"></script>
+
+  <link rel="stylesheet" href="/css/custom.css?v=6">
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: {'[+]': [['$', '$']]},
+      processEscapes: true
+    }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body
+    data-color-scheme="auto"
+    data-uppercase-categories="true"
+    
+    data-rainbow-banner="true"
+    data-rainbow-banner-shown="always"
+    data-rainbow-banner-month="6"
+    data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+    
+    data-config-root="/"
+    
+    data-toc="true"
+    data-toc-max-depth="3"
+    
+    
+    
+    data-scroll-reveal-disappear="false"
+    data-scroll-reveal-query=".scroll-reveal, .post-list-item, .card, .content p img, .content .block-large img"
+    
+    data-nav-blur-gradient="false"
+    style="--config-corner-squircle: true"
+  >
+    
+<script src="/js/body-top.js"></script>
+
+    <a href="#main-content" id="skip-to-content">Skip to content</a>
+    
+
+<nav id="theme-nav">
+  <div class="inner">
+    <a class="title" href="/">Ezra Yang</a>
+    <div class="nav-arrow"></div>
+    <div class="nav-items">
+      <a class="nav-item nav-item-home" href="/" style="--index: 0">Home</a>
+
+      
+      <a class="nav-item" href="/categories/CStudy/" style="--index: 1">CStudy</a>
+      
+      <a class="nav-item" href="/categories/Music/" style="--index: 2">Music</a>
+      
+      <a class="nav-item" href="/categories/Language/" style="--index: 3">Language</a>
+      
+      <a class="nav-item" href="/categories/Diary/" style="--index: 4">Diary</a>
+      
+      <a class="nav-item" href="/tags" style="--index: 5">Tags</a>
+      
+      <a class="nav-item" href="/about" style="--index: 6">About</a>
+      
+    </div>
+  </div>
+</nav>
+
+    <main id="main-content" data-pagefind-body>
+      
+<article class="post">
+  
+  <div class="meta">
+    
+    <div class="categories text-uppercase">
+    
+      <a href="/categories/CStudy/">CStudy</a>
+    
+    </div>
+    
+
+    
+    <time class="date" datetime="2026-08-25T22:40:39+08:00">
+      August 25, 2026
+    </time>
+    
+
+    <h1 class="title" data-pagefind-meta="title">LIBERO文档阅读笔记</h1>
+  </div>
+
+  <div class="content">
+    <h2 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h2><p>关于 LIBERO 这个终身机器人benchmark工具的文档阅读笔记。</p>
+<p>Aim：如何使用 LIBERO 跑通实验，及如何外部导入 3D 模型构建本地数据集</p>
+<p>网址：<a target="_blank" rel="noopener" href="https://lifelong-robot-learning.github.io/LIBERO/html/index.html">https://lifelong-robot-learning.github.io/LIBERO/html/index.html</a></p>
+<h2 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h2><p>环境：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">libero/</span><br><span class="line">    assets/ <span class="comment"># 物体/场景的视觉与物理资产</span></span><br><span class="line">    bddl_files/   <span class="comment"># 任务定义</span></span><br><span class="line">        libero_goal/*.bddl      <span class="comment"># 10 tasks of LIBERO-Goal suite</span></span><br><span class="line">        libero_spatial/*.bddl   <span class="comment"># 10 tasks of LIBERO-Spatial suite</span></span><br><span class="line">        libero_object/*.bddl    <span class="comment"># 10 tasks of LIBERO-Object suite</span></span><br><span class="line">        libero_10/*.bddl        <span class="comment"># 10 tasks of LIBERO-100 for evaluation (aka LIBERO-LONG)</span></span><br><span class="line">        libero_90/*.bddl        <span class="comment"># 90 tasks of LIBERO-100 for pretraining</span></span><br><span class="line">    benchmark/    <span class="comment"># benchmark 怎么组织任务、按什么顺序评测</span></span><br><span class="line">    envs/         <span class="comment"># MuJoCo / robosuite 环境本体</span></span><br><span class="line">    init_files/   <span class="comment"># 固定好的初始状态</span></span><br><span class="line">    utils/        <span class="comment"># 工具函数</span></span><br></pre></td></tr></table></figure>
+
+<p>算法与实验：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">lifelong/      <span class="comment"># Files for algorithms, models, and training / testing</span></span><br><span class="line">    main.py    <span class="comment"># the main script for reproducing experiments.</span></span><br><span class="line">    algos/</span><br><span class="line">        base.py                 <span class="comment"># Base class `Sequential` for all the algorithms</span></span><br><span class="line">        er.py                   <span class="comment"># Algorithm Experience Replay</span></span><br><span class="line">        ewc.py                  <span class="comment"># Algorithm Elastic Weight Consolidation</span></span><br><span class="line">        packnet.py              <span class="comment"># Algorithm Packnet</span></span><br><span class="line">        multitask.py            <span class="comment"># Algorithm multitask (baseline)</span></span><br><span class="line">        single_task.py          <span class="comment"># Algorithm single task (baseline)</span></span><br><span class="line">        language.py</span><br><span class="line"></span><br><span class="line">    models/</span><br><span class="line">        policy/</span><br><span class="line">            bc_rnn_policy.py            <span class="comment"># ResNet-RNN</span></span><br><span class="line">            bc_transformer_policy.py    <span class="comment"># ResNet-T</span></span><br><span class="line">            bc_vilt_policy.py           <span class="comment"># ViT-T</span></span><br></pre></td></tr></table></figure>
+
+<p>创建数据集：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scripts/</span><br><span class="line">    collect_demonstrations.py    <span class="comment"># Collect your own demonstrations</span></span><br><span class="line">    create_dataset.py            <span class="comment"># Create your own dataset</span></span><br><span class="line">    batch_create_dataset.py      <span class="comment"># Create a batch of datasets by calling create_dataset.py repeatedly</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="场景创建"><a href="#场景创建" class="headerlink" title="场景创建"></a>场景创建</h2><h3 id="Step-1-准备-mesh-文件"><a href="#Step-1-准备-mesh-文件" class="headerlink" title="Step 1 准备 mesh 文件"></a>Step 1 准备 mesh 文件</h3><p>可能有用的资源：<a target="_blank" rel="noopener" href="https://github.com/kevinzakka/obj2mjcf">obj2mjcf</a></p>
+<p>mesh 文件位置：<code>libero/libero/assets</code></p>
+<h3 id="Step-2-创造问题类"><a href="#Step-2-创造问题类" class="headerlink" title="Step 2 创造问题类"></a>Step 2 创造问题类</h3><p>问题类定义了场景的区域。在区域上，初始状态被创建，物体放置于此。</p>
+<p>问题类定义文件位置： <code>libero/libero/envs/problems</code></p>
+<p>模板： <a target="_blank" rel="noopener" href="https://github.com/Lifelong-Robot-Learning/LIBERO/blob/master/templates/problem_class_template.py">template</a></p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ol>
+<li><p>什么是mesh文件，mesh文件定义了什么东西？</p>
+<p>mesh文件可以理解为一个物体的3D外壳&#x2F;几何表面。计算机存储物体时，使用大量三角形近似它的表面。</p>
+<p>一个mesh的核心信息包括：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vertices      <span class="comment"># 顶点坐标</span></span><br><span class="line">faces         <span class="comment"># 哪几个顶点组成一个三角面</span></span><br><span class="line">normals       <span class="comment"># 表面朝哪个方向</span></span><br><span class="line">UV coordinates <span class="comment"># 纹理图片怎么贴到表面</span></span><br></pre></td></tr></table></figure>
+
+<p>LIBERO常用的mesh文件格式是 <code>.obj</code> 。</p>
+<p>mesh文件只定义物体形状，关于质量、摩擦系数等这些物理参数，通常由MJCF&#x2F;XML进一步定义。</p>
+</li>
+<li><p><code>obj2mjcf</code> 是什么，如何使用？</p>
+<p>MJCF &#x3D; MuJoCo XML Configuration Format，就是 MuJoCo 描述仿真物体&#x2F;场景的 XML 格式。</p>
+<p><code>obj2mjcf</code> 是一个命令行工具，专门帮你把 <code>.obj</code> 模型整理成 MuJoCo 更容易使用的形式。官方说明它主要做三件事：</p>
+<ul>
+<li>把包含多个 material 的复杂 OBJ 拆成若干 sub-mesh；</li>
+<li>自动生成包含 mesh、material、geom 引用的 MJCF XML；</li>
+<li>可选地用 CoACD 做 convex decomposition，从而产生更适合作为 collision geometry 的网格。</li>
+</ul>
+<p>安装后运行 <code>obj2mjcf --help</code> 运行结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">A CLI <span class="keyword">for</span> processing composite Wavefront OBJ files <span class="keyword">for</span> use <span class="keyword">in</span> MuJoCo.</span><br><span class="line"></span><br><span class="line">╭─ options ──────────────────────────────────────────╮</span><br><span class="line">│ -h, --<span class="built_in">help</span>                                         │</span><br><span class="line">│       show this <span class="built_in">help</span> message and <span class="built_in">exit</span>              │</span><br><span class="line">│ --obj-dir STR                                      │</span><br><span class="line">│       path to a directory containing obj files.    │</span><br><span class="line">│       All obj files <span class="keyword">in</span> the directory will be       │</span><br><span class="line">│       converted (required)                         │</span><br><span class="line">│ --obj-filter &#123;None&#125;|STR                            │</span><br><span class="line">│       only convert obj files matching this regex   │</span><br><span class="line">│       (default: None)                              │</span><br><span class="line">│ --save-mjcf, --no-save-mjcf                        │</span><br><span class="line">│       save an example XML (MJCF) file (default:    │</span><br><span class="line">│       False)                                       │</span><br><span class="line">│ --compile-model, --no-compile-model                │</span><br><span class="line">│       compile the MJCF file to check <span class="keyword">for</span> errors    │</span><br><span class="line">│       (default: False)                             │</span><br><span class="line">│ --verbose, --no-verbose                            │</span><br><span class="line">│       <span class="built_in">print</span> verbose output (default: False)        │</span><br><span class="line">│ --decompose, --no-decompose                        │</span><br><span class="line">│       approximate mesh decomposition using CoACD   │</span><br><span class="line">│       (default: False)                             │</span><br><span class="line">│ --texture-resize-percent FLOAT                     │</span><br><span class="line">│       resize the texture to this percentage of the │</span><br><span class="line">│       original size (default: 1.0)                 │</span><br><span class="line">│ --overwrite, --no-overwrite                        │</span><br><span class="line">│       overwrite previous run output (default:      │</span><br><span class="line">│       False)                                       │</span><br><span class="line">│ --add-free-joint, --no-add-free-joint              │</span><br><span class="line">│       add a free joint to the root body (default:  │</span><br><span class="line">│       False)                                       │</span><br><span class="line">╰────────────────────────────────────────────────────╯</span><br><span class="line">╭─ coacd-args options ───────────────────────────────╮</span><br><span class="line">│ arguments to pass to CoACD                         │</span><br><span class="line">│ ────────────────────────────────────────────────── │</span><br><span class="line">│ --coacd-args.preprocess-resolution INT             │</span><br><span class="line">│       resolution <span class="keyword">for</span> manifold preprocess (20~100), │</span><br><span class="line">│       default = 50 (default: 50)                   │</span><br><span class="line">│ --coacd-args.threshold FLOAT                       │</span><br><span class="line">│       concavity threshold <span class="keyword">for</span> terminating the      │</span><br><span class="line">│       decomposition (0.01~1), default = 0.05       │</span><br><span class="line">│       (default: 0.05)                              │</span><br><span class="line">│ --coacd-args.max-convex-hull INT                   │</span><br><span class="line">│       max <span class="comment"># convex hulls in the result, -1 for no  │</span></span><br><span class="line">│       maximum limitation (default: -1)             │</span><br><span class="line">│ --coacd-args.mcts-iterations INT                   │</span><br><span class="line">│       number of search iterations <span class="keyword">in</span> MCTS          │</span><br><span class="line">│       (60~2000), default = 100 (default: 100)      │</span><br><span class="line">│ --coacd-args.mcts-max-depth INT                    │</span><br><span class="line">│       max search depth <span class="keyword">in</span> MCTS (2~7), default = 3  │</span><br><span class="line">│       (default: 3)                                 │</span><br><span class="line">│ --coacd-args.mcts-nodes INT                        │</span><br><span class="line">│       max number of child nodes <span class="keyword">in</span> MCTS (10~40),   │</span><br><span class="line">│       default = 20 (default: 20)                   │</span><br><span class="line">│ --coacd-args.resolution INT                        │</span><br><span class="line">│       sampling resolution <span class="keyword">for</span> Hausdorff distance   │</span><br><span class="line">│       calculation (1e3~1e4), default = 2000        │</span><br><span class="line">│       (default: 2000)                              │</span><br><span class="line">│ --coacd-args.pca, --coacd-args.no-pca              │</span><br><span class="line">│       <span class="built_in">enable</span> PCA pre-processing, default = <span class="literal">false</span>   │</span><br><span class="line">│       (default: False)                             │</span><br><span class="line">│ --coacd-args.seed INT                              │</span><br><span class="line">│       random seed used <span class="keyword">for</span> sampling, default = 0   │</span><br><span class="line">│       (default: 0)                                 │</span><br><span class="line">╰────────────────────────────────────────────────────╯</span><br></pre></td></tr></table></figure>
+
+<p>一般使用流程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">网上/Blender 找到一个 phone.obj</span><br><span class="line">            ↓</span><br><span class="line">obj2mjcf</span><br><span class="line">            ↓</span><br><span class="line">整理 mesh</span><br><span class="line">生成/辅助生成 MJCF XML</span><br><span class="line">生成 collision mesh</span><br><span class="line">            ↓</span><br><span class="line">放进 LIBERO assets</span><br><span class="line">            ↓</span><br><span class="line">让 LIBERO 把它实例化成 PhoneObject</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>问题类长什么样，如何创建？</p>
+<p>Problem Class 实际上就是 LIBERO 中用来描述“世界怎么搭起来”的 Python 类。</p>
+<p>Problem class 的定义根据提供的模板修改，其中需要重点修改的函数有：</p>
+<ul>
+<li><code>__init__</code> ：设置一些参数；</li>
+<li><code>_load_sites_in_arena</code> ：加载场景；</li>
+<li><code>_setup_camera</code> ：设置摄像头。</li>
+</ul>
+<p>对于和现有 LIBERO 场景结构相似的新 Problem Class，通常主要定制 <code>__init__</code>、<code>_load_sites_in_arena</code> 和 <code>_setup_camera</code>；其余方法可以沿用模板的通用实现。特殊 fixture&#x2F;object&#x2F;placement&#x2F;success logic 才需要额外修改。</p>
+</li>
+</ol>
+<h2 id="任务生成"><a href="#任务生成" class="headerlink" title="任务生成"></a>任务生成</h2><h3 id="Step-1-创建场景（previous-chapter）"><a href="#Step-1-创建场景（previous-chapter）" class="headerlink" title="Step 1 创建场景（previous chapter）"></a>Step 1 创建场景（previous chapter）</h3><h3 id="Step-2-布局与初始状态分布"><a href="#Step-2-布局与初始状态分布" class="headerlink" title="Step 2 布局与初始状态分布"></a>Step 2 布局与初始状态分布</h3><h4 id="2-1-在codebases里面获取物体和谓词"><a href="#2-1-在codebases里面获取物体和谓词" class="headerlink" title="2.1  在codebases里面获取物体和谓词"></a>2.1  在codebases里面获取物体和谓词</h4><p>查看已有数据库中的物体：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> libero.libero.envs.objects <span class="keyword">import</span> get_object_dict, get_object_fn</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get a dictionary of all the objects</span></span><br><span class="line">object_dict = get_object_dict()</span><br><span class="line"><span class="built_in">print</span>(object_dict)</span><br></pre></td></tr></table></figure>
+
+<p>获取物体，并查看所在的类别：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">category_name = <span class="string">&quot;moka_pot&quot;</span></span><br><span class="line">object_cls = get_object_fn(category_name)</span><br><span class="line"><span class="built_in">print</span>(category_name, <span class="string">&quot;: defined in the class &quot;</span>, object_cls)</span><br></pre></td></tr></table></figure>
+
+<p>获取谓词的相关信息：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> libero.libero.envs.predicates <span class="keyword">import</span> get_predicate_fn_dict, get_predicate_fn</span><br><span class="line"></span><br><span class="line">predicate_dict = get_predicate_fn_dict()</span><br><span class="line"><span class="built_in">print</span>(predicate_dict)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;=============&quot;</span>)</span><br><span class="line">predicate_name = <span class="string">&quot;on&quot;</span></span><br><span class="line"><span class="built_in">print</span>(get_predicate_fn(predicate_name))</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-定义布局与初始状态分布"><a href="#2-2-定义布局与初始状态分布" class="headerlink" title="2.2  定义布局与初始状态分布"></a>2.2  定义布局与初始状态分布</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> libero.libero.utils.bddl_generation_utils <span class="keyword">import</span> get_xy_region_kwargs_list_from_regions_info</span><br><span class="line"><span class="keyword">from</span> libero.libero.utils.mu_utils <span class="keyword">import</span> register_mu, InitialSceneTemplates</span><br><span class="line"><span class="keyword">from</span> libero.libero.utils.task_generation_utils <span class="keyword">import</span> register_task_info, get_task_info, generate_bddl_from_task_info</span><br><span class="line"><span class="comment"># 以下是布局与初始状态分布的主体代码</span></span><br><span class="line"><span class="meta">@register_mu(<span class="params">scene_type=<span class="string">&quot;kitchen&quot;</span></span>) </span><span class="comment"># </span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">KitchenScene1</span>(<span class="title class_ inherited__">InitialSceneTemplates</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 定义固定物体和移动物体及数量</span></span><br><span class="line">        fixture_num_info = &#123;</span><br><span class="line">            <span class="string">&quot;kitchen_table&quot;</span>: <span class="number">1</span>,</span><br><span class="line">            <span class="string">&quot;wooden_cabinet&quot;</span>: <span class="number">1</span>,</span><br><span class="line">        &#125;</span><br><span class="line">  </span><br><span class="line">        object_num_info = &#123;</span><br><span class="line">            <span class="string">&quot;akita_black_bowl&quot;</span>: <span class="number">1</span>,</span><br><span class="line">            <span class="string">&quot;plate&quot;</span>: <span class="number">1</span>,</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">super</span>().__init__(</span><br><span class="line">            workspace_name=<span class="string">&quot;kitchen_table&quot;</span>,</span><br><span class="line">            fixture_num_info=fixture_num_info,</span><br><span class="line">            object_num_info=object_num_info</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">define_regions</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 初始化物体的位置</span></span><br><span class="line">        <span class="variable language_">self</span>.regions.update(</span><br><span class="line">            <span class="variable language_">self</span>.get_region_dict(region_centroid_xy=[<span class="number">0.0</span>, -<span class="number">0.30</span>], </span><br><span class="line">                                 region_name=<span class="string">&quot;wooden_cabinet_init_region&quot;</span>, </span><br><span class="line">                                 target_name=<span class="variable language_">self</span>.workspace_name, </span><br><span class="line">                                 region_half_len=<span class="number">0.01</span>,</span><br><span class="line">                                 yaw_rotation=(np.pi, np.pi))</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.regions.update(</span><br><span class="line">            <span class="variable language_">self</span>.get_region_dict(region_centroid_xy=[<span class="number">0.</span>, <span class="number">0.0</span>], </span><br><span class="line">                                 region_name=<span class="string">&quot;akita_black_bowl_init_region&quot;</span>, </span><br><span class="line">                                 target_name=<span class="variable language_">self</span>.workspace_name, </span><br><span class="line">                                 region_half_len=<span class="number">0.025</span>)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.regions.update(</span><br><span class="line">            <span class="variable language_">self</span>.get_region_dict(region_centroid_xy=[<span class="number">0.0</span>, <span class="number">0.25</span>], </span><br><span class="line">                                 region_name=<span class="string">&quot;plate_init_region&quot;</span>, </span><br><span class="line">                                 target_name=<span class="variable language_">self</span>.workspace_name, </span><br><span class="line">                                 region_half_len=<span class="number">0.025</span>)</span><br><span class="line">        )</span><br><span class="line">        <span class="variable language_">self</span>.xy_region_kwargs_list = get_xy_region_kwargs_list_from_regions_info(<span class="variable language_">self</span>.regions)</span><br><span class="line"> </span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">init_states</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 定义物体初始状态的逻辑关系</span></span><br><span class="line">        states = [</span><br><span class="line">            (<span class="string">&quot;On&quot;</span>, <span class="string">&quot;akita_black_bowl_1&quot;</span>, <span class="string">&quot;kitchen_table_akita_black_bowl_init_region&quot;</span>),</span><br><span class="line">            (<span class="string">&quot;On&quot;</span>, <span class="string">&quot;plate_1&quot;</span>, <span class="string">&quot;kitchen_table_plate_init_region&quot;</span>),</span><br><span class="line">            (<span class="string">&quot;On&quot;</span>, <span class="string">&quot;wooden_cabinet_1&quot;</span>, <span class="string">&quot;kitchen_table_wooden_cabinet_init_region&quot;</span>)]</span><br><span class="line">        <span class="keyword">return</span> states</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-定义任务目标"><a href="#2-3-定义任务目标" class="headerlink" title="2.3  定义任务目标"></a>2.3  定义任务目标</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">scene_name = <span class="string">&quot;kitchen_scene1&quot;</span></span><br><span class="line">language = <span class="string">&quot;Your Language 1&quot;</span></span><br><span class="line">register_task_info(language,</span><br><span class="line">                    scene_name=scene_name,</span><br><span class="line">                    objects_of_interest=[<span class="string">&quot;wooden_cabinet_1&quot;</span>, <span class="string">&quot;akita_black_bowl_1&quot;</span>],</span><br><span class="line">                    goal_states=[(<span class="string">&quot;Open&quot;</span>, <span class="string">&quot;wooden_cabinet_1_top_region&quot;</span>), (<span class="string">&quot;In&quot;</span>, <span class="string">&quot;akita_black_bowl_1&quot;</span>, <span class="string">&quot;wooden_cabinet_1_top_region&quot;</span>)]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create another task with the same scene layout</span></span><br><span class="line">scene_name = <span class="string">&quot;kitchen_scene1&quot;</span></span><br><span class="line">language = <span class="string">&quot;Your Language 2&quot;</span></span><br><span class="line">register_task_info(language,</span><br><span class="line">                    scene_name=scene_name,</span><br><span class="line">                    objects_of_interest=[<span class="string">&quot;wooden_cabinet_1&quot;</span>, <span class="string">&quot;akita_black_bowl_1&quot;</span>],</span><br><span class="line">                    goal_states=[(<span class="string">&quot;Open&quot;</span>, <span class="string">&quot;wooden_cabinet_1_top_region&quot;</span>), (<span class="string">&quot;In&quot;</span>, <span class="string">&quot;akita_black_bowl_1&quot;</span>, <span class="string">&quot;wooden_cabinet_1_bottom_region&quot;</span>)]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>任务目标将以命名元组<code>libero.libero.utils.task_ Generation_utils.TaskInfoTuple</code>的格式临时保存在变量<code>libero.libero.utils.task_ Generation_utils.TASK_INFO</code>中。这样的设计目的是为了方便批量创建任务。</p>
+<p>查看PDDL文件名称：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># This is the default path to store all the pddl scene files. Here we store the files in the temporary folder. If you want to directly add files into the libero codebase, get the default path use the following commented lines:</span></span><br><span class="line"><span class="comment"># from libero.libero import get_libero_path</span></span><br><span class="line"><span class="comment"># YOUR_BDDL_FILE_PATH = get_libero_path(&quot;bddl_files&quot;)</span></span><br><span class="line"></span><br><span class="line">YOUR_BDDL_FILE_PATH = <span class="string">&quot;tmp/pddl_files&quot;</span></span><br><span class="line">bddl_file_names, failures = generate_bddl_from_task_info(folder=YOUR_BDDL_FILE_PATH)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(bddl_file_names)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Encountered some failures: &quot;</span>, failures)</span><br></pre></td></tr></table></figure>
+
+<p>自动生成PDDL文件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(bddl_file_names[<span class="number">0</span>], <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    content = f.read()</span><br><span class="line"><span class="built_in">print</span>(content)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-3-指定目标和语言指令"><a href="#Step-3-指定目标和语言指令" class="headerlink" title="Step 3 指定目标和语言指令"></a>Step 3 指定目标和语言指令</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># kitchen_scene_example</span></span><br><span class="line">scene_name = <span class="string">&quot;kitchen_scene_example&quot;</span></span><br><span class="line">language = <span class="string">&quot;open the top drawer of the cabinet and put the bowl in it&quot;</span></span><br><span class="line">register_task_info(language,</span><br><span class="line">                    scene_name=scene_name,</span><br><span class="line">                    objects_of_interest=[<span class="string">&quot;wooden_cabinet_1&quot;</span>, <span class="string">&quot;akita_black_bowl_1&quot;</span>],</span><br><span class="line">                    goal_states=[(<span class="string">&quot;Open&quot;</span>, <span class="string">&quot;wooden_cabinet_1_top_region&quot;</span>), (<span class="string">&quot;In&quot;</span>, <span class="string">&quot;akita_black_bowl_1&quot;</span>, <span class="string">&quot;wooden_cabinet_1_top_region&quot;</span>)]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>请注意，<code>objects_of_interest</code>是一个可选字段，如果您希望修改 LIBERO 问题类以跟踪某些特定对象的内部模拟状态，则可以使用此字段。</p>
+<h2 id="添加外部-3D-物体步骤（以-egg-为例）"><a href="#添加外部-3D-物体步骤（以-egg-为例）" class="headerlink" title="添加外部 3D 物体步骤（以 egg 为例）"></a>添加外部 3D 物体步骤（以 egg 为例）</h2><ol>
+<li><p>从外部网站（如 free3D.com）下载 3D 模型。模型文件格式应为 <code>.obj</code> 和模型预览图 <code>.jpg</code> 。最好是单一物体、非 articulated、面数适中。</p>
+</li>
+<li><p>使用文档给出的工具 <code>obj2mjcf</code> 处理 <code>.obj</code> 文件，确认 <code>.obj</code> 文件可被 MuJoCo 解析。（此处生成的 XML 文件通常只是参考，不一定能直接拿来当 LIBERO object）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">obj2mjcf \</span><br><span class="line">  --obj-dir playground/custom_assets/egg \</span><br><span class="line">  --save-mjcf \</span><br><span class="line">  --compile-model \</span><br><span class="line">  --verbose</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查模型尺寸。运行命令行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">python - &lt;&lt;<span class="string">&#x27;PY&#x27;</span></span><br><span class="line">import trimesh</span><br><span class="line"></span><br><span class="line">mesh = trimesh.load(</span><br><span class="line">    <span class="string">&quot;playground/custom_assets/egg/egg/egg.obj&quot;</span>,</span><br><span class="line">    force=<span class="string">&quot;mesh&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;bounds:&quot;</span>, mesh.bounds)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;extents:&quot;</span>, mesh.extents)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;centroid:&quot;</span>, mesh.centroid)</span><br><span class="line">PY</span><br></pre></td></tr></table></figure>
+
+<p>根据 <code>extents</code> 算真实缩放比例。比如一个鸡蛋，原始长轴约5.32个单位，想做成约6cm，故设置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scale=&quot;0.01127 0.01127 0.01127&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把处理后的 mesh 放进 LIBERO assets，文件位置为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">libero/libero/assets/custom_objects/egg/</span><br><span class="line">├── egg.obj</span><br><span class="line">└── egg.xml</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自己写正式的 <code>egg.xml</code>。这里最好把 visual 和 collision 分开：visual mesh → 外部真实 egg.obj，collision geom → 简单 ellipsoid。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mesh</span></span></span><br><span class="line"><span class="tag">    <span class="attr">name</span>=<span class="string">&quot;egg_visual_mesh&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">file</span>=<span class="string">&quot;egg.obj&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">scale</span>=<span class="string">&quot;0.01127 0.01127 0.01127&quot;</span></span></span><br><span class="line"><span class="tag">/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">geom</span></span></span><br><span class="line"><span class="tag">    <span class="attr">type</span>=<span class="string">&quot;mesh&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">mesh</span>=<span class="string">&quot;egg_visual_mesh&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">contype</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">conaffinity</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">group</span>=<span class="string">&quot;1&quot;</span></span></span><br><span class="line"><span class="tag">/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">geom</span></span></span><br><span class="line"><span class="tag">    <span class="attr">type</span>=<span class="string">&quot;ellipsoid&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">size</span>=<span class="string">&quot;0.0217 0.0217 0.0300&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">density</span>=<span class="string">&quot;600&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">friction</span>=<span class="string">&quot;0.8 0.3 0.1&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">group</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">site</span> <span class="attr">name</span>=<span class="string">&quot;bottom_site&quot;</span> <span class="attr">...</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">site</span> <span class="attr">name</span>=<span class="string">&quot;top_site&quot;</span> <span class="attr">...</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">site</span> <span class="attr">name</span>=<span class="string">&quot;horizontal_radius_site&quot;</span> <span class="attr">...</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写 LIBERO object class。例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@register_object</span><br><span class="line">class Egg(MujocoXMLObject):</span><br><span class="line">    def __init__(self, name=<span class="string">&quot;egg&quot;</span>):</span><br><span class="line">        super().__init__(</span><br><span class="line">            <span class="string">&quot;.../assets/custom_objects/egg/egg.xml&quot;</span>,</span><br><span class="line">            name=name,</span><br><span class="line">            joints=[dict(<span class="built_in">type</span>=<span class="string">&quot;free&quot;</span>, damping=<span class="string">&quot;0.0005&quot;</span>)],</span><br><span class="line">            obj_type=<span class="string">&quot;all&quot;</span>,</span><br><span class="line">            duplicate_collision_geoms=False,</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        self.category_name = <span class="string">&quot;egg&quot;</span></span><br><span class="line"></span><br><span class="line">        self.rotation = (0.0, 0.0)</span><br><span class="line">        self.rotation_axis = <span class="string">&quot;z&quot;</span></span><br><span class="line"></span><br><span class="line">        self.object_properties = &#123;</span><br><span class="line">            <span class="string">&quot;vis_site_names&quot;</span>: &#123;&#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 <code>libero/libero/envs/objects/__init__.py</code> 里加上：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> .custom_objects <span class="keyword">import</span> *</span><br></pre></td></tr></table></figure>
+
+<p>验证：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">python - &lt;&lt;<span class="string">&#x27;PY&#x27;</span></span><br><span class="line">from libero.libero.envs.objects import get_object_fn, get_object_dict</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;egg&quot;</span> <span class="keyword">in</span> get_object_dict())</span><br><span class="line"><span class="built_in">print</span>(get_object_fn(<span class="string">&quot;egg&quot;</span>))</span><br><span class="line">PY</span><br></pre></td></tr></table></figure>
+
+<p>理想输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">True</span><br><span class="line">&lt;class <span class="string">&#x27;...Egg&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 Initial Scene 里声明新物体：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">object_num_info = &#123;</span><br><span class="line">    <span class="string">&quot;egg&quot;</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">&quot;tomato_sauce&quot;</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">&quot;basket&quot;</span>: <span class="number">1</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 <code>define_regions()</code> 里给 egg 定义初始化区域：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">self</span>.regions.update(</span><br><span class="line">    <span class="variable language_">self</span>.get_region_dict(</span><br><span class="line">        region_centroid_xy=[-<span class="number">0.20</span>, -<span class="number">0.10</span>],</span><br><span class="line">        region_name=<span class="string">&quot;egg_init_region&quot;</span>,</span><br><span class="line">        target_name=<span class="variable language_">self</span>.workspace_name,</span><br><span class="line">        region_half_len=<span class="number">0.08</span>,</span><br><span class="line">    )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 <code>init_states</code> 里明确让 Egg 放到对应 region：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">init_states</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="keyword">return</span> [</span><br><span class="line">        (</span><br><span class="line">            <span class="string">&quot;On&quot;</span>,</span><br><span class="line">            <span class="string">&quot;egg_1&quot;</span>,</span><br><span class="line">            <span class="string">&quot;living_room_table_egg_init_region&quot;</span>,</span><br><span class="line">        ),</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 task 里正常用它：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">register_task_info(</span><br><span class="line">    language=<span class="string">&quot;pick up the egg and place it in the basket&quot;</span>,</span><br><span class="line">    scene_name=<span class="string">&quot;living_room_scene_custom&quot;</span>,</span><br><span class="line">    objects_of_interest=[</span><br><span class="line">        <span class="string">&quot;egg_1&quot;</span>,</span><br><span class="line">        <span class="string">&quot;basket_1&quot;</span>,</span><br><span class="line">    ],</span><br><span class="line">    goal_states=[</span><br><span class="line">        (</span><br><span class="line">            <span class="string">&quot;In&quot;</span>,</span><br><span class="line">            <span class="string">&quot;egg_1&quot;</span>,</span><br><span class="line">            <span class="string">&quot;basket_1_contain_region&quot;</span>,</span><br><span class="line">        ),</span><br><span class="line">    ],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在终端重新生成 BDDL 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf playground/generated_bddl</span><br><span class="line">python playground/create_custom_tasks.py</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后加载模型：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python playground/preview_custom_task.py</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+  </div>
+
+  
+  <div class="about" data-pagefind-ignore>
+    <h2>About this Post</h2>
+    <div class="details">This post is written by Ezra Yang, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</div>
+    
+    <p class="tags">
+      <i class="bi bi-tags icon"></i>
+      
+      <a href="/tags/notes/" class="tag">#notes</a>
+      
+      <a href="/tags/Embodied-AI/" class="tag">#Embodied AI</a>
+      
+      <a href="/tags/research/" class="tag">#research</a>
+      
+    </p>
+    
+    
+  </div>
+  
+
+  <div class="container post-prev-next" data-pagefind-ignore>
+    <a class="next"></a>
+    
+    <a href="/2026/08/18/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95-8-18/" class="prev">
+      <div class="text">
+        <p class="label">Previous</p>
+        <h3 class="title">论文阅读记录 8.18</h3>
+      </div>
+    </a>
+    
+  </div>
+
+  
+    <section class="giscus-comments" style="width:min(100% - 48px, 860px); margin:96px auto 72px auto; padding-top:40px; border-top:1px solid rgba(120,150,180,0.22); box-sizing:border-box;">
+  <h2 style="margin:0 0 28px 0; font-size:28px; line-height:1.1;">Comments</h2>
+  <script src="https://giscus.app/client.js"
+    data-repo="ezrablake2006/ezrablake2006.github.io"
+    data-repo-id="R_kgDOTIW0HA"
+    data-category="General"
+    data-category-id="DIC_kwDOTIW0HM4DAJj3"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+
+  
+</article>
+
+
+    </main>
+    <footer>
+  <div class="inner">
+    <div class="links">
+      
+      <div class="group">
+        <h2 class="title">Site</h2>
+        
+        <a href="/" class="item">Home</a>
+        
+        <a href="/archives/" class="item">Archive</a>
+        
+        <a href="/categories/" class="item">Categories</a>
+        
+      </div>
+      
+      <div class="group">
+        <h2 class="title">Me</h2>
+        
+        <a target="_blank" rel="noopener" href="https://github.com/ezrablake2006" class="item">GitHub</a>
+        
+        <a href="mailto:EzraBlake2006@outlook.com" class="item">Email</a>
+        
+      </div>
+      
+    </div>
+    <span>&copy; 2026 Ezra Yang<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></span>
+    
+    
+      <br>
+      <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+        <label>
+          <input type="radio" value="light">
+          <span>Light</span>
+        </label>
+        <label>
+          <input type="radio" value="dark">
+          <span>Dark</span>
+        </label>
+        <label>
+          <input type="radio" value="auto">
+          <span>Auto</span>
+        </label>
+      </div>
+    
+  </div>
+</footer>
+
+
+    
+<script src="/js/main.js"></script>
+
+
+    
+
+    
+    
+<script src="/js/scroll-reveal.js"></script>
+
+    
+
+    <script src="/js/hero-scroll.js?v=1"></script>
+<script src="/js/post-toc.js?v=1"></script>
+
+  </body>
+</html>
