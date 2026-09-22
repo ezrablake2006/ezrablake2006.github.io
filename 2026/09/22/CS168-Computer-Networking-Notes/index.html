@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>CS168 Computer Networking Notes - @Ezra_Yang</title>
+  
+    <link rel="shortcut icon" href="/img/favicon.png">
+  
+  
+  <link rel='manifest' href='/manifest.json'>
+  
+
+  <meta name="description" content="This note is based on slides and the textbook of UCB CS168 SP25. See the original course on https:&#x2F;&#x2F;sp25.cs168.io&#x2F;. §1  Layers of Internet1.1  What is the Internet?The Internet transfers data between">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS168 Computer Networking Notes">
+<meta property="og:url" content="http://ezrablake2006.github.io/2026/09/22/CS168-Computer-Networking-Notes/index.html">
+<meta property="og:site_name" content="@Ezra_Yang">
+<meta property="og:description" content="This note is based on slides and the textbook of UCB CS168 SP25. See the original course on https:&#x2F;&#x2F;sp25.cs168.io&#x2F;. §1  Layers of Internet1.1  What is the Internet?The Internet transfers data between">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-09-22T06:29:30.000Z">
+<meta property="article:modified_time" content="2026-09-22T10:43:01.436Z">
+<meta property="article:author" content="Ezra Yang">
+<meta property="article:tag" content="notes">
+<meta property="article:tag" content="Computer Networking">
+<meta name="twitter:card" content="summary">
+
+  <script>window.ThemeCupertino = {}</script>
+
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/simple-icons-font@16/font/simple-icons.min.css">
+
+  
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1/font/bootstrap-icons.min.css">
+
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+
+  
+  
+<link rel="stylesheet" href="/css/components/card.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/button.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/badge.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/utilities.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/carousel.css">
+
+  
+  
+  <script>ThemeCupertino['_calloutStyles'] = `
+<link rel="stylesheet" href="/css/components/callout.css">
+`</script>
+  
+<script src="/js/components/callout.js"></script>
+
+  
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/scroll-reveal.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/view-transition.css">
+
+  
+  
+
+  
+<script src="/js/head.js"></script>
+
+  <link rel="stylesheet" href="/css/custom.css?v=6">
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: {'[+]': [['$', '$']]},
+      processEscapes: true
+    }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body
+    data-color-scheme="auto"
+    data-uppercase-categories="true"
+    
+    data-rainbow-banner="true"
+    data-rainbow-banner-shown="always"
+    data-rainbow-banner-month="6"
+    data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+    
+    data-config-root="/"
+    
+    data-toc="true"
+    data-toc-max-depth="3"
+    
+    
+    
+    data-scroll-reveal-disappear="false"
+    data-scroll-reveal-query=".scroll-reveal, .post-list-item, .card, .content p img, .content .block-large img"
+    
+    data-nav-blur-gradient="false"
+    style="--config-corner-squircle: true"
+  >
+    
+<script src="/js/body-top.js"></script>
+
+    <a href="#main-content" id="skip-to-content">Skip to content</a>
+    
+
+<nav id="theme-nav">
+  <div class="inner">
+    <a class="title" href="/">Ezra Yang</a>
+    <div class="nav-arrow"></div>
+    <div class="nav-items">
+      <a class="nav-item nav-item-home" href="/" style="--index: 0">Home</a>
+
+      
+      <a class="nav-item" href="/search/" style="--index: 1">Search</a>
+      
+      <a class="nav-item" href="/categories/CStudy/" style="--index: 2">CStudy</a>
+      
+      <a class="nav-item" href="/categories/Music/" style="--index: 3">Music</a>
+      
+      <a class="nav-item" href="/categories/Language/" style="--index: 4">Language</a>
+      
+      <a class="nav-item" href="/categories/Diary/" style="--index: 5">Diary</a>
+      
+      <a class="nav-item" href="/tags" style="--index: 6">Tags</a>
+      
+      <a class="nav-item" href="/about" style="--index: 7">About</a>
+      
+    </div>
+  </div>
+</nav>
+
+    <main id="main-content" data-pagefind-body>
+      
+<article class="post">
+  
+  <div class="meta">
+    
+    <div class="categories text-uppercase">
+    
+      <a href="/categories/CStudy/">CStudy</a>
+    
+    </div>
+    
+
+    
+    <time class="date" datetime="2026-09-22T14:29:30+08:00">
+      September 22, 2026
+    </time>
+    
+
+    <h1 class="title" data-pagefind-meta="title">CS168 Computer Networking Notes</h1>
+  </div>
+
+  <div class="content">
+    <p>This note is based on slides and the textbook of UCB CS168 SP25. See the original course on <a target="_blank" rel="noopener" href="https://sp25.cs168.io/">https://sp25.cs168.io/</a>.</p>
+<h1 id="§1-Layers-of-Internet"><a href="#§1-Layers-of-Internet" class="headerlink" title="§1  Layers of Internet"></a>§1  Layers of Internet</h1><h2 id="1-1-What-is-the-Internet"><a href="#1-1-What-is-the-Internet" class="headerlink" title="1.1  What is the Internet?"></a>1.1  What is the Internet?</h2><p>The <strong>Internet</strong> transfers data between computers.</p>
+<p>The Internet:</p>
+<ul>
+<li>Is a federated system.</li>
+<li>Operates at enormous scale.</li>
+<li>Is constantly evolving.</li>
+<li>Has a tremendous range and diversity of users and devices.</li>
+<li>Operates asynchronously.</li>
+<li>Must handle failures at scale.</li>
+</ul>
+<p><strong>Protocol</strong>: A specification on how to communicate.</p>
+<ul>
+<li>Syntax: Format of messages.</li>
+<li>Semantics: What actions should I take in response to certain messages?</li>
+</ul>
+<h2 id="1-2-Layers-of-the-Internet"><a href="#1-2-Layers-of-the-Internet" class="headerlink" title="1.2  Layers of the Internet"></a>1.2  Layers of the Internet</h2><p>Layer 1 - <strong>Physical</strong>: moving bits across space</p>
+<p>Layer 2 - <strong>Link</strong>: create links in a local network</p>
+<ul>
+<li>Use physical technology to create a <strong>link</strong> between machines.</li>
+<li>Use links to connect all machines in a local area.</li>
+<li>Machines can exchange <strong>packets</strong>: A group of bits representing a message.</li>
+</ul>
+<p>Layer 3 - <strong>Internet</strong>: connect local networks to form an Internet</p>
+<ul>
+<li><strong>End hosts</strong> are the machines communicating over the Internet.</li>
+<li><strong>Switches</strong> (aka <strong>routers</strong>) receive packets and forward them toward their destination.</li>
+<li><strong>Modularity</strong>: In our design, we decomposed the system into layers of abstraction.<ul>
+<li>Each layer relies on services from the layer below.</li>
+<li>Each layer provides services to the layer above.</li>
+</ul>
+</li>
+<li>Layer 3 offers a <strong>best-effort</strong> service model.<ul>
+<li>Packets are limited in size.</li>
+<li>Packets could get lost, reordered, corrupted, etc.</li>
+<li>The network will try its best to deliver your packet, but no guarantee.</li>
+<li>The network won’t tell you if the delivery failed.</li>
+</ul>
+</li>
+</ul>
+<p>Layer 4 - <strong>Transport</strong>: reliably deliver packets, forming connections</p>
+<ul>
+<li>Adds extra mechanisms (e.g. re-sending lost packets) for reliable packet delivery.</li>
+<li>Splits up large data into packets to send them. Reassembles received packets.</li>
+<li>Instead of individual packets, can think about <strong>flows</strong> (aka <strong>connections</strong>): A stream of packets exchanged between two endpoints.</li>
+</ul>
+<p>Layer 7 - <strong>Application</strong>: Implement services on top of the Internet infrastructure.</p>
+<h2 id="1-3-Header"><a href="#1-3-Header" class="headerlink" title="1.3  Header"></a>1.3  Header</h2><p>The packet <strong>header</strong> contains metadata describing how the data should be sent.</p>
+<ul>
+<li>Destination address: Required to deliver the packet.</li>
+<li>Source address: Useful if the recipient wants to send replies back.</li>
+</ul>
+<p>The actual data in the packet is called the <strong>payload</strong>.</p>
+<ul>
+<li>Headers are added as the packet moves down the stack, and unwrapped as the packet moves up the stack.</li>
+<li>Hosts parse headers for Layers 1–7.<br>Routers parse headers for Layers 1–3.</li>
+</ul>
+<h1 id="§2-Architecting-the-Internet"><a href="#§2-Architecting-the-Internet" class="headerlink" title="§2  Architecting the Internet"></a>§2  Architecting the Internet</h1><h2 id="2-1-Internet-Design-Principle"><a href="#2-1-Internet-Design-Principle" class="headerlink" title="2.1  Internet Design Principle"></a>2.1  Internet Design Principle</h2><h3 id="Architecting-the-Internet"><a href="#Architecting-the-Internet" class="headerlink" title="Architecting the Internet"></a>Architecting the Internet</h3><p><strong>The Internet Design Principles:</strong></p>
+<ol>
+<li><p><strong>Decentralized control</strong></p>
+<p>Each network device (e.g. router) runs on its own. No central mastermind.</p>
+</li>
+<li><p><strong>Best-effort service model</strong></p>
+<p>At Layer 3, routers only offer best-effort delivery.</p>
+</li>
+<li><p><strong>Route around trouble</strong></p>
+<ul>
+<li>Network must be resilient to failures.</li>
+<li>If a router or link goes down, find a different path through the network.</li>
+</ul>
+</li>
+<li><p><strong>Dumb infrastructure (with smart endpoints)</strong></p>
+<p>Routers forward packets. They don’t care about what’s inside.</p>
+</li>
+<li><p><strong>End-to-end principle</strong></p>
+<p>Implement features at the end hosts, not at the routers.</p>
+</li>
+<li><p><strong>Layering</strong></p>
+<ul>
+<li>Each layer relies on the layer below, and supports the layer above.</li>
+<li>Allows us to innovate at one layer, without disturbing other layers.</li>
+<li>Different communities can work on different layers.<ul>
+<li>Chip designers at Layers 1 and 2.</li>
+<li>Application developers at Layer 7.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Federation via narrow-waist interface</strong></p>
+<p>Federation works because all operators speak the same Layer 3 protocol.</p>
+</li>
+</ol>
+<h3 id="Narrow-Waist-Demultiplexing"><a href="#Narrow-Waist-Demultiplexing" class="headerlink" title="Narrow Waist, Demultiplexing"></a>Narrow Waist, Demultiplexing</h3><p><strong>Narrow waist</strong>: IP (Internet Protocol) is the only protocol at Layer 3.</p>
+<ul>
+<li>All hosts and routers understand IP.</li>
+<li>This unifies the Internet and enables federation.</li>
+</ul>
+<p><strong>Demultiplexing</strong>: </p>
+<ul>
+<li>Add a new header field that tells us what the next (higher) layer protocol is.</li>
+<li>Allows the IP code to pass the rest of the packet to the appropriate L4 code.</li>
+<li>Port numbers help us distinguish between applications on the same computer. Both end hosts in a connection have a port number.</li>
+</ul>
+<h3 id="End-to-End-Principle"><a href="#End-to-End-Principle" class="headerlink" title="End-to-End Principle"></a>End-to-End Principle</h3><p><strong>End-to-end principle</strong>: Certain application features (e.g. reliability) must be implemented at the end host for correctness.</p>
+<h2 id="2-2-Designing-Resource-Sharing"><a href="#2-2-Designing-Resource-Sharing" class="headerlink" title="2.2  Designing Resource Sharing"></a>2.2  Designing Resource Sharing</h2><h3 id="Statistical-Multiplexing"><a href="#Statistical-Multiplexing" class="headerlink" title="Statistical Multiplexing"></a>Statistical Multiplexing</h3><p>Two ways to allocate resources to users:</p>
+<ul>
+<li>Static allocation: Give a fixed amount to each user.</li>
+<li><strong>Statistical multiplexing</strong>: Dynamically allocate to users based on their demand.</li>
+</ul>
+<p>Statistical multiplexing (dynamic) is more efficient than static allocation (fixed).</p>
+<ul>
+<li>Fixed: You have to give everyone enough for their peak demand.</li>
+<li>Dynamic: Give a user more when their demand peaks.</li>
+</ul>
+<h3 id="Circuit-Switching-VS-Packet-Switching"><a href="#Circuit-Switching-VS-Packet-Switching" class="headerlink" title="Circuit Switching VS Packet Switching"></a>Circuit Switching VS Packet Switching</h3><p>There are 2 canonical designs for implementing statistical multiplexing:</p>
+<ul>
+<li><strong>Reservations</strong> via <strong>circuit switching</strong>:<ul>
+<li>At start of connection, end-hosts explicitly request and reserve resources.</li>
+<li>During connection, use the reserved resources to send packets.</li>
+<li>At end of connection, release resources.</li>
+</ul>
+</li>
+<li><strong>Best-effort</strong> via <strong>packet switching</strong>:<ul>
+<li>Just use the resources (send packets) and hope for the best.</li>
+</ul>
+</li>
+</ul>
+<p>Circuit switching pros:</p>
+<ul>
+<li>Reservations give applications better performance.</li>
+<li>Reservations are more predictable and understandable.</li>
+</ul>
+<p>Packet switching pros: more efficient on bursty flows</p>
+<ul>
+<li>More efficient.</li>
+<li>Faster startup to first packet delivered.</li>
+<li>Easier recovery from failure.</li>
+<li>Simpler implementation.</li>
+</ul>
+<h1 id="§3-Links"><a href="#§3-Links" class="headerlink" title="§3  Links"></a>§3  Links</h1><h2 id="3-1-Bandwidth-Propagation-Delay"><a href="#3-1-Bandwidth-Propagation-Delay" class="headerlink" title="3.1 Bandwidth &amp; Propagation Delay"></a>3.1 Bandwidth &amp; Propagation Delay</h2><p><strong>Bandwidth</strong>: Number of bits sent&#x2F;received per unit time.</p>
+<ul>
+<li>“Width” of the link.</li>
+<li>Measured in bits per second (bps).</li>
+</ul>
+<p><strong>Propagation delay</strong>: Time it takes a bit to travel along the link.</p>
+<ul>
+<li>“Length” of the link.</li>
+<li>Measured in seconds.</li>
+</ul>
+<p><strong>Bandwidth-delay product</strong>: Bandwidth × delay.</p>
+<ul>
+<li>“Capacity” of the link.</li>
+</ul>
+<p>Packet Delay  &#x3D;  Transmission Delay +  Propagation Delay</p>
+<p>Packet Delay  &#x3D; (Packet Size &#x2F; Bandwidth)  +  Propagation Delay</p>
+<h2 id="3-2-Pipe-Diagrams"><a href="#3-2-Pipe-Diagrams" class="headerlink" title="3.2  Pipe Diagrams"></a>3.2  Pipe Diagrams</h2><p>The pipe diagram is an alternate view of the link.</p>
+<p>Pipe diagram shows the bits on the link at a frozen moment in time.</p>
+<ul>
+<li><strong>Height &#x3D; bandwidth.</strong> How many bits we can put in the pipe per unit time.</li>
+<li><strong>Width &#x3D; propagation delay.</strong> How long it takes for bits to travel through the pipe.</li>
+<li><strong>Area &#x3D; bandwidth-delay product</strong>. How many bits fit in the pipe at a given instant.</li>
+</ul>
+<h2 id="3-3-Overloaded-Links"><a href="#3-3-Overloaded-Links" class="headerlink" title="3.3  Overloaded Links"></a>3.3  Overloaded Links</h2><p>What happens if two packets arrive at the router simultaneously?</p>
+<p><strong>Transient overload</strong>: When there are no incoming packets, router can drain the queue.</p>
+<p><strong>Persistent overload</strong>: When not enough capacity to handle the incoming packets, operators can detect the overload and (manually) upgrade the link. Routers can tell the senders to slow down.</p>
+<p>In this way, Packet Delay &#x3D; Transmission Delay + Propagation Delay + Queuing Delay</p>
+
+  </div>
+
+  
+  <div class="about" data-pagefind-ignore>
+    <h2>About this Post</h2>
+    <div class="details">This post is written by Ezra Yang, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</div>
+    
+    <p class="tags">
+      <i class="bi bi-tags icon"></i>
+      
+      <a href="/tags/notes/" class="tag">#notes</a>
+      
+      <a href="/tags/Computer-Networking/" class="tag">#Computer Networking</a>
+      
+    </p>
+    
+    
+  </div>
+  
+
+  <div class="container post-prev-next" data-pagefind-ignore>
+    <a class="next"></a>
+    
+    <a href="/2026/08/25/LIBERO%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="prev">
+      <div class="text">
+        <p class="label">Previous</p>
+        <h3 class="title">LIBERO文档阅读笔记</h3>
+      </div>
+    </a>
+    
+  </div>
+
+  
+    <section class="giscus-comments" style="width:min(100% - 48px, 860px); margin:96px auto 72px auto; padding-top:40px; border-top:1px solid rgba(120,150,180,0.22); box-sizing:border-box;">
+  <h2 style="margin:0 0 28px 0; font-size:28px; line-height:1.1;">Comments</h2>
+  <script src="https://giscus.app/client.js"
+    data-repo="ezrablake2006/ezrablake2006.github.io"
+    data-repo-id="R_kgDOTIW0HA"
+    data-category="General"
+    data-category-id="DIC_kwDOTIW0HM4DAJj3"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+
+  
+</article>
+
+
+    </main>
+    <footer>
+  <div class="inner">
+    <div class="links">
+      
+      <div class="group">
+        <h2 class="title">Site</h2>
+        
+        <a href="/" class="item">Home</a>
+        
+        <a href="/archives/" class="item">Archive</a>
+        
+        <a href="/categories/" class="item">Categories</a>
+        
+      </div>
+      
+      <div class="group">
+        <h2 class="title">Me</h2>
+        
+        <a target="_blank" rel="noopener" href="https://github.com/ezrablake2006" class="item">GitHub</a>
+        
+        <a href="mailto:EzraBlake2006@outlook.com" class="item">Email</a>
+        
+      </div>
+      
+    </div>
+    <span>&copy; 2026 Ezra Yang<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></span>
+    
+    
+      <br>
+      <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+        <label>
+          <input type="radio" value="light">
+          <span>Light</span>
+        </label>
+        <label>
+          <input type="radio" value="dark">
+          <span>Dark</span>
+        </label>
+        <label>
+          <input type="radio" value="auto">
+          <span>Auto</span>
+        </label>
+      </div>
+    
+  </div>
+</footer>
+
+
+    
+<script src="/js/main.js"></script>
+
+
+    
+
+    
+    
+<script src="/js/scroll-reveal.js"></script>
+
+    
+
+    <script src="/js/hero-scroll.js?v=1"></script>
+<script src="/js/post-toc.js?v=1"></script>
+
+  </body>
+</html>
