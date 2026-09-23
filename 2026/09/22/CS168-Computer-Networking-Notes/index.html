@@ -21,7 +21,7 @@
 <meta property="og:description" content="This note is based on slides and the textbook of UCB CS168 SP25. See the original course on https:&#x2F;&#x2F;sp25.cs168.io&#x2F;. §1  Layers of Internet1.1  What is the Internet?The Internet transfers data between">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-09-22T06:29:30.000Z">
-<meta property="article:modified_time" content="2026-09-22T10:43:01.436Z">
+<meta property="article:modified_time" content="2026-09-23T02:35:06.068Z">
 <meta property="article:author" content="Ezra Yang">
 <meta property="article:tag" content="notes">
 <meta property="article:tag" content="Computer Networking">
@@ -392,6 +392,98 @@
 <p><strong>Transient overload</strong>: When there are no incoming packets, router can drain the queue.</p>
 <p><strong>Persistent overload</strong>: When not enough capacity to handle the incoming packets, operators can detect the overload and (manually) upgrade the link. Routers can tell the senders to slow down.</p>
 <p>In this way, Packet Delay &#x3D; Transmission Delay + Propagation Delay + Queuing Delay</p>
+<h1 id="§4-Routing-Principles"><a href="#§4-Routing-Principles" class="headerlink" title="§4  Routing Principles"></a>§4  Routing Principles</h1><h2 id="4-1-Defining-the-Routing-Problem"><a href="#4-1-Defining-the-Routing-Problem" class="headerlink" title="4.1 Defining the Routing Problem"></a>4.1 Defining the Routing Problem</h2><p><strong>Routing</strong>: Finding paths through the network.</p>
+<p><strong>Router</strong>: An intermediate machine that can forward data. </p>
+<ul>
+<li>Pros: use fewer links than the full-mesh topology; have more capacity than just a single link; if a link goes down, traffic could use another path.</li>
+<li>Cons: less bandwidth.</li>
+</ul>
+<p><strong>Packet</strong>: The basic unit of data sent across the network.</p>
+<ul>
+<li>Packets have a header with metadata.</li>
+<li>Packets have a payload with the application data.</li>
+</ul>
+<p>Routing is hard because:</p>
+<ul>
+<li>topology changes over time</li>
+<li>routers don’t have a global view of the network</li>
+<li>links are best-effort</li>
+</ul>
+<p><strong>Intra-domain routing protocols</strong> compute routes within a single network.</p>
+<ul>
+<li>Each network can choose their own intra-domain protocol based on their needs</li>
+</ul>
+<p><strong>Inter-domain routing protocols</strong> compute routes between networks.</p>
+<ul>
+<li>Everybody has to agree on the same protocol.</li>
+</ul>
+<p>Classifying routing protocols by where they operate: </p>
+<ul>
+<li><p>Let individual networks choose how to route inside their network. (Intra-domain.) </p>
+</li>
+<li><p>Have all networks agree on how to route between each other. (Inter-domain.)</p>
+</li>
+</ul>
+<h2 id="4-2-Routing-States"><a href="#4-2-Routing-States" class="headerlink" title="4.2  Routing States"></a>4.2  Routing States</h2><p><strong>Destination-based forwarding</strong>: used by the Internet for routing decisions</p>
+<ul>
+<li>Each router keeps a table, mapping destinations to next hops. </li>
+<li>The decision only depends on the destination field of the packet.</li>
+</ul>
+<p><strong>Forwarding VS Routing</strong></p>
+<ul>
+<li><p>Forwarding: </p>
+<ul>
+<li><p>Look up packet’s destination in table,  and send packet to neighbor. </p>
+</li>
+<li><p>Inherently <strong>local</strong>. Depends only on arriving packet and local table. </p>
+</li>
+<li><p>Occurs every time <strong>a packet arrives</strong></p>
+</li>
+</ul>
+</li>
+<li><p>Routing: </p>
+<ul>
+<li><p>Communicates with other routers to  determine how to populate tables. </p>
+</li>
+<li><p>Inherently <strong>global</strong>. Must know about all  destinations, not just local ones. </p>
+</li>
+<li><p>Occurs every time the <strong>network changes</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>A routing state is <strong>valid</strong> if packets actually reach their destinations. In this way, we can only tell whether a <strong>global routing state</strong> is valid or not.</p>
+<p>A global routing state is valid if and only if there are <strong>no dead ends and no loops</strong>.</p>
+<ul>
+<li><p><strong>Dead end</strong>: A packet arrives at a router, but there is no next hop to forward it.</p>
+</li>
+<li><p><strong>Loop</strong>: A packet cycles around the same set of routers.</p>
+</li>
+</ul>
+<p>A <strong>directed delivery tree</strong> shows how packets get forwarded toward one destination.</p>
+<p>A valid directed delivery tree is an <strong>oriented spanning tree</strong> rooted at the destination.</p>
+<p><strong>Steps to verify routing state validity:</strong></p>
+<ol>
+<li>Pick a single destination.</li>
+<li>For each router, draw an arrow to the next-hop.</li>
+<li>Delete all links with no arrows.</li>
+<li>State is valid if and only if the remaining graph is a valid directed delivery tree.</li>
+<li>Repeat for every destination.</li>
+</ol>
+<p><strong>Least-cost routing</strong>: Assign costs to every edge, and find paths with lowest cost.</p>
+<ul>
+<li>Costs are local to a router. Each router knows the cost of its own links. In practice, generally configured by an operator.</li>
+<li>Costs are always positive integers.</li>
+<li>Costs are always symmetrical.</li>
+</ul>
+<p><strong>Static routes</strong> are hard-coded entries that we always want to be there.</p>
+<p>The route is static because: </p>
+<ul>
+<li><p>It never changes. </p>
+</li>
+<li><p>No routing protocol used to discover it.</p>
+</li>
+</ul>
 
   </div>
 
