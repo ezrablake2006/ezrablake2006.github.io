@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>概率论与数理统计笔记 - @Ezra_Yang</title>
+  
+    <link rel="shortcut icon" href="/img/favicon.png">
+  
+  
+  <link rel='manifest' href='/manifest.json'>
+  
+
+  <meta name="description" content="§3  连续型随机变量3.1  随机变量的分布函数定义：$F(x) &#x3D; P(X \le x)$，表示随机变量 $X$ 落在 $(-\infty, x]$ 内的概率。 核心性质：  有界性：$0 \le F(x) \le 1$，且 $F(-\infty) &#x3D; \lim_{x \to -\infty} F(x) &#x3D; 0$，$F(+\infty) &#x3D; \lim_{">
+<meta property="og:type" content="article">
+<meta property="og:title" content="概率论与数理统计笔记">
+<meta property="og:url" content="http://ezrablake2006.github.io/2026/10/26/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="@Ezra_Yang">
+<meta property="og:description" content="§3  连续型随机变量3.1  随机变量的分布函数定义：$F(x) &#x3D; P(X \le x)$，表示随机变量 $X$ 落在 $(-\infty, x]$ 内的概率。 核心性质：  有界性：$0 \le F(x) \le 1$，且 $F(-\infty) &#x3D; \lim_{x \to -\infty} F(x) &#x3D; 0$，$F(+\infty) &#x3D; \lim_{">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-10-26T08:06:29.000Z">
+<meta property="article:modified_time" content="2026-10-26T08:45:45.852Z">
+<meta property="article:author" content="Ezra Yang">
+<meta property="article:tag" content="notes">
+<meta property="article:tag" content="Maths">
+<meta property="article:tag" content="Probability">
+<meta name="twitter:card" content="summary">
+
+  <script>window.ThemeCupertino = {}</script>
+
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/simple-icons-font@16/font/simple-icons.min.css">
+
+  
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1/font/bootstrap-icons.min.css">
+
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+
+  
+  
+<link rel="stylesheet" href="/css/components/card.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/button.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/badge.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/utilities.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/components/carousel.css">
+
+  
+  
+  <script>ThemeCupertino['_calloutStyles'] = `
+<link rel="stylesheet" href="/css/components/callout.css">
+`</script>
+  
+<script src="/js/components/callout.js"></script>
+
+  
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/scroll-reveal.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/view-transition.css">
+
+  
+  
+
+  
+<script src="/js/head.js"></script>
+
+  <link rel="stylesheet" href="/css/custom.css?v=6">
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: {'[+]': [['$', '$']]},
+      processEscapes: true
+    }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body
+    data-color-scheme="auto"
+    data-uppercase-categories="true"
+    
+    data-rainbow-banner="true"
+    data-rainbow-banner-shown="always"
+    data-rainbow-banner-month="6"
+    data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+    
+    data-config-root="/"
+    
+    data-toc="true"
+    data-toc-max-depth="3"
+    
+    
+    
+    data-scroll-reveal-disappear="false"
+    data-scroll-reveal-query=".scroll-reveal, .post-list-item, .card, .content p img, .content .block-large img"
+    
+    data-nav-blur-gradient="false"
+    style="--config-corner-squircle: true"
+  >
+    
+<script src="/js/body-top.js"></script>
+
+    <a href="#main-content" id="skip-to-content">Skip to content</a>
+    
+
+<nav id="theme-nav">
+  <div class="inner">
+    <a class="title" href="/">Ezra Yang</a>
+    <div class="nav-arrow"></div>
+    <div class="nav-items">
+      <a class="nav-item nav-item-home" href="/" style="--index: 0">Home</a>
+
+      
+      <a class="nav-item" href="/search/" style="--index: 1">Search</a>
+      
+      <a class="nav-item" href="/categories/CStudy/" style="--index: 2">CStudy</a>
+      
+      <a class="nav-item" href="/categories/Music/" style="--index: 3">Music</a>
+      
+      <a class="nav-item" href="/categories/Language/" style="--index: 4">Language</a>
+      
+      <a class="nav-item" href="/categories/Diary/" style="--index: 5">Diary</a>
+      
+      <a class="nav-item" href="/tags" style="--index: 6">Tags</a>
+      
+      <a class="nav-item" href="/about" style="--index: 7">About</a>
+      
+    </div>
+  </div>
+</nav>
+
+    <main id="main-content" data-pagefind-body>
+      
+<article class="post">
+  
+  <div class="meta">
+    
+    <div class="categories text-uppercase">
+    
+      <a href="/categories/CStudy/">CStudy</a>
+    
+    </div>
+    
+
+    
+    <time class="date" datetime="2026-10-26T16:06:29+08:00">
+      October 26, 2026
+    </time>
+    
+
+    <h1 class="title" data-pagefind-meta="title">概率论与数理统计笔记</h1>
+  </div>
+
+  <div class="content">
+    <h2 id="§3-连续型随机变量"><a href="#§3-连续型随机变量" class="headerlink" title="§3  连续型随机变量"></a>§3  连续型随机变量</h2><h3 id="3-1-随机变量的分布函数"><a href="#3-1-随机变量的分布函数" class="headerlink" title="3.1  随机变量的分布函数"></a>3.1  随机变量的分布函数</h3><p><strong>定义</strong>：$F(x) &#x3D; P(X \le x)$，表示随机变量 $X$ 落在 $(-\infty, x]$ 内的概率。</p>
+<p><strong>核心性质</strong>：</p>
+<ol>
+<li><strong>有界性</strong>：$0 \le F(x) \le 1$，且 $F(-\infty) &#x3D; \lim_{x \to -\infty} F(x) &#x3D; 0$，$F(+\infty) &#x3D; \lim_{x \to +\infty} F(x) &#x3D; 1$。</li>
+<li><strong>区间概率计算</strong>：$P(a &lt; X \le b) &#x3D; F(b) - F(a)$。</li>
+</ol>
+<h3 id="3-2-连续型随机变量及其密度函数"><a href="#3-2-连续型随机变量及其密度函数" class="headerlink" title="3.2  连续型随机变量及其密度函数"></a>3.2  连续型随机变量及其密度函数</h3><p><strong>定义关系</strong>：</p>
+<p>$$F(x) &#x3D; \int_{-\infty}^{x} f(t) , dt$$</p>
+<p>其中 $f(x)$ 称为<strong>概率密度函数</strong>。在 $f(x)$ 的连续点处，有 $F’(x) &#x3D; f(x)$。 </p>
+<p><strong>归一性</strong>：$\int_{-\infty}^{+\infty} f(x) , dx &#x3D; 1$（曲线下总面积为 1）</p>
+<h3 id="3-3-连续型随机变量的数学期望与方差"><a href="#3-3-连续型随机变量的数学期望与方差" class="headerlink" title="3.3  连续型随机变量的数学期望与方差"></a>3.3  连续型随机变量的数学期望与方差</h3><p>$$E(X) &#x3D; \int_{-\infty}^{+\infty} x f(x) , dx$$</p>
+<p>$$E[g(X)] &#x3D; \int_{-\infty}^{+\infty} g(x) f(x) , dx$$</p>
+<p>$$D(X) &#x3D; \text{Var}(X) &#x3D; E[(X - E(X))^2] &#x3D; \int_{-\infty}^{+\infty} [x - E(X)]^2 f(x) , dx$$</p>
+<p>$D(X) &#x3D; E(X^2) - [E(X)]^2$，其中 $E(X^2) &#x3D; \int_{-\infty}^{+\infty} x^2 f(x) , dx$。</p>
+<p>$E(aX + b) &#x3D; aE(X) + b$</p>
+<p>$D(aX + b) &#x3D; a^2 D(X)$</p>
+<h3 id="3-4-常用连续型随机变量及分布"><a href="#3-4-常用连续型随机变量及分布" class="headerlink" title="3.4  常用连续型随机变量及分布"></a>3.4  常用连续型随机变量及分布</h3><h4 id="3-4-1-均匀分布"><a href="#3-4-1-均匀分布" class="headerlink" title="3.4.1  均匀分布"></a>3.4.1  均匀分布</h4><p>均匀分布：落在 $(a,b)$ 内任一子区间的概率仅与区间长度成正比。</p>
+<p>$$X \sim U(a, b)$$</p>
+<p>$$E(x)&#x3D;\frac{a+b}{2}$$</p>
+<p>$$Var(x)&#x3D;\frac{(b-a)^2}{12}$$</p>
+<h4 id="3-4-2-正态分布"><a href="#3-4-2-正态分布" class="headerlink" title="3.4.2  正态分布"></a>3.4.2  正态分布</h4><p><strong>正态分布</strong>：钟形对称曲线，对称轴为 $x&#x3D;\mu$；$\mu$ 决定位置（期望），$\sigma$ 决定胖瘦（标准差）。</p>
+<p>$$X \sim N(\mu, \sigma^2)$$</p>
+<p>密度函数：$f(x)&#x3D;\frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$<strong>（记忆！）</strong></p>
+<p>正态分布的分布函数没有初等表示，必须通过查表解决。</p>
+<p>在 $x &#x3D; \mu$ 处取得最大值 **$f(\mu) &#x3D; \frac{1}{\sqrt{2\pi}\sigma}$**；在 $x &#x3D; \mu \pm \sigma$ 处有两个拐点。</p>
+<p><strong>标准正态分布</strong>：当 $\mu &#x3D; 0, \sigma &#x3D; 1$ 时，称 $Z \sim N(0, 1)$ 为标准正态分布。</p>
+<p>概率密度函数：$\varphi(x) &#x3D; \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}$（偶函数：$\varphi(-x) &#x3D; \varphi(x)$）</p>
+<p><strong>三大铁律</strong>：</p>
+<ul>
+<li><p><strong>中点值</strong>：$\Phi(0) &#x3D; 0.5$</p>
+</li>
+<li><p><strong>正负转换公式</strong>：**$\Phi(-x) &#x3D; 1 - \Phi(x)$**</p>
+</li>
+<li><p><strong>对称区间公式</strong>：$P(\vert{}Z\vert{} \le a) &#x3D; P(-a \le Z \le a) &#x3D; \Phi(a) - \Phi(-a) &#x3D; 2\Phi(a) - 1$</p>
+</li>
+</ul>
+<p><strong>一般正态分布的“标准化”</strong>：若 $X \sim N(\mu, \sigma^2)$，则令 **$Z &#x3D; \frac{X - \mu}{\sigma}$**，必有 **$Z \sim N(0, 1)$**。</p>
+<p><strong>计算公式</strong>：</p>
+<ol>
+<li>$P(X \le a) &#x3D; P\left(\frac{X-\mu}{\sigma} \le \frac{a-\mu}{\sigma}\right) &#x3D; \Phi\left(\frac{a-\mu}{\sigma}\right)$</li>
+<li>$P(a &lt; X \le b) &#x3D; \Phi\left(\frac{b-\mu}{\sigma}\right) - \Phi\left(\frac{a-\mu}{\sigma}\right)$</li>
+</ol>
+<h4 id="3-4-3-指数分布"><a href="#3-4-3-指数分布" class="headerlink" title="3.4.3  指数分布"></a>3.4.3  指数分布</h4><p>$$X \sim E(\lambda), f(x) &#x3D; \begin{cases} \lambda e^{-\lambda x}, &amp; x &gt; 0 \ 0, &amp; x \le 0 \end{cases}$$</p>
+<p>$$F(x) &#x3D; \begin{cases} 1 - e^{-\lambda x}, &amp; x &gt; 0 \ 0, &amp; x \le 0 \end{cases}$$</p>
+<p>$$P(X &gt; a) &#x3D; 1 - F(a) &#x3D; \mathbf{e^{-\lambda a}}$$</p>
+<p>$$P(a &lt; X \le b) &#x3D; F(b) - F(a) &#x3D; (1 - e^{-\lambda b}) - (1 - e^{-\lambda a}) &#x3D; \mathbf{e^{-\lambda a} - e^{-\lambda b}}$$</p>
+<p>$$E(x)&#x3D;\frac{1}{\lambda}$$</p>
+<p>$$D(x)&#x3D;\frac{1}{\lambda^2}$$</p>
+<p>性质：无记忆性，对于任意 $s &gt; 0, t &gt; 0$，恒有：</p>
+<p>$$P(X &gt; s + t \mid X &gt; s) &#x3D; P(X &gt; t)$$</p>
+<h3 id="3-5-连续型随机变量函数的分布"><a href="#3-5-连续型随机变量函数的分布" class="headerlink" title="3.5  连续型随机变量函数的分布"></a>3.5  连续型随机变量函数的分布</h3><p>已知 $X$ 的密度函数 $f_X(x)$，求 $Y &#x3D; g(X)$ 的密度函数 $f_Y(y)$：   </p>
+<p><strong>分布函数法（通法）</strong>：</p>
+<ul>
+<li><strong>第一步</strong>：先写 $Y$ 的分布函数 $F_Y(y) &#x3D; P(Y \le y) &#x3D; P(g(X) \le y)$。</li>
+<li><strong>第二步</strong>：解不等式，将其转化为关于 $X$ 的概率（如 $P(X \le h(y))$），用 $F_X$ 表示。</li>
+<li><strong>第三步</strong>：对 $y$ 求导，得到 $f_Y(y) &#x3D; F’_Y(y)$，并注明 $y$ 的取值范围。</li>
+</ul>
+
+  </div>
+
+  
+  <div class="about" data-pagefind-ignore>
+    <h2>About this Post</h2>
+    <div class="details">This post is written by Ezra Yang, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</div>
+    
+    <p class="tags">
+      <i class="bi bi-tags icon"></i>
+      
+      <a href="/tags/notes/" class="tag">#notes</a>
+      
+      <a href="/tags/Maths/" class="tag">#Maths</a>
+      
+      <a href="/tags/Probability/" class="tag">#Probability</a>
+      
+    </p>
+    
+    
+  </div>
+  
+
+  <div class="container post-prev-next" data-pagefind-ignore>
+    <a class="next"></a>
+    
+    <a href="/2026/09/22/CS168-Computer-Networking-Notes/" class="prev">
+      <div class="text">
+        <p class="label">Previous</p>
+        <h3 class="title">CS168 Computer Networking Notes</h3>
+      </div>
+    </a>
+    
+  </div>
+
+  
+    <section class="giscus-comments" style="width:min(100% - 48px, 860px); margin:96px auto 72px auto; padding-top:40px; border-top:1px solid rgba(120,150,180,0.22); box-sizing:border-box;">
+  <h2 style="margin:0 0 28px 0; font-size:28px; line-height:1.1;">Comments</h2>
+  <script src="https://giscus.app/client.js"
+    data-repo="ezrablake2006/ezrablake2006.github.io"
+    data-repo-id="R_kgDOTIW0HA"
+    data-category="General"
+    data-category-id="DIC_kwDOTIW0HM4DAJj3"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+
+  
+</article>
+
+
+    </main>
+    <footer>
+  <div class="inner">
+    <div class="links">
+      
+      <div class="group">
+        <h2 class="title">Site</h2>
+        
+        <a href="/" class="item">Home</a>
+        
+        <a href="/archives/" class="item">Archive</a>
+        
+        <a href="/categories/" class="item">Categories</a>
+        
+      </div>
+      
+      <div class="group">
+        <h2 class="title">Me</h2>
+        
+        <a target="_blank" rel="noopener" href="https://github.com/ezrablake2006" class="item">GitHub</a>
+        
+        <a href="mailto:EzraBlake2006@outlook.com" class="item">Email</a>
+        
+      </div>
+      
+    </div>
+    <span>&copy; 2026 Ezra Yang<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></span>
+    
+    
+      <br>
+      <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+        <label>
+          <input type="radio" value="light">
+          <span>Light</span>
+        </label>
+        <label>
+          <input type="radio" value="dark">
+          <span>Dark</span>
+        </label>
+        <label>
+          <input type="radio" value="auto">
+          <span>Auto</span>
+        </label>
+      </div>
+    
+  </div>
+</footer>
+
+
+    
+<script src="/js/main.js"></script>
+
+
+    
+
+    
+    
+<script src="/js/scroll-reveal.js"></script>
+
+    
+
+    <script src="/js/hero-scroll.js?v=1"></script>
+<script src="/js/post-toc.js?v=1"></script>
+
+  </body>
+</html>
